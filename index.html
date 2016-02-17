@@ -4,14 +4,28 @@
 </head>
 <body>
 
-<?php 
+<?php
+// Создаем новый класс Coor:
+class Coor {
+// данные (свойства):
+var $name;
 
-function funct() {
-$a = 100;
- echo "<h4>$a</h4>";
+// методы:
+ function Getname() {
+ echo "<h3>John</h3>";
+ }
+
 }
-funct();
 
+// Создаем объект класса Coor:
+$object = new Coor;
+// Получаем доступ к членам класса:
+$object->name = "Alex";
+echo $object->name;
+// Выводит 'Alex'
+// А теперь получим доступ к методу класса (фактически, к функции внутри класса):
+$object->Getname();
+// Выводит 'John' крупными буквами
 ?>
 
 </body>
