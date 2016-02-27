@@ -31,6 +31,9 @@
                 <div class="col-md-6">
                     <div class="input-group">
                         <input type="text" class="form-control" id="inputQuery" placeholder="Что ищем..."/>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-info" onclick="query();"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
                     </div>
                     <div class="alert"><input type="checkbox" id="owners_only"> Искать только в записях от имени владельца стены.</div>
                     <div class="contacts-widget" style="margin-top: 20px;">
@@ -57,7 +60,12 @@ VK.init({
 });
 var id;
 newUrl();
-query();
+addQuery();
+
+
+function addQuery() {
+	query();
+}
 
 function query() {
     var query_ = 25;
