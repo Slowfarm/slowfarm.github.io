@@ -13,10 +13,6 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="form-control" id="inputUser" placeholder="Ссылку на пользователя или сообщество...">
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-info" onclick="newUrl();"><span class="glyphicon glyphicon-plus"></span></button>
-						</span>
 					</div>
 					<div id="error"></div>
 					<div class="contacts-widget" style="margin-top: 20px;">
@@ -36,7 +32,6 @@
 				</div>	
 				<div class="col-md-6">
 					<div class="input-group">
-						<input type="text" class="form-control" id="inputQuery" placeholder="Что ищем..."/>
 						<span class="input-group-btn">
 							<button type="submit" class="btn btn-info" onclick="query();"><span class="glyphicon glyphicon-search"></span></button>
 						</span>
@@ -97,7 +92,7 @@ function query() {
 	});
 }
 function newUrl() {
-	var user_id = miet.university;
+	var user_id = 33509;
 	if (user_id.indexOf("com/") >= 0)
 		user_id = user_id.split('com/')[1];
 	VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
