@@ -73,7 +73,7 @@ function query() {
 	});
 }
 function newUrl() {
-	var user_id = miet_university;
+	var user_id = miet.university;
 	if (user_id.indexOf("com/") >= 0)
 		user_id = user_id.split('com/')[1];
 	VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
