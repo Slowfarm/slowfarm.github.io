@@ -92,7 +92,7 @@ function query() {
 	});
 }
 function newUrl() {
-	var user_id = 33509;
+	var user_id = "http://vk.com/miet.university";
 	if (user_id.indexOf("com/") >= 0)
 		user_id = user_id.split('com/')[1];
 	VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
