@@ -61,8 +61,6 @@ VK.init({
 var id;
 newUrl();
 function query() {
-	for(var _offset = 1; _offset <=1300; _offset+=100)
-	{
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 100, offset: _offset}, function(r) {
 		if(r.response) {
 			$('#resultCount').html(r.response.count);
@@ -84,7 +82,6 @@ function query() {
 				}
 		}
 	});
-	}
 }
 function newUrl() {
 	var user_id = "http://vk.com/miet.university";
