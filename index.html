@@ -72,9 +72,6 @@ function query(_offset) {
 								+ '<div class="contact-details">'
 								+ '<div class="pull-left">'
 								+ r.response.items[i].text
-								+  r.response.items[i].likes.count 
-								+ r.response.items[i].reposts.count 
-								+ r.response.items[i].comments.count
 								+ '</div>'
 								+ '<div class="pull-right">'
 								+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '" class="btn btn-success btn-xs" target="_blank"><span class="glyphicon glyphicon-link"></span></a>'
@@ -120,7 +117,10 @@ function addGroup(user_id) {
 			}
 	});
 	for(var _offset = 1; _offset <=r.response[0].members_count; _offset+=100)
+	{
 	query(_offset);
+	alert("кек");
+	}
 }
 	</script>
     </body>
