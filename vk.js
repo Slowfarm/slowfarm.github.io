@@ -4,7 +4,7 @@ VK.init({
 });
 
 var membersGroups = []; // массив участников группы
-getMembers(20629724);
+getMembers(4235235);
 
 // получаем информацию о группе и её участников
 function getMembers(group_id) {
