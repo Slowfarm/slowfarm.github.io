@@ -62,7 +62,7 @@ var id;
 newUrl();
 query();
 function query() {
-	VK.Api.call('wall.search', {owner_id: id, v: '5.27', count: 30}, function(r) {
+	VK.Api.call('wall.search', {owner_id: id, query: " ", owners_only: 0 , v: '5.27', count: 30}, function(r) {
 		if(r.response) {
 			$('#resultCount').html(r.response.count);
 			if (r.response.count > 0)
