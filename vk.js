@@ -1,9 +1,9 @@
 VK.init({
-    apiId: 6456476 // ID вашего приложения VK
+    apiId: 654647 // ID вашего приложения VK
 });
 
 var membersGroups = []; // массив участников группы
-getMembers(30666517);
+getMembers(20629724);
 
 // получаем информацию о группе и её участников
 function getMembers(group_id) {
@@ -13,7 +13,7 @@ function getMembers(group_id) {
 				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
 					+ r.response[0].name
 					+ '<br/>Участников: ' + r.response[0].members_count);
-				getMembers20k(group_id, r.response[0].members_count); // получаем участников группы и пишем в массив membersGroups
+				getMembers20k(group_id, r.response[0].members_count); // получем участников группы и пишем в массив membersGroups
 			}
 	});
 }
@@ -42,4 +42,3 @@ function getMembers20k(group_id, members_count) {
 		}
 	});
 }
-getMembers(club228);
