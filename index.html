@@ -61,7 +61,7 @@ VK.init({
 var id;
 newUrl();
 function query() {
-	for(var _offset = 1; _offset <=r.response[0].members_count; _offset+=100)
+	for(var _offset = 1; _offset <=1300; _offset+=100)
 	{
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 100, offset: _offset}, function(r) {
 		if(r.response) {
