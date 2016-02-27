@@ -61,7 +61,7 @@ VK.init({
 var id;
 newUrl();
 function query() {
-	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 100, offset: _offset}, function(r) {
+	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
 			$('#resultCount').html(r.response.count);
 				$('#result').html('');
