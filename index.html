@@ -12,12 +12,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="inputUser" placeholder="Ссылку на пользователя или сообщество...">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-info" onclick="newUrl();"><span class="glyphicon glyphicon-plus"></span></button>
-                        </span>
-                    </div>
                     <div id="error"></div>
                     <div class="contacts-widget" style="margin-top: 20px;">
                         <div class="widget-body 300-scroll">
@@ -66,6 +60,7 @@ VK.init({
 });
 var id;
 newUrl();
+query();
 query();
 function query() {
     var query_ = 25;
