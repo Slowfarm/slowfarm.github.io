@@ -106,14 +106,7 @@ function newUrl() {
 		user_id = user_id.split('com/')[1];
 	VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
 		if(r.response) {
-			if (r.response.type == 'user') {
-				addUser(user_id);
-			} else {
-				if (r.response.type == 'group') {
-					addGroup(user_id);
-				} else {
-					writeError('Неверно указана ссылка!');
-				}
+			addGroup(user_id);
 			}
 		}
 	});	
@@ -143,39 +136,6 @@ function addGroup(user_id) {
 				writeError('Неверно указана ссылка!');
 			}
 	});
-}
-function addUser(user_id) {
-	$('#error').html('');
-	VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_50,domain', v: '5.27'}, function(r) {
-			if(r.response) {
-					id = r.response[0].id;
-					$('#profiles').html(''
-								+ '<li class="c-list user' + r.response[0].id + ' pulse animated">'
-									+ '<div class="contact-pic">'
-										+ '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>'
-									+ '</div>'
-									+ '<div class="contact-details">'
-										+ '<div class="pull-left">'
-											+ '<strong>' + r.response[0].first_name + ' ' + r.response[0].last_name + '</strong>'
-											+ '<small>CLUB' + r.response[0].id + '</small>'
-										+ '</div>'
-										+ '<div class="pull-right">'
-											+ '<a href="http://vk.com/id' + id + '" class="btn btn-success btn-xs" target="_blank"><span class="glyphicon glyphicon-link"></span></a>'
-										+ '</div>'
-										+ '<div class="clearfix"></div>'
-									+ '</div>'
-								+ '</li>');
-								alert(id + ' ' + type);
-			} else {
-				writeError('Неверно указана ссылка!');
-			}
-	});
-}
-function writeError(error) {
-	$('#error').html('<b>Ошибка!</b> ' + error);
-}
-function writeErrorResult(error) {
-	$('#result').html('<div class="errorL"><b>Ошибка!</b> ' + error + '</div>');
 }
 	</script>
     </body>
