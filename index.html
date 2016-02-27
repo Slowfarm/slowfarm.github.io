@@ -8,70 +8,15 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
-	<section style="margin-top: 20px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="input-group">
-						<input type="text" class="form-control" id="inputUser" placeholder="Ссылку на пользователя или сообщество...">
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-info" onclick="newUrl();"><span class="glyphicon glyphicon-plus"></span></button>
-						</span>
-					</div>
-					<div id="error"></div>
-					<div class="contacts-widget" style="margin-top: 20px;">
-						<div class="widget-body 300-scroll">
-							<ul class="list-unstyled">
-								<li class="contact-alpha">
-									Где будем искать?
-									<div class="clearfix"></div>
-								</li>
-							</ul>
-							<ul class="list-unstyled" id="profiles">
-								<div class="errorL" id="errorL">Укажите профиль пользователя или сообщесва!</div>
-							</ul>
-						</div>
-						<div class="widget-foot"></div>
-					</div>
-				</div>	
-				<div class="col-md-6">
-					<div class="input-group">
-						<input type="text" class="form-control" id="inputQuery" placeholder="Что ищем..."/>
-						<span class="input-group-btn">
-							<button type="submit" class="btn btn-info" onclick="query();"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
-					</div>
-					<div class="alert"><input type="checkbox" id="owners_only"> Искать только в записях от имени владельца стены.</div>
-					<div class="contacts-widget" style="margin-top: 20px;">
-						<div class="widget-body">
-							<ul class="list-unstyled">
-								<li class="contact-alpha">
-									Найденные записи <span class="label label-info pull-right"><span id="resultCount">0</span> Найденных записей</span>
-									<div class="clearfix"></div>
-								</li>
-								<ul class="list-unstyled" id="result">
-									
-								</ul>
-							</ul>
-						</div>
-						<div class="widget-foot"></div>
-					</div>
-				</div>		
-			</div>
-		</div>
-	</section>
     <script>
 VK.init({
     apiId: 5322127
 });
 var id;
+newUrl();
+query();
 function query() {
-	var query_ = document.getElementById('inputQuery').value;
-	var setting = 0;
-	if (document.getElementById('owners_only').checked)
-		setting = 1;
-		
-	VK.Api.call('wall.search', {owner_id: id, v: '5.27', query: query_, owners_only: setting, count: 30}, function(r) {
+	VK.Api.call('wall.search', {owner_id: id, v: '5.27', count: 30}, function(r) {
 		if(r.response) {
 			$('#resultCount').html(r.response.count);
 			if (r.response.count > 0)
@@ -98,7 +43,7 @@ function query() {
 	});
 }
 function newUrl() {
-	var user_id = document.getElementById('inputUser').value;
+	var user_id = 57789423;
 	if (user_id.indexOf("com/") >= 0)
 		user_id = user_id.split('com/')[1];
 	VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
