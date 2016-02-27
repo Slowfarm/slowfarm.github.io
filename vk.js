@@ -1,10 +1,10 @@
 alert("кок");
 VK.init({
-    apiId: 4235235 // ID вашего приложения VK
+    apiId: 5322127 // ID вашего приложения VK
 });
 
 var membersGroups = []; // массив участников группы
-getMembers(4235235);
+getMembers(mp_45);
 
 // получаем информацию о группе и её участников
 function getMembers(group_id) {
