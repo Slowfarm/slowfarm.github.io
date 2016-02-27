@@ -62,6 +62,7 @@ var id;
 newUrl();
 query();
 function query() {
+	alert("asdasdasd");
     var query_ = 25;
     var setting = 0;
     VK.Api.call('wall.search', {owner_id: id, v: '5.27', query: query_, owners_only: setting, count: 30}, function(r) {
