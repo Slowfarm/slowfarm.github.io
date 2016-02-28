@@ -5,8 +5,23 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-	<div class="group_info"></div>
-	<div class="member_ids"></div>
-	<script src="/getmembersvkapi.js"></script>
+		<script>
+			VK.init({
+  			apiId: 5322127
+			});
+			// Код для вызова в методе execute
+			var code;
+			code = 'return {';
+			code += 'data: API.wall.get({owner_id: -62269959, offset: 0, count: 15, filter: all, v: "5.37"})';
+			code += '};';
+			// сам метод execute, выполняет созданный код
+			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+			  if (r.response){
+			      if (r.response.data){
+			          console.log(r.response.data);
+			      }
+			  }
+			});
+		</script>
 	</body>
 </html>
