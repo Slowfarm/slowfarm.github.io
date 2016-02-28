@@ -5,6 +5,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
+		<input type="text" class="form-control" id="inputUser" placeholder="Ссылку на пользователя или сообщество...">
 		<input type="button" value="Проверить" onclick="wall()">
 		<div id="wall"></div>
 
@@ -14,7 +15,7 @@
 			});
 			
 			function wall(){
-				var user_id = "20629724";
+				 var user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
 				user_id = '-' + user_id;
