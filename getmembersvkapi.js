@@ -17,7 +17,6 @@ function getMembers(group_id) {
 				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
 					+ r.response[0].name
 					+ '<br/>Участников: ' + r.response[0].members_count);
-					alert("getMembers");
 				getMembers20k(group_id, r.response[0].members_count); // получем участников группы и пишем в массив membersGroups
 			}
 	});
@@ -46,6 +45,6 @@ function getMembers20k(group_id, members_count) {
 		} else {
 			alert(data.error.error_msg); // в случае ошибки выведем её
 		}
+		alert("во время");
 	});
-	alert("после execute");
 }
