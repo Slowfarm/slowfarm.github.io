@@ -19,8 +19,7 @@
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 				  if (r.response){
 				  	if (r.response.data){
-				          $('.members_ids').html(' '+r.response.data);
-				          alert(""+ r.response.data.text[0]);
+				          $('.members_ids').html(' '+r.response.data.items.text[0]);
 				   	}
 				   }
 			});
