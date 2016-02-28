@@ -18,6 +18,7 @@ function getMembers(group_id) {
 				getMembers20k();
 			}
 	});
+	alert("it works");
 }
 
 // получаем участников группы, members_count - количество участников
@@ -30,6 +31,7 @@ code += '};';
 VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
   if (r.response){
       if (r.response.data){
+      	$('.members_ids').html(' ');
           $('.member_ids').append(r.response.data);
       }
   }
