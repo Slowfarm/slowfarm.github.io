@@ -8,10 +8,10 @@ function query() {
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
 			$('#resultCount').html(r.response.count);
-				$('#profiles').append('');
+				$('#result').html('');
 				for (var i=0; i<r.response.count; i++)
 				{
-					$('#profiles').append(''
+					$('#result').append(''
 								+ '<li class="c-list user' + r.response.items[i].id + ' pulse animated">'
 								+ '<div class="contact-details">'
 								+ '<div class="pull-left">'
