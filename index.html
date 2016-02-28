@@ -10,6 +10,7 @@
 			VK.init({
   			apiId: 5322127
 			});
+			alert("connect");
 			// Код для вызова в методе execute
 			var code;
 			code = 'return {';
@@ -19,10 +20,11 @@
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 			  if (r.response){
 			      if (r.response.data){
-			          $('.member_ids').html('Загрузка: ' + membersGroups.length + '/' + members_count);
+			          $('.member_ids').html(r.response.data);
 			      }
 			  }
 			});
+			alert("work");
 		</script>
 	</body>
 </html>
