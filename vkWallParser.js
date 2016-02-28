@@ -21,7 +21,6 @@ function query() {
 	VK.Api.call("execute", {code: code}, function(data) {
 		if(data.response) {
 			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]"));
-				$('#resultCount').html(r.response.count);
 				$('#result').append('Загрузка: ' + membersGroups.length + '/' + members_count);
 				if (members_count >  membersGroups.length)
 				setTimeout(function() { query(); }, 333); 
