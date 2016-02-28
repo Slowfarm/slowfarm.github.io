@@ -18,6 +18,8 @@
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 				  if (r.response){
 				  	if (r.response.data){
+				  		document.write("Привет Мир!");
+				  		alert("wtf");
 				  	for (var i = 0; i < r.response.data.count; i++)
 				  		{
 				        	 document.write("<h1>"+r.response.data.items[i].text+"</h1>");
