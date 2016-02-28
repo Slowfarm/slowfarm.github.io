@@ -23,17 +23,18 @@ function getMembers(group_id) {
 
 // получаем участников группы, members_count - количество участников
 function getMembers20k() {
-var code;
-code = 'return {';
-code += 'data: API.wall.get({group_id: -33509, offset: 0, count: 100, filter: all, v: "5.37"})';
-code += '};';
+	var code;
+	code = 'return {';
+	code += 'data: API.wall.get({group_id: -33509, offset: 0, count: 100, filter: all, v: "5.37"})';
+	code += '};';
 // сам метод execute, выполняет созданный код
-VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
-  if (r.response){
-      if (r.response.data){
-      	$('.members_ids').html(' ');
-          $('.member_ids').append(r.response.data);
-      }
-  }
-}
+	VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+	 if (r.response){
+	   if (r.response.data){
+	   		$('.members_ids').html(' ');
+		   	$('.member_ids').append(r.response.data);
+      			}
+  		}
+	}
+	alert("it works");
 }
