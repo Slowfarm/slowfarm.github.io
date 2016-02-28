@@ -15,15 +15,11 @@
 			code = 'return {';
 			code += 'data: API.wall.get({owner_id: 182740114, offset: 0, count: 15, v: "5.37"})';
 			code += '};';
-			alert("work");
 			// сам метод execute, выполняет созданный код
-			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+			VK.Api.call('execute', {code: code}, function(r){
 			  if (r.response){
 			      	  $('.member_ids').html('');
-			      	  for (var i=0; i<r.response.count; i++)
-				{
-			          $('.member_ids').append(r.response.items[i].text);
-				}
+			          $('.member_ids').append(r.response.data);
 			  }
 			});
 		</script>
