@@ -17,6 +17,7 @@ function getMembers(group_id) {
 				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
 					+ r.response[0].name
 					+ '<br/>Участников: ' + r.response[0].members_count);
+					alert("getMembers");
 				getMembers20k(group_id, r.response[0].members_count); // получем участников группы и пишем в массив membersGroups
 			}
 	});
@@ -32,7 +33,7 @@ function getMembers20k(group_id, members_count) {
 				+	'offset = offset + 100;' // увеличиваем сдвиг на 1000
 			+	'};'
 			+	'return members;'; // вернуть массив members
-	
+	alert("до execute");
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
 			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]")); // запишем это в массив
@@ -45,4 +46,5 @@ function getMembers20k(group_id, members_count) {
 			alert(data.error.error_msg); // в случае ошибки выведем её
 		}
 	});
+	alert("после execute");
 }
