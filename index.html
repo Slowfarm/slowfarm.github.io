@@ -30,7 +30,7 @@
             				if(r.response) {
             					group_id = '-' + group_id;
           					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
-            					wallInfoStream.innerHTML += r.response[0].name+separator;
+            					wallInfoStream.innerHTML += +"<br/>"+r.response[0].name+separator;
             					}
 				 });
 				var code;
