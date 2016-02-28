@@ -5,8 +5,9 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
+		<div id="wall"></div>
+
 		<script type="text/javascript">
-		alert("wtf");
 			VK.init({
   			apiId: 5322127
 			});
@@ -18,13 +19,12 @@
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 				  if (r.response){
 				  	if (r.response.data){
-				  		document.writeln("Привет Мир!");
 				  	for (var i = 0; i < r.response.data.count; i++)
 				  		{
-				  			alert(""+r.response.data.items[i].text);
+				  			var z=document.getElementById("wall");
+				  			z.innerHTML=r.response.data.items[i].text;
 				        	 //document.writeln(""+r.response.data.items[i].text);
 				  		}
-				  		alert(""+r.response.data.count);
 				          
 				   	}
 				   }
