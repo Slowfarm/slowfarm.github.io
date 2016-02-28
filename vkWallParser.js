@@ -4,6 +4,7 @@ VK.init({
 var id;
 newUrl();
 query();
+alert("кек");
 function query() {
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
@@ -37,5 +38,4 @@ function addGroup(user_id) {
 					+ 'CLUB' + r.response[0].id+'<br/>');
 			}
 	});
-	alert("кек");
 }
