@@ -11,7 +11,7 @@ getMembers(user_id);
 function getMembers(group_id) {
 	VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50,members_count', v: '5.27'}, function(r) {
 			if(r.response) {
-				$('.profiles')
+				$('.group_info')
 				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
 					+ r.response[0].name
 					+ '<br/>Участников: ' + r.response[0].members_count);
@@ -34,7 +34,7 @@ function getMembers20k(group_id, members_count) {
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
 			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]")); // запишем это в массив
-			$('.result').html('Загрузка: ' + membersGroups.length + '/' + members_count);
+			$('.member_ids').html('Загрузка: ' + membersGroups.length + '/' + members_count);
 			if (members_count >  membersGroups.length) // если еще не всех участников получили
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
 			else // если конец то
