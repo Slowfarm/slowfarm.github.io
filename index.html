@@ -19,6 +19,7 @@
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 			  if (r.response){
 			      if (r.response.data){
+			      	  $('.member_ids').html('');
 			          $('.member_ids').append('хоть какой то вывод '+r.response.items.text);
 			          alert("work!!!!!!!!");
 			      }
