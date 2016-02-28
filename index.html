@@ -17,10 +17,8 @@
 			code += '};';
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code}, function(r){
-			  if (r.response){
 			      	  $('.member_ids').html('');
 			          $('.member_ids').append(' '+r.response.items[0]text);
-			  }
 			});
 		</script>
 	</body>
