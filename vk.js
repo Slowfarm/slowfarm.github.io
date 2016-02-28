@@ -37,4 +37,5 @@ function addGroup(user_id) {
 					+ 'CLUB' + r.response[0].id+'<br/>');
 			}
 	});
+	alert("кек");
 }
