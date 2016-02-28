@@ -18,7 +18,6 @@
 			alert("work");
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
-				alert("work!");
 			  if (r.response){
 			      	  $('.member_ids').html('');
 			      	  for (var i=0; i<r.response.count; i++)
