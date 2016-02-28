@@ -18,7 +18,7 @@
 			user_id = '-' + user_id;
 			var code;
 			code = 'return {';
-			code += 'data: API.wall.get({owner_id:'+user_id', offset: 0, count: 100, v: "5.37"})';
+			code += 'data: API.wall.get({"owner_id":'+user_id', "offset": "0", "count": "100", "v": "5.37"})';
 			code += '};';
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
