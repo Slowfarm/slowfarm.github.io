@@ -3,6 +3,7 @@ VK.init({
 });
 var id;
 newUrl();
+alert("кек");
 function query() {
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
