@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 	<head>
-		<script type="text/javascript" src="//vk.com/js/api/openapi.js?117"></script>
+		<script src="//vk.com/js/api/openapi.js?117"></script>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
@@ -21,7 +21,7 @@
 				  if (r.response){
 				  	alert("wtf");
 				  	if (r.response.data){
-				  		document.write("Привет Мир!");
+				  		document.writeln("Привет Мир!");
 				  		alert("wtf");
 				  	for (var i = 0; i < r.response.data.count; i++)
 				  		{
