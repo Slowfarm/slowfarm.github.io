@@ -6,7 +6,6 @@
 	</head>
 	<body>
 		<div class="member_ids"></div>
-		<b>кек</b>
 		<script>
 			VK.init({
   			apiId: 5322127
@@ -20,9 +19,9 @@
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 				  if (r.response){
 				  	if (r.response.data){
-				          $('.members_ids').html('<b>'+r.response.data.items[0].text+</b>);
-				          for (var i = 0; i < r.response.data.count; i++)
-				          alert(""+r.response.data.items[i].text);
+				  	for (var i = 0; i < r.response.data.count; i++)
+				          $('.members_ids').html('<b>'+r.response.data.items[i].text+</b>);
+				          alert(""+r.response.data.count);
 				   	}
 				   }
 			});
