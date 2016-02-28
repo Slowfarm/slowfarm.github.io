@@ -5,8 +5,10 @@ var membersGroups = [];
 var user_id = "http://vk.com/miet.university";
 if (user_id.indexOf("com/") >= 0)
 	user_id = user_id.split('com/')[1];
-	
+
+var membersGroups = []; // массив участников группы
 getMembers(user_id);
+
 // получаем информацию о группе и её участников
 function getMembers(group_id) {
 	VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50,members_count', v: '5.27'}, function(r) {
@@ -43,4 +45,4 @@ function getMembers20k(group_id, members_count) {
 			alert(data.error.error_msg); // в случае ошибки выведем её
 		}
 	});
-
+}
