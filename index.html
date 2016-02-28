@@ -11,10 +11,10 @@
 			VK.init({
   			apiId: 5322127
 			});
-			alert("Я работаю");
 				var user_id = "57789423";
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
+				alert("Я работаю");
 				var code;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:'+user_id', count: 100, v: 5.37})';
