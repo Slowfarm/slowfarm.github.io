@@ -14,12 +14,14 @@
   			apiId: 5322127
 			});
 			function login() {
-			var user_id = document.getElementById('inputUser').value;
-			if (user_id.indexOf("com/") >= 0)
-			user_id = user_id.split('com/')[1];
-			user_id = '-' + user_id;
-			alert(""+user_id);
-			wall(user_id);
+				var user_id = document.getElementById('inputUser').value;
+				if (user_id.indexOf("com/") >= 0)
+					user_id = user_id.split('com/')[1];
+				VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
+					if(r.response) 
+						wall(user_id);
+				}
+			});	
 			}
 			function wall(user_id){
 			var code;
