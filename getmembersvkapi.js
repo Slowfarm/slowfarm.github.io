@@ -7,7 +7,7 @@ if (user_id.indexOf("com/") >= 0)
 	user_id = user_id.split('com/')[1];
 
 var membersGroups = []; // массив участников группы
-getMembers(user_id);
+getMembers(20629724);
 
 // получаем информацию о группе и её участников
 function getMembers(group_id) {
