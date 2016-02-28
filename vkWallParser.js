@@ -5,6 +5,8 @@ var id;
 var members_count;
 var membersGroups = []; 
 var user_id = "http://vk.com/miet.university";
+if (user_id.indexOf("com/") >= 0)
+	user_id = user_id.split('com/')[1];
 addGroup();
 function query() {
 		var code = 'var members = API.wall.get({"owner_id": '+ id+ ', "v": "5,27", "count": "1000", "offset": ' + membersGroups.length +'}).items;'
