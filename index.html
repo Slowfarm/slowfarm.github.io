@@ -20,18 +20,18 @@
 				 var user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
+				user_id = '-' + user_id;
 				
 				var z=0;
 				z=document.getElementById("wall");
 				var separator = "<br/>-----------------------<br/>";
 				
-				 VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
+				 /*VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
             				if(r.response) {
-            					user_id = '-' + user_id;
           					z += r.response[0].photo_50+"<br/>";
             					z += r.response[0].name+<br/>;
-            						}
-				 });
+            					}
+				 });*/
 				
 				var code;
 				code = 'return {';
