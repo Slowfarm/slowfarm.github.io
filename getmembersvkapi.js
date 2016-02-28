@@ -31,8 +31,7 @@ function getMembers20k() {
 	VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 	 if (r.response){
 	   if (r.response.data){
-	   		$('.members_ids').html(' ');
-		   	$('.member_ids').append(r.response.data);
+	   		$('.member_ids').html('Загрузка: ' + r.response.data);
       			}
   		}
 	}
