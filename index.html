@@ -19,7 +19,10 @@
 					user_id = user_id.split('com/')[1];
 				VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
 					if(r.response) 
+					{
+						alert(""+user_id);
 						wall(user_id);
+					}
 				}
 			});	
 			}
