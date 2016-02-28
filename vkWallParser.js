@@ -49,4 +49,5 @@ function addGroup() {
 								+ '</li>');
 			}
 	});
+	query();
 }
