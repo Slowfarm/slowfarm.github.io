@@ -25,13 +25,14 @@
 				code += ''+user_id;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
+				var z=0;
+				z=document.getElementById("wall");
 				// сам метод execute, выполняет созданный код
 				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 					  if (r.response){
 					  	if (r.response.data){
 					  	for (var i = 0; i < r.response.data.count; i++)
 					  		{
-					  			var z=document.getElementById("wall");
 					  			z.innerHTML+=r.response.data.items[i].text+"<br/> <br/>";
 					  		}
 					          
