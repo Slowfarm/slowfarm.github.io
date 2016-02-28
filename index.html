@@ -21,8 +21,10 @@
 				alert("work!");
 			  if (r.response){
 			      	  $('.member_ids').html('');
-			          $('.member_ids').append('хоть какой то вывод '+r.response.items.text);
-			          alert("work!!!!!!!!");
+			      	  for (var i=0; i<r.response.count; i++)
+				{
+			          $('.member_ids').append(r.response.items[i].text);
+				}
 			  }
 			});
 		</script>
