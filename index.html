@@ -21,10 +21,10 @@
 				  		document.writeln("Привет Мир!");
 				  	for (var i = 0; i < r.response.data.count; i++)
 				  		{
-				  			alert(""+i);
+				  			alert(""+r.response.data.items[i].text);
 				        	 //document.writeln(""+r.response.data.items[i].text);
 				  		}
-				  		alert("r.response.data.count");
+				  		alert(""+r.response.data.count);
 				          
 				   	}
 				   }
