@@ -5,36 +5,38 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
+		<input type="text" class="form-control" id="inputUser" placeholder="Ссылку на пользователя или сообщество...">
+		<button type="submit" class="btn btn-info" onclick="wall();"><span class="glyphicon glyphicon-plus"></span></button>
 		<div id="wall"></div>
 
 		<script type="text/javascript">
 			VK.init({
   			apiId: 5322127
 			});
-			
-			var user_id = "57789423";
+			alert(""+user_id);
+			wall(){
+			var user_id = document.getElementById('inputUser').value;
 			if (user_id.indexOf("com/") >= 0)
 			user_id = user_id.split('com/')[1];
 			user_id = '-' + user_id;
 			var code;
-			alert(""+user_id);
-			code = 'return {';
-			code += 'data: API.wall.get({owner_id: -57789423, count: 100, v: 5.37})';
-			code += '};';
-			// сам метод execute, выполняет созданный код
-			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
-				  if (r.response){
-				  	if (r.response.data){
-				  	for (var i = 0; i < r.response.data.count; i++)
-				  		{
-				  			var z=document.getElementById("wall");
-				  			z.innerHTML+=r.response.data.items[i].text+"<br/> <br/>";
-				        	 //document.writeln(""+r.response.data.items[i].text);
-				  		}
-				          
-				   	}
-				   }
-			});
+				code = 'return {';
+				code += 'data: API.wall.get({owner_id:'+user_id', count: 100, v: 5.37})';
+				code += '};';
+				// сам метод execute, выполняет созданный код
+				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+					  if (r.response){
+					  	if (r.response.data){
+					  	for (var i = 0; i < r.response.data.count; i++)
+					  		{
+					  			var z=document.getElementById("wall");
+					  			z.innerHTML+=r.response.data.items[i].text+"<br/> <br/>";
+					  		}
+					          
+					   	}
+					   }
+				});
+			}
 		</script>
 	</body>
 </html>
