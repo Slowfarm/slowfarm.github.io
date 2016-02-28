@@ -28,7 +28,7 @@ function getMembers20k(group_id, members_count) {
 			+	'var offset = 100;' // это сдвиг по участникам группы
 			+	'while (offset < 2500 && (offset + ' + membersGroups.length + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
 			+	'{'
-				+	'members = members + "," + API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "sort": "id_asc", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
+				+	'members = members + "," + API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
 				+	'offset = offset + 100;' // увеличиваем сдвиг на 1000
 			+	'};'
 			+	'return members;'; // вернуть массив members
