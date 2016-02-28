@@ -60,11 +60,11 @@ VK.init({
 });
 var id;
 newUrl();
+query();
 function query() {
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
-			$('#resultCount').html(r.response.count);
-				$('#result').html('');
+			document.write(r.response.count);
 				for (var i=0; i<r.response.count; i++)
 				{
 								document.write("r.response.items[i].id");
