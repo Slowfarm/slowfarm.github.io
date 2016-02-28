@@ -12,7 +12,7 @@
 			});
 			var code;
 			code = 'return {';
-			code += 'data: API.wall.get({owner_id: -62269959, offset: 0, count: 15, v: "5.37"})';
+			code += 'data: API.wall.get({owner_id: -62269959, offset: 0, count: 100, v: "5.37"})';
 			code += '};';
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
@@ -24,6 +24,7 @@
 				  			alert(""+i);
 				        	 //document.writeln(""+r.response.data.items[i].text);
 				  		}
+				  		alert("r.response.data.count");
 				          
 				   	}
 				   }
