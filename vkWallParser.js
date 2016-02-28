@@ -4,14 +4,15 @@ VK.init({
 var id;
 var members_count;
 var membersGroups = []; 
-newUrl();
+var user_id = "http://vk.com/miet.university";
+addGroup();
 function query() {
 		var code = 'var members = API.wall.get({"owner_id": '+ id+ ', "v": "5,27", "count": "1000", "offset": ' + membersGroups.length +'}).items;'
-		+	'var offset = 100;'
-		+	'while (offset < 2500 && (offset + '+ membersGroup.length+') <' + members_count+ ')'
+		+	'var offset = 1000;'
+		+	'while (offset < 25000 && (offset + '+ membersGroup.length+') <' + members_count+ ')'
 		+	'{'
 		+		'members = members + "," + API.wall.get({"owner_id": ' + id + ', "v": "5.27",  "count": "1000", "offset": (' + membersGroups.length + ' + offset)}).items;'
-		+		'offset = offset + 100;'
+		+		'offset = offset + 1000;'
 		+	'}'
 		+	'return members;';
 	
@@ -28,17 +29,7 @@ function query() {
 	});
 	
 }
-function newUrl() {
-	var user_id = "http://vk.com/miet.university";
-	if (user_id.indexOf("com/") >= 0)
-		user_id = user_id.split('com/')[1];
-	VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
-		if(r.response) {
-			addGroup(user_id);
-		}
-	});	
-}
-function addGroup(user_id) {
+function addGroup() {
 	VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
 			if(r.response) {
 					id = '-' + r.response[0].id;
@@ -57,5 +48,4 @@ function addGroup(user_id) {
 								+ '</li>');
 			}
 	});
-	query();
 }
