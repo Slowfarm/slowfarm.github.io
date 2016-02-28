@@ -19,22 +19,7 @@ function query() {
 		if(data.response) {
 			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]"));
 				$('#resultCount').html(r.response.count);
-				$('#result').append('');
-				for (var i=0; i<r.response.count; i++)
-				{
-					$('#result').append(''
-								+ '<li class="c-list user' + r.response.items[i].id + ' pulse animated">'
-								+ '<div class="contact-details">'
-								+ '<div class="pull-left">'
-								+ r.response.items[i].text
-								+ '</div>'
-								+ '<div class="pull-right">'
-								+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '" class="btn btn-success btn-xs" target="_blank"></a>'
-								+ '</div>'
-								+ '<div class="clearfix"></div>'
-								+ '</div>'
-								+ '</li>');
-				}
+				$('#result').append('Загрузка: ' + membersGroups.length + '/' + members_count);
 				if (members_count >  membersGroups.length)
 				setTimeout(function() { query(); }, 333); 
 			else
