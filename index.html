@@ -11,9 +11,13 @@
 			VK.init({
   			apiId: 5322127
 			});
+			
+			var user_id = http://vk.com/water_miet;
+			if (user_id.indexOf("com/") >= 0)
+			user_id = "-" + user_id.split('com/')[1];
 			var code;
 			code = 'return {';
-			code += 'data: API.wall.get({owner_id: -62269959, offset: 0, count: 100, v: "5.37"})';
+			code += 'data: API.wall.get({owner_id:'+user_id', offset: 0, count: 100, v: "5.37"})';
 			code += '};';
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
