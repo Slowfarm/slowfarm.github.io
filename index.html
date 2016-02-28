@@ -15,6 +15,7 @@
 			code = 'return {';
 			code += 'data: API.wall.get({owner_id: -62269959, offset: 0, count: 15, v: "5.37"})';
 			code += '};';
+			alert("work");
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 			  if (r.response){
