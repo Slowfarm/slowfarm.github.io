@@ -14,17 +14,15 @@
 			code = 'return {';
 			code += 'data: API.wall.get({owner_id: -62269959, offset: 0, count: 15, v: "5.37"})';
 			code += '};';
-			alert("wtf");
 			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 				  if (r.response){
-				  	alert("wtf");
 				  	if (r.response.data){
 				  		document.writeln("Привет Мир!");
-				  		alert("wtf");
 				  	for (var i = 0; i < r.response.data.count; i++)
 				  		{
-				        	 document.write("<h1>"+r.response.data.items[i].text+"</h1>");
+				  			alert(""+i);
+				        	 //document.writeln(""+r.response.data.items[i].text);
 				  		}
 				          
 				   	}
