@@ -6,7 +6,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id ">
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите id группы ">
 		<input type="button" value="Найти" onclick="wall()">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
@@ -35,8 +35,8 @@
 				 });
 				
 				var code;
-				alarm(user_id);
-				//user_id = '-' + user_id;
+				alarm(""+user_id);
+				user_id = '-' + user_id;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
 				code += ''+user_id;
