@@ -40,38 +40,8 @@ function query() {
 			else
 				alert('Ура тест закончен! В массиве membersGroups теперь ' + membersGroups.length + ' элементов.');
 		}
-	})
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
-		if(r.response) {
-			$('#resultCount').html(r.response.count);
-				$('#result').html('');
-				for (var i=0; i<r.response.count; i++)
-				{
-					$('#result').append(''
-								+ '<li class="c-list user' + r.response.items[i].id + ' pulse animated">'
-								+ '<div class="contact-details">'
-								+ '<div class="pull-left">'
-								+ r.response.items[i].text
-								+ '</div>'
-								+ '<div class="pull-right">'
-								+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '" class="btn btn-success btn-xs" target="_blank"></a>'
-								+ '</div>'
-								+ '<div class="clearfix"></div>'
-								+ '</div>'
-								+ '</li>');
-				}
-		}
 	});
+	
 }
 function newUrl() {
 	var user_id = "http://vk.com/miet.university";
@@ -102,4 +72,5 @@ function addGroup(user_id) {
 								+ '</li>');
 			}
 	});
+	query();
 }
