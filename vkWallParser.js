@@ -3,16 +3,25 @@ VK.init({
 });
 var id;
 newUrl();
-query();
-alert("кек");
 function query() {
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
-			$('.group_text')
-			.html(r.response.items[i].id+'<br/>'
-			+ r.response.items[i].text+'<br/>'
-			+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '</a><br/>'
-			);
+			$('#resultCount').html(r.response.count);
+				$('#result').html('');
+				for (var i=0; i<r.response.count; i++)
+				{
+					$('#result').append(''
+								+ '<li class="c-list user' + r.response.items[i].id + ' pulse animated">'
+								+ '<div class="contact-details">'
+								+ '<div class="pull-left">'
+								+ r.response.items[i].text
+								+ '</div>'
+								+ '<div class="pull-right">'
+								+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '" class="btn btn-success btn-xs" target="_blank"></a>'
+								+ '</div>'
+								+ '<div class="clearfix"></div>'
+								+ '</div>'
+								+ '</li>');
 				}
 		}
 	});
@@ -31,11 +40,18 @@ function addGroup(user_id) {
 	VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
 			if(r.response) {
 					id = '-' + r.response[0].id;
-					$('.group_info')
-				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
-					+ r.response[0].id+'<br/>'+
-					+ r.response[0].name+'<br/>'+
-					+ 'CLUB' + r.response[0].id+'<br/>');
+					$('#profiles').html(''
+								+ '<li class="c-list user' + r.response[0].id + ' pulse animated">'
+								+ '<div class="contact-pic">'
+								+ '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>'
+								+ '</div>'
+								+ '<div class="contact-details">'
+								+ r.response[0].name
+								+' CLUB' + r.response[0].id
+								+ '<a href="http://vk.com/club' + r.response[0].id + '" class="btn btn-success btn-xs" target="_blank"><span class="glyphicon glyphicon-link"></span></a>'
+								+ '<div class="clearfix"></div>'
+								+ '</div>'
+								+ '</li>');
 			}
 	});
 }
