@@ -11,22 +11,10 @@
 			VK.init({
   			apiId: 5322127
 			});
-			login();
 			alert("Я работаю");
-			function login() {
 				var user_id = "57789423";
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
-				VK.Api.call('utils.resolveScreenName', {screen_name: user_id, v: '5.27'}, function(r) {
-					if(r.response) 
-					{
-						alert(""+user_id);
-						wall(user_id);
-					}
-				}
-			});	
-			}
-			function wall(user_id){
 				var code;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:'+user_id', count: 100, v: 5.37})';
@@ -44,7 +32,6 @@
 					   	}
 					   }
 				});
-			}
 		</script>
 	</body>
 </html>
