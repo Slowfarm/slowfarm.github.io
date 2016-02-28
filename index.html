@@ -20,7 +20,8 @@
 				  if (r.response){
 				  	if (r.response.data){
 				          $('.members_ids').html(' '+r.response.data.items[0].text);
-				          alert(""+r.response.data.items.text);
+				          for (var i = 0; i < r.response.count; i++)
+				          alert(""+r.response.data.items[i].text);
 				   	}
 				   }
 			});
