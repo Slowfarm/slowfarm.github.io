@@ -5,8 +5,6 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Ссылку на пользователя или сообщество...">
-		<input type="submit" value="Найти" onClick="login();">
 		<div id="wall"></div>
 
 		<script type="text/javascript">
@@ -24,9 +22,6 @@
 					{
 						alert(""+user_id);
 						wall(user_id);
-					}
-					else{
-					alert(""+user_id);	
 					}
 				}
 			});	
