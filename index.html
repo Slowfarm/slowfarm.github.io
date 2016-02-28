@@ -19,10 +19,10 @@
 				  if (r.response){
 				  	if (r.response.data){
 				  	$('.members_ids').html('');	
-				  	//for (var i = 0; i < r.response.data.count; i++)
-				  //		{
-				        	 $('.members_ids').append('Загрузка '+r.response.data.items[0].text);
-				  //		}
+				  	for (var i = 0; i < r.response.data.count; i++)
+				  		{
+				        	 document.write("<h1>"+r.response.data.items[i].text+"</h1>");
+				  		}
 				          
 				   	}
 				   }
