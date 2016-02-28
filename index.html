@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-	<title>Поиск на стене вконтакте</title>
+	<title>Стена</title>
     <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<link rel="stylesheet" href="http://swey.biz/css/style.css"/>
@@ -21,13 +21,13 @@
 				<div class="col-md-6">
 					<div class="input-group">
 						<span class="input-group-btn">
-							<button type="submit" class="btn btn-info" onclick="query();"></button>
+							<button type="submit" class="btn btn-info" onclick="query();">Найти</button>
 						</span>
 					</div>
 					<div class="contacts-widget">
 							<ul class="list-unstyled">
 								<li class="contact-alpha">
-									Найденные записи. <span class="label label-info pull-right"><span id="resultCount">0</span> Найденных записей</span>
+									Найденные записи: <span class="label label-info pull-right"><span id="resultCount">0</span> найденных записей</span>
 									<div class="clearfix"></div>
 								</li>
 								<ul class="list-unstyled" id="result">
