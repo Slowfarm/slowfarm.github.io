@@ -8,9 +8,9 @@ function query() {
 	VK.Api.call('wall.get', {owner_id: id, v: '5.27', count: 1000}, function(r) {
 		if(r.response) {
 			$('.group_text')
-			.html(r.response.items[i].id+'</br>'
-			+ r.response.items[i].text+'</br>'
-			+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '</a></br>'
+			.html(r.response.items[i].id+'<br/>'
+			+ r.response.items[i].text+'<br/>'
+			+ '<a href="http://vk.com/wall' + id + '_' + r.response.items[i].id + '</a><br/>'
 			);
 				}
 		}
@@ -30,9 +30,11 @@ function addGroup(user_id) {
 	VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
 			if(r.response) {
 					id = '-' + r.response[0].id;
-					document.write(r.response[0].id+"<br>");
-					document.write(r.response[0].name+"<br>")
-					document.write("CLUB" + r.response[0].id+"<br>");
+					$('.group_info')
+				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
+					+ r.response[0].id+'<br/>'+
+					+ r.response[0].name+'<br/>'+
+					+ 'CLUB' + r.response[0].id+'<br/>');
 			}
 	});
 }
