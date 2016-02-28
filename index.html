@@ -6,7 +6,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id группы">
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите id">
 		<input type="button" value="Найти" onclick="wall()">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
@@ -29,8 +29,8 @@
 				 VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
             				if(r.response) {
             					group_id = '-' + group_id;
-          					wallInfoStream.innerHTML += r.response[0].photo_50+"<br/>";
-            					wallInfoStream.innerHTML += r.response[0].name+"<br/>";
+          					wallInfoStream.innerHTML += "<img src =""+ r.response[0].photo_50 +""alt = "Картинка" width = "100" height = "100">"+"<br/>";
+            					wallInfoStream.innerHTML += r.response[0].name+separator;
             					}
 				 });
 				var code;
