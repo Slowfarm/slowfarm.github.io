@@ -19,7 +19,7 @@
 			VK.Api.call('execute', {code: code}, function(r){
 			  if (r.response){
 			      	  $('.member_ids').html('');
-			          $('.member_ids').append(r.response.data);
+			          $('.member_ids').append(' '+r.response.data);
 			  }
 			});
 		</script>
