@@ -35,16 +35,20 @@ function addGroup() {
 			if(r.response) {
 					id = '-' + r.response[0].id;
 					members_count = r.response[0].members_count;
-					$('#profiles').html(''
+				$('#profiles').html(''
 								+ '<li class="c-list user' + r.response[0].id + ' pulse animated">'
 								+ '<div class="contact-pic">'
 								+ '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>'
 								+ '</div>'
+								+ '<div class="contact-details">'
 								+ r.response[0].name
 								+' CLUB' + r.response[0].id
 								+ '<a href="http://vk.com/club' + r.response[0].id + '" class="btn btn-success btn-xs" target="_blank"><span class="glyphicon glyphicon-link"></span></a>'
+								+ '<div class="clearfix"></div>'
+								+ '</div>'
 								+ '</li>');
 			}
 	});
 	query();
 }
+
