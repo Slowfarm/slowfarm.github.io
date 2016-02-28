@@ -19,6 +19,7 @@
 			if (user_id.indexOf("com/") >= 0)
 			user_id = user_id.split('com/')[1];
 			user_id = '-' + user_id;
+			alert(""+user_id);
 			var code;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:'+user_id', count: 100, v: 5.37})';
