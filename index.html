@@ -64,7 +64,7 @@
 				if(dataCount>offset) {
 					offset+=100;
 					alert(user_id+"    "+offset);
-					wall(user_id, dataCount);
+					setTimeout(function() { wall(user_id, dataCount); }, 333);
 				}
 			}
 		</script>
