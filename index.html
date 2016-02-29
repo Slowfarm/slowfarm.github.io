@@ -46,16 +46,20 @@
 			function wall(user_id, dataCount) {
 				var code;
 				code = 'return {';
-				code += 'data: API.wall.get({owner_id:';
+				code += 'wall: API.wall.get({owner_id:';
 				code += ' '+user_id;
 				code += ', offset: '+offset;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				VK.Api.call('execute', {code: code, v: '5.37'}, function(r){
-					  if (r.response)
-					  	if (r.response.data)
-					  		for (var i = 0; i < r.response.data.count; i++)
-					  			wallStream.innerHTML+=" "+r.response.data.items[i].text+separator;
+				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
+					  if (data.response) {
+					  	if (data.response.wall)
+					  		for (var i = 0; i < data.response.wall.count; i++)
+					  			wallStream.innerHTML+=" "+data.response.wall.items[i].text+separator;
+					  }
+					  else {
+					  	alert(data.error.error_msg); // в случае ошибки выведем её
+					  }
 				});
 				if(dataCount>offset) {
 					offset+=100;
