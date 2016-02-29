@@ -45,17 +45,16 @@
 			}
 			function wall(user_id, dataCount) {
 				var code;
-				code = 'return {';
-				code += 'wall: API.wall.get({owner_id:';
+				code = 'return ';
+				code += 'API.wall.get({owner_id:';
 				code += ' '+user_id;
 				code += ', offset: '+offset;
 			        code += ', count: 100, v: 5.37})';
-				code += '};';
+				code += ';';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	if (data.response.wall)
-					  		for (var i = 0; i < data.response.wall.count; i++)
-					  			wallStream.innerHTML+=" "+data.response.wall.items[i].text+separator;
+					  	for (var i = 0; i < data.response.count; i++)
+					  		wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 					  }
 					  else {
 					  	alert(data.error.error_msg); // в случае ошибки выведем её
