@@ -6,8 +6,8 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id">
-		<input type="button" value="Найти" onclick="wallInfo()">
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите id группы">
+		<input type="button" value="Найти" onclick="wall()">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
 
@@ -16,34 +16,29 @@
   			apiId: 5322127
 			});
 			
-			function wallInfo(){
+			function wall(){
 				
 				var user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
 				var group_id = user_id;
 				user_id = '-' + user_id;
+				var wallStream = document.getElementById("wall");
 				var wallInfoStream = document.getElementById("wallInfo");
 				var separator = "<br/>-----------------------<br/>";
-				 /*VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
+				 VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
             				if(r.response) {
             					group_id = '-' + group_id;
-          					wallInfoStream.innerHTML += '<img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/>';
+          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
             					}
-				 });*/
-				 wall(user_id);
-			}
-			function wall(user_id) {
-				var wallStream = document.getElementById("wall");
-				
+				 });
 				var code;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
 				code += ''+user_id;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				alert(" ");
 				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 					  if (r.response){
 					  	if (r.response.data){
