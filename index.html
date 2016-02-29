@@ -31,12 +31,14 @@
             					}
 				 });
 				var code;
+				var offset = 0;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
 				code += ' -'+user_id;
+				code += ', offset: '+offset;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				//alert("1");
+				alert(code);
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r){
 					//alert("2");
 					  if (r.response){
