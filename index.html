@@ -34,11 +34,13 @@
           					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
             				}
+            				else {
+					 	alert(data.error.error_msg);
+					}
 				 });
 				 user_id = "-"+user_id;
 				 VK.Api.call('wall.get', {owner_id: user_id, count: 0, v: '5.37'}, function(r) {
 					 	if(r.response) {
-					 		alert("Этап 1 пройден");
 					 		setTimeout(function() { wall(user_id, r.response.count); }, 333);
 					 	}
 					 	else {
@@ -48,8 +50,7 @@
 			}
 			function wall(user_id, dataCount) {
 				var code;
-				code = 'return API.wall.get({"owner_id": '+ user_id+ ', "offset": '+ offset +', "count": "100", "v": "5.37"});';
-				alert(code);
+				code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	for (var i = 0; i < data.response.count; i++)
