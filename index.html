@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<input type="text" class="form-control" id="inputUser" placeholder="Введите id">
-		<input type="button" value="Найти" onclick="wall()">
+		<input type="button" value="Найти" onclick="wall();">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
 
@@ -41,13 +41,13 @@
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
 				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+					alert(" ");
 					  if (r.response){
 					  	if (r.response.data){
 					  	for (var i = 0; i < r.response.data.count; i++)
 					  		{
 					  			wallStream.innerHTML+=r.response.data.items[i].text+separator;
 					  		}
-					          
 					   	}
 					   }
 				});
