@@ -41,7 +41,6 @@
 				 VK.Api.call('wall.get', {owner_id: user_id, count: 100, v: '5.37'}, function(r) {
 					 	if(r.response) {
 					 		dataCount = r.response.count;
-					 		alert(dataCount);
 					 	}
 				 });
 				 wall(user_id, dataCount);
@@ -63,6 +62,7 @@
 				if(dataCount>offset) {
 					offset+=100;
 					wall(user_id, dataCount);
+					alert(user_id+"    "+offset);
 				}
 			}
 		</script>
