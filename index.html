@@ -49,8 +49,7 @@
 				 });
 			}
 			function wall(user_id, dataCount) {
-				var code;
-				code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
+				String code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	for (var i = 0; i < data.response.count; i++)
