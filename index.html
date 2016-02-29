@@ -55,15 +55,18 @@
 					  if (data.response) {
 					  	for (var i = 0; i < data.response.count; i++)
 					  		wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+					  	if(dataCount>offset) {
+						offset+=100;
+						setTimeout(function() { wall(user_id, dataCount); }, 333);
+						}
+						else {
+							alert("Ура!");
+						}
 					  }
 					  else {
 					  	alert(data.error.error_msg); // в случае ошибки выведем её
 					  }
 				});
-				if(dataCount>offset) {
-					offset+=100;
-					setTimeout(function() { wall(user_id, dataCount); }, 333);
-				}
 			}
 		</script>
 	</body>
