@@ -6,7 +6,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="ID группы">
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите ID группы">
 		<input type="button" value="Найти" onclick="wall()">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
@@ -39,7 +39,7 @@
 				code += ''+user_id;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+				VK.Api.call('execute', {code: code, v: '5.37'}, function(r){
 					  if (r.response){
 					  	if (r.response.data){
 					  	for (var i = 0; i < r.response.data.count; i++)
