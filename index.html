@@ -50,13 +50,15 @@
 				var code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	if(dataCount > offset) {
+					  	if(dataCount > offset+100) {
 					  		for (var i = 0; i < 100; i++)
 					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
 							setTimeout(function() { wall(user_id, dataCount); }, 333);
 						}
 						else {
+							for (var i = 0; i < dataCount-offset+100; i++)
+					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 					  		alert("Ура!");
 						}
 					  }
