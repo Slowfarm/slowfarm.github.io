@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<title>Стена ВК</title>
+		<script src="//vk.com/js/api/openapi.js?117"></script>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	</head>
+	<body>
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите id">
+		<input type="button" value="Найти" onclick="wall()">
+		<div id="wallInfo"></div>
+		<div id="wall"></div>
+
+		<script type="text/javascript">
+			VK.init({
+  			apiId: 5322127
+			});
+			
+			function wall(){
+				
+				var user_id = document.getElementById('inputUser').value;
+				if (user_id.indexOf("com/") >= 0)
+				user_id = user_id.split('com/')[1];
+				var group_id = user_id;
+				user_id = '-' + user_id;
+				var wallStream = document.getElementById("wall");
+				var wallInfoStream = document.getElementById("wallInfo");
+				var separator = "<br/>-----------------------<br/>";
+				 VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
+            				if(r.response) {
+            					group_id = '-' + group_id;
+          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
+            					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
+            					}
+				 });
+				var code;
+				code = 'return {';
+				code += 'data: API.wall.get({owner_id:';
+				code += ''+user_id;
+			        code += ', count: 100, v: 5.37})';
+				code += '};';
+				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
+					  if (r.response){
+					  	if (r.response.data){
+					  	for (var i = 0; i < r.response.data.count; i++)
+					  		{
+					  			wallStream.innerHTML+=r.response.data.items[i].text+separator;
+					  		}
+					          
+					   	}
+					   }
+				});
+			}
+		</script>
+	</body>
+</html>
