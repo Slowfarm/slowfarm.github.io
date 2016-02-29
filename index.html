@@ -39,7 +39,10 @@
 				 VK.Api.call('wall.get', {owner_id: user_id, count: 0, v: '5.37'}, function(r) {
 					 	if(r.response) {
 					 		alert("Этап 1 пройден");
-					 		wall(user_id, r.response.count);
+					 		setTimeout(function() { wall(user_id, r.response.count); }, 333);
+					 	}
+					 	else {
+					 		alert(data.error.error_msg);
 					 	}
 				 });
 			}
