@@ -36,20 +36,16 @@
             				}
 				 });
 				 user_id = "-"+user_id;
-				 VK.Api.call('wall.get', {owner_id: user_id, v: '5.37'}, function(r) {
+				 VK.Api.call('wall.get', {owner_id: user_id, count: 0, v: '5.37'}, function(r) {
 					 	if(r.response) {
 					 		wall(user_id, r.response.count);
+					 		alert("Этап 1 пройден");
 					 	}
 				 });
 			}
 			function wall(user_id, dataCount) {
 				var code;
-				code = 'return ';
-				code += 'API.wall.get({owner_id:';
-				code += ' '+user_id;
-				code += ', offset: '+offset;
-			        code += ', count: 100, v: 5.37})';
-				code += ';';
+				code = 'return API.wall.get({"owner_id": '+ user_id+ ', "offset": '+ offset +', "count": "100", "v": "5.37"});';
 				alert(code);
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
