@@ -24,8 +24,6 @@
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
 				
-				var dataCount = 0;
-				
 				var wallStream = document.getElementById('wall');
 				var wallInfoStream = document.getElementById('wallInfo');
 				
@@ -38,12 +36,12 @@
             				}
 				 });
 				 user_id = "-"+user_id;
-				 VK.Api.call('wall.get', {owner_id: user_id, count: 100, v: '5.37'}, function(r) {
+				 VK.Api.call('wall.get', {owner_id: user_id, v: '5.37'}, function(r) {
 					 	if(r.response) {
-					 		dataCount = r.response.count;
+					 		alert(r.response.count);
+					 		wall(user_id, r.response.count);
 					 	}
 				 });
-				 wall(user_id, dataCount);
 			}
 			function wall(user_id, dataCount) {
 				var code;
@@ -61,8 +59,8 @@
 				});
 				if(dataCount>offset) {
 					offset+=100;
-					wall(user_id, dataCount);
 					alert(user_id+"    "+offset);
+					wall(user_id, dataCount);
 				}
 			}
 		</script>
