@@ -6,7 +6,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id">
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите id группы">
 		<input type="button" value="Найти" onclick="wall()">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
@@ -34,7 +34,6 @@
             					}
 				 });
 				var code;
-				alert(""+user_id);
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
 				code += ''+user_id;
@@ -43,13 +42,12 @@
 				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 					  if (r.response){
 					  	if (r.response.data){
-					  	for (var i = 0; i < r.response.data.count; i++)
-					  		{
-					  			wallStream.innerHTML+=r.response.data.items[i].text+separator;
-					  			alert(""+r.response.data.items[i].text);
+					  		alert(""+user_id);
+					  		for (var i = 0; i < r.response.data.count; i++) {
+					  		wallStream.innerHTML+=r.response.data.items[i].text+separator;
 					  		}
-					          
 					   	}
+					   	alert(""+user_id);
 					   }
 				});
 			}
