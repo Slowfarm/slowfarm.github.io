@@ -26,13 +26,6 @@
 				var wallStream = document.getElementById("wall");
 				var wallInfoStream = document.getElementById("wallInfo");
 				var separator = "<br/>-----------------------<br/>";
-				 VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
-            				if(r.response) {
-            					group_id = '-' + group_id;
-          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
-            					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
-            					}
-				 });
 				var code;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
@@ -50,6 +43,13 @@
 					   	}
 					   }
 				});
+				VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
+            				if(r.response) {
+            					group_id = '-' + group_id;
+          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
+            					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
+            					}
+				 });
 			}
 		</script>
 	</body>
