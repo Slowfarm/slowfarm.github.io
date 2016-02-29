@@ -39,13 +39,13 @@
 				code += ''+user_id;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				alert("1");
+				//alert("1");
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r){
-					alert("2");
+					//alert("2");
 					  if (r.response){
-					  	alert("3");
+					  	//alert("3");
 					  	if (r.response.data){
-					  		alert("4");
+					  		//alert("4");
 					  	for (var i = 0; i < r.response.data.count; i++)
 					  		{
 					  			alert("5");
