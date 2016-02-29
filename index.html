@@ -40,7 +40,7 @@
 				code += ''+user_id;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				alert(" "+ user_id+ "       "+ group_id);
+				alert(code);
 				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 					  if (r.response){
 					  	if (r.response.data){
