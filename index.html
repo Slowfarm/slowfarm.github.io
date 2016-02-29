@@ -12,7 +12,7 @@
 		});
 		var code;
 		code = 'return {';
-		code += 'data: API.wall.get({owner_id: 33509, offset: 0, count: 15, filter: all, v: "5.37"})';
+		code += 'data: API.wall.get({owner_id: -33509, offset: 0, count: 15, filter: all, v: "5.37"})';
 		code += '};';
 		alert(" ");
 		VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
