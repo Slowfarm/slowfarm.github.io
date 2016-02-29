@@ -33,7 +33,7 @@
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
             				}
             				else {
-					 	alert(data.error.error_msg);
+					 	alert(r.error.error_msg);
 					}
 				 });
 				 user_id = "-"+user_id;
@@ -42,7 +42,7 @@
 					 		setTimeout(function() { wall(user_id, r.response.count); }, 333);
 					 	}
 					 	else {
-					 		alert(data.error.error_msg);
+					 		alert(r.error.error_msg);
 					 	}
 				 });
 			}
