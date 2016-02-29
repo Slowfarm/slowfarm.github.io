@@ -6,7 +6,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="ID">
+		<input type="text" class="form-control" id="inputUser" placeholder="ID группы">
 		<input type="button" value="Найти" onclick="wall()">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
@@ -23,8 +23,8 @@
 				user_id = user_id.split('com/')[1];
 				var group_id = user_id;
 				user_id = '-' + user_id;
-				var wallStream = document.getElementById("wall");
-				var wallInfoStream = document.getElementById("wallInfo");
+				var wallStream = document.getElementById('wall');
+				var wallInfoStream = document.getElementById('wallInfo');
 				var separator = "<br/>-----------------------<br/>";
 				 VK.Api.call('groups.getById', {group_id: group_id, fields: 'photo_50', v: '5.27'}, function(r) {
             				if(r.response) {
