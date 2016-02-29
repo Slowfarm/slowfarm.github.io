@@ -37,6 +37,7 @@
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
             				}
 				 });
+				 user_id = "-"+user_id;
 				 VK.Api.call('wall.get', {owner_id: user_id, count: 100, v: '5.37'}, function(r) {
 					 	if(r.response) {
 					 		dataCount = r.response.count;
@@ -49,7 +50,7 @@
 				var code;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
-				code += ' -'+user_id;
+				code += ' '+user_id;
 				code += ', offset: '+offset;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
