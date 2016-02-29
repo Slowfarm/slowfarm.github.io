@@ -21,15 +21,13 @@
 			code = 'return {';
 			code += 'data: API.wall.get({owner_id: -mp_45, count: 100, v: 5.37})';
 			code += '};';
-			// сам метод execute, выполняет созданный код
 			VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 				  if (r.response){
 				  	if (r.response.data){
 				  	for (var i = 0; i < r.response.data.count; i++)
 				  		{
 				  			var z=document.getElementById("wall");
-				  			z.innerHTML+=r.response.data.items[i].text+"<br/> <br/>";
-				        	 //document.writeln(""+r.response.data.items[i].text);
+				  			z.innerHTML+=r.response.data.items[i].text+"<br/>--------------<br/>";
 				  		}
 				          
 				   	}
