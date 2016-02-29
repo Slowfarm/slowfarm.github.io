@@ -18,10 +18,10 @@
 			});
 			
 			function wall(){
-				
 				var user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
+				
 				var group_id = user_id;
 				user_id = '-' + user_id;
 				var wallStream = document.getElementById("wall");
@@ -46,7 +46,7 @@
 					  	if (r.response.data){
 					  	for (var i = 0; i < r.response.data.count; i++)
 					  		{
-					  			wallStream.innerHTML+=r.response.data.items[i].text+separator;
+					  			wallStream.innerHTML+=r.response.data.items[i].text;
 					  		}
 					   	}
 					   }
