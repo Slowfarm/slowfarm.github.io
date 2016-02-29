@@ -53,15 +53,17 @@
 				code += '};';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r){
 					  if (r.response)
-					  	if (r.response.data)
-					  		for (var i = 0; i < r.response.data.count; i++)
-					  			wallStream.innerHTML+=" "+r.response.data.items[i].text+separator;
+					  	if (r.response.data) {
+					  			if(dataCount>offset) {
+					  				for (var i = 0; i < r.response.data.count; i++) {
+					  					wallStream.innerHTML+=" "+r.response.data.items[i].text+separator;
+					  				}
+									offset+=100;
+									alert(user_id+"    "+offset);
+									wall(user_id, dataCount);
+								}
+					  	}
 				});
-				if(dataCount>offset) {
-					offset+=100;
-					alert(user_id+"    "+offset);
-					wall(user_id, dataCount);
-				}
 			}
 		</script>
 	</body>
