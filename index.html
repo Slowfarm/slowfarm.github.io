@@ -42,12 +42,12 @@
 				VK.Api.call('execute', {code: code, v: "5.37"}, function(r){
 					  if (r.response){
 					  	if (r.response.data){
-					  		alert(""+user_id);
-					  		for (var i = 0; i < r.response.data.count; i++) {
-					  		wallStream.innerHTML+=r.response.data.items[i].text+separator;
+					  	for (var i = 0; i < r.response.data.count; i++)
+					  		{
+					  			wallStream.innerHTML+=r.response.data.items[i].text+separator;
 					  		}
+					          
 					   	}
-					   	alert(""+user_id);
 					   }
 				});
 			}
