@@ -24,7 +24,6 @@
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
 				
-				var wallStream = document.getElementById('wall');
 				var wallInfoStream = document.getElementById('wallInfo');
 				
 				var separator = "<br/>-----------------------<br/>";
@@ -49,6 +48,7 @@
 				 });
 			}
 			function wall(user_id, dataCount) {
+				var wallStream = document.getElementById('wall');
 				var code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
