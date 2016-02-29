@@ -16,6 +16,8 @@
   			apiId: 5322127
 			});
 			
+			var offset = 0;
+			
 			function login(){
 				
 				var user_id = document.getElementById('inputUser').value;
@@ -35,30 +37,32 @@
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
             				}
 				 });
-				 VK.Api.call('wall.get', {owner_id: user_id, v: '5.37'}, function(r) {
+				 VK.Api.call('wall.get', {owner_id: user_id, count: 100, v: '5.37'}, function(r) {
 					 	if(r.response) {
 					 		dataCount = r.response.count;
 					 		alert(dataCount);
-					 		wall(user_id, dataCount);
 					 	}
 				 });
+				 wall(user_id, dataCount);
 			}
 			function wall(user_id, dataCount) {
 				var code;
-				var offset = 0;
 				code = 'return {';
 				code += 'data: API.wall.get({owner_id:';
 				code += ' -'+user_id;
 				code += ', offset: '+offset;
 			        code += ', count: 100, v: 5.37})';
 				code += '};';
-				alert(code);
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r){
 					  if (r.response)
 					  	if (r.response.data)
-					  	for (var i = 0; i < r.response.data.count; i++)
+					  		for (var i = 0; i < r.response.data.count; i++)
 					  			wallStream.innerHTML+=" "+r.response.data.items[i].text+separator;
 				});
+				if(dataCount>offset) {
+					offset+=100;
+					wall(user_id, dataCount);
+				}
 			}
 		</script>
 	</body>
