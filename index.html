@@ -17,16 +17,15 @@
 			});
 			
 			var offset = 0;
+			var wallInfoStream = document.getElementById('wallInfo');
+			var wallStream = document.getElementById('wall');
+			var separator = "<br/>-----------------------<br/>";
 			
 			function login(){
 				
 				var user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 				user_id = user_id.split('com/')[1];
-				
-				var wallInfoStream = document.getElementById('wallInfo');
-				
-				var separator = "<br/>-----------------------<br/>";
 				
 				 VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
             				if(r.response) {
@@ -47,8 +46,7 @@
 					 	}
 				 });
 			}
-			function wall(user_id, dataCount) {
-				var wallStream = document.getElementById('wall');
+			function wall(user_id, dataCount) {	
 				var code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
