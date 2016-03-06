@@ -21,7 +21,6 @@
 			var wallStream = document.getElementById('wall');
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
-			var int_user_id;
 			var news_count;
 			
 			function login(){
@@ -35,32 +34,36 @@
           					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
             					user_id = r.response[0].id;
-            					int_user_id = parseInt(user_id, 10);
+            					var int_user_id = parseInt(user_id, 10);
+            					getGroups(int_user_id);
             				}
             				else {
 					 	alert(r.error.error_msg);
 					}
 				 });
-				 VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
-					 	if(r.response) {
-					 		for(var i = 0; i < r.response.count; i++) {
-					 			VK.Api.call('wall.get', {owner_id: "-"+r.response.items[i], count: 0, v: '5.37'}, function(r) {
-					 				if(r.response) {
-					 					news_count = r.response.count;
-					 				}
-					 				else {
-					 					alert(r.error.error_msg);
-					 				}
-				 				});
-					 		}
-					 			wallSearch(r.response.items[i], news_count);
-					 			if(i==1)
-					 				alert(r.response.items[i]);
-					 	}
-					 	else {
-					 		alert(r.error.error_msg);
-					 	}
-				 });
+				 function getGroups(int_user_id) {
+					 VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
+						 	if(r.response) {
+						 		for(var i = 0; i < r.response.count; i++) {
+						 			var owner_id = "-"+r.response.items[i];
+						 			VK.Api.call('wall.get', {owner_id: owner_id, count: 0, v: '5.37'}, function(r) {
+						 				if(r.response) {
+						 					news_count = r.response.count;
+						 				}
+						 				else {
+						 					alert(r.error.error_msg);
+						 				}
+					 				});
+						 		}
+						 			wallSearch(owner_id, news_count);
+						 			if(i==1)
+						 				alert(r.response.items[i]);
+						 	}
+						 	else {
+						 		alert(r.error.error_msg);
+						 	}
+					 });
+				 }
 			}
 			function wallSearch(group_id, dataCount) {	
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
