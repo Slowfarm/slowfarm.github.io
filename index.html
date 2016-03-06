@@ -76,7 +76,7 @@
 					  if (data.response) {
 					  	if(dataCount > offset+100) {
 					  		for (var i = 0; i < 100; i++)
-					  			if(data.response.from_id == int_user_id)
+					  			if(data.response.items.from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
 							wallSearch(user_id, dataCount, int_user_id);
