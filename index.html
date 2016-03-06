@@ -75,7 +75,7 @@
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	alert(data.response.items[0].owner_id+" элемент номер 0");
+					  	alert("data.response.items[0].id");
 					  	if(dataCount >= offset+100) {
 					  		for (var i = 0; i < 100; i++)
 					  			if(data.response.items[i].owner_id == int_user_id)
@@ -86,7 +86,8 @@
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 							{
-					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+								if(data.response.items[i].owner_id == int_user_id)
+					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 					  			alert(i);
 							}
 							alert(dataCount-offset);
