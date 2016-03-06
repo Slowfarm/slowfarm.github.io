@@ -52,7 +52,7 @@
 					if(r.response) {
 						if(index < r.response.count) {
 							var owner_id = "-"+r.response.items[index];
-							setTimeout(function() { getGroups(owner_id); }, 2000);
+							setTimeout(function() { getGroups(owner_id); }, 5000);
 						}
 					}
 					else {
@@ -83,7 +83,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout(function() { wallSearch(group_id, dataCount); }, 2000);
+							setTimeout(function() { wallSearch(group_id, dataCount); }, 333);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
@@ -98,7 +98,7 @@
 					  }
 				});
 				index++;
-				setTimeout(function() { main(); }, 2000);
+				setTimeout(function() { main(); }, 5000);
 			}
 		</script>
 	</body>
