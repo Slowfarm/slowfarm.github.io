@@ -49,7 +49,7 @@
 			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
 					if(r.response) {
-						data_count = r.response.count;
+						var data_count = r.response.count;
 						for(i = 0; i < data_count; i++) {
 							ownerArray[i] = "-"+r.response.items[i];
 						}
@@ -66,12 +66,13 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						wallSearch(owner_id, r.response.count);
+						var data_count = r.response.count;
 					}
 						else {
 							alert(r.error.error_msg + " getGroups()");
 						}
 					});
+					wallSearch(owner_id ,data_count);
 			 }
 			 
 			function wallSearch(group_id, dataCount) {	
