@@ -48,7 +48,7 @@
 					if(r.response) {
 						for(var i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
-							setTimeout(getGroups(owner_id, int_user_id), 333);
+							setTimeout(function() { getGroups(owner_id, int_user_id); }, 333);
 						}
 					}
 					else {
@@ -61,7 +61,7 @@
 				VK.Api.call('wall.get', {owner_id: owner_id, count: 0, v: '5.37'}, function(r) {
 					if(r.response) {
 						news_count = r.response.count;
-						setTimeout(wallSearch(owner_id, news_count, int_user_id), 333);
+						wallSearch(owner_id, news_count, int_user_id);
 					}
 						else {
 							alert(r.error.error_msg+ " getGroups()");
