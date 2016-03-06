@@ -63,7 +63,7 @@
 				VK.Api.call('wall.get', {owner_id: owner_id, count: 0, v: '5.37'}, function(r) {
 					if(r.response) {
 						news_count = r.response.count;
-						setTimeout(function() { wallSearch(owner_id, news_count); }, 333);
+						wallSearch(owner_id, news_count);
 					}
 						else {
 							alert(r.error.error_msg+ " getGroups()");
@@ -77,7 +77,7 @@
 					  if (data.response) {
 					  	if(dataCount >= offset+100) {
 					  		for (var i = 0; i < 100; i++)
-					  			if(int_user_id == 182740114)
+					  		//	if(int_user_id == 182740114)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
 							setTimeout(function() { wallSearch(user_id, dataCount); }, 333);
@@ -85,7 +85,7 @@
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 							{
-								if(int_user_id == 182740114)
+								//if(int_user_id == 182740114)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 					  			alert(i);
 							}
