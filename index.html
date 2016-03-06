@@ -40,7 +40,7 @@
             					main();
             				}
             				else {
-					 	alert(r.error.error_msg+ " login()");
+					 	alert(r.error.error_msg + " login()");
 					}
 				 });
 			}
@@ -48,13 +48,13 @@
 			function main() {
 				VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
 					if(r.response) {
-						//for(var i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[0];
+						for(var i = 0; i < r.response.count; i++) {
+							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
-					//	}
+						}
 					}
 					else {
-						alert(r.error.error_msg+ " main()");
+						alert(r.error.error_msg + " main()");
 					}
 				});
 			}
@@ -66,7 +66,7 @@
 						wallSearch(owner_id, news_count);
 					}
 						else {
-							alert(r.error.error_msg+ " getGroups()");
+							alert(r.error.error_msg + " getGroups()");
 						}
 					});
 			 }
@@ -87,13 +87,11 @@
 							{
 								if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-					  			alert(i);
 							}
-							alert(dataCount-offset);
 						}
 					  }
 					  else {
-					  	alert(data.error.error_msg+ " WallSearch()");
+					  	alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
