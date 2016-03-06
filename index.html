@@ -20,33 +20,44 @@
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
 			var separator = "<br/>-----------------------<br/>";
+			var user_id;
+			var groups_count;
 			
 			function login(){
 				
-				var user_id = document.getElementById('inputUser').value;
+				user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
-				user_id = user_id.split('com/')[1];
+					user_id = user_id.split('com/')[1];
 				
-				 VK.Api.call('groups.getById', {group_id: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
+				 VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
             				if(r.response) {
           					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
-            					wallInfoStream.innerHTML += "<br/>"+r.response[0].name+separator;
+            					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
+            					user_id = r.response[0].id;
             				}
             				else {
 					 	alert(r.error.error_msg);
 					}
 				 });
-				 user_id = "-"+user_id;
 				 VK.Api.call('wall.get', {owner_id: user_id, count: 0, v: '5.37'}, function(r) {
 					 	if(r.response) {
-					 		setTimeout(function() { wall(user_id, r.response.count); }, 333);
+					 		groups_count = r.response.count;
+					 	}
+					 	else {
+					 		alert(r.error.error_msg);
+					 	}
+				 });
+				 VK.Api.call('groups.get', {user_id: user_id, v: '5.37'}, function(r) {
+					 	if(r.response) {
+					 		for(var i = 0; i < r.response.count; i++)
+					 			wallSearch(r.response.items[i], groups_count);
 					 	}
 					 	else {
 					 		alert(r.error.error_msg);
 					 	}
 				 });
 			}
-			function wall(user_id, dataCount) {	
+			function wallSearch(user_id, dataCount) {	
 				var code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
