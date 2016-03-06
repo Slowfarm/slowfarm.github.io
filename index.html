@@ -55,7 +55,7 @@
 						 				}
 					 				});
 						 		}
-						 			wallSearch(owner_id, news_count);
+						 			setTimeout(function() { wallSearch(owner_id, news_count); }, 333);
 						 			if(i==1)
 						 				alert(r.response.items[i]);
 						 	}
