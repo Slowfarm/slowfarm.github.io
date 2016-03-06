@@ -77,15 +77,15 @@
 					  if (data.response) {
 					  	if(dataCount >= offset+100) {
 					  		for (var i = 0; i < 100; i++)
-					  		//	if(int_user_id == 182740114)
+					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout(function() { wallSearch(user_id, dataCount); }, 333);
+							setTimeout(function() { wallSearch(group_id, dataCount); }, 333);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 							{
-								//if(int_user_id == 182740114)
+								if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 					  			alert(i);
 							}
