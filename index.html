@@ -63,9 +63,9 @@
 						news_count = r.response.count;
 						wallSearch(owner_id, news_count);
 					}
-						else {
-							alert(r.error.error_msg+ " getGroups()");
-						}
+					//	else {
+					//		alert(r.error.error_msg+ " getGroups()");
+					//	}
 					});
 			 }
 			 
@@ -78,7 +78,7 @@
 					  		for (var i = 0; i < 100; i++)
 					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							wall(user_id, dataCount);
+							wallSearch(user_id, dataCount);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
