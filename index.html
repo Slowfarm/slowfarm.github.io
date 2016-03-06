@@ -48,7 +48,7 @@
 					if(r.response) {
 						for(var i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
-							setTimeout(getGroups(owner_id),1000);
+							setTimeout(getGroups(owner_id, int_user_id),1000);
 						}
 					}
 					else {
@@ -57,11 +57,11 @@
 				});
 			}
 			
-			function getGroups(owner_id) {
+			function getGroups(owner_id, int_user_id) {
 				VK.Api.call('wall.get', {owner_id: owner_id, count: 0, v: '5.37'}, function(r) {
 					if(r.response) {
 						news_count = r.response.count;
-						wallSearch(owner_id, news_count);
+						wallSearch(owner_id, news_count, int_user_id);
 					}
 					//	else {
 					//		alert(r.error.error_msg+ " getGroups()");
@@ -70,24 +70,25 @@
 			 }
 			 
 			 
-			function wallSearch(group_id, dataCount) {	
+			function wallSearch(group_id, dataCount, int_user_id) {	
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	if(dataCount > offset+100) {
 					  		for (var i = 0; i < 100; i++)
-					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+					  			if(data.response.from_id == int_user_id)
+					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							wallSearch(user_id, dataCount);
+							wallSearch(user_id, dataCount, int_user_id);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 						}
 					  }
-					  else {
-					  	alert(data.error.error_msg+ " WallSearch()");
-					  }
+					 // else {
+					  //	alert(data.error.error_msg+ " WallSearch()");
+					 // }
 				});
 			}
 		</script>
