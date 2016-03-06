@@ -72,12 +72,11 @@
 					});
 			 }
 			 
-			 
 			function wallSearch(group_id, dataCount) {	
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	if(dataCount > offset+100) {
+					  	if(dataCount >= offset+100) {
 					  		for (var i = 0; i < 100; i++)
 					  			if(data.response.items.from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
@@ -87,7 +86,7 @@
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 							{
-								alert(dataCount+ "      "+data.response.items.from_id);
+								alert(dataCount+ "      "+int_user_id);
 					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							}
 						}
