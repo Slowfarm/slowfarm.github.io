@@ -38,7 +38,7 @@
             					main(int_user_id);
             				}
             				else {
-					 	alert(r.error.error_msg);
+					 	alert(r.error.error_msg+ " login()");
 					}
 				 });
 			}
@@ -54,7 +54,7 @@
 						 		}
 						 	}
 						 	else {
-						 		alert(r.error.error_msg);
+						 		alert(r.error.error_msg+ " main()");
 						 	}
 					 });
 			}
@@ -65,7 +65,7 @@
 						news_count = r.response.count;
 					}
 						else {
-							alert(r.error.error_msg);
+							alert(r.error.error_msg+ " getGroups()");
 						}
 					});
 			 }
@@ -87,7 +87,7 @@
 						}
 					  }
 					  else {
-					  	alert(data.error.error_msg);
+					  	alert(data.error.error_msg+ " WallSearch()");
 					  }
 				});
 			}
