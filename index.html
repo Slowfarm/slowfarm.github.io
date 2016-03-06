@@ -46,10 +46,10 @@
 			function main(int_user_id) {
 				VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
 					if(r.response) {
-						for(var i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[i];
+						//for(var i = 0; i < r.response.count; i++) {
+							var owner_id = "-"+r.response.items[0];
 							setTimeout(function() { getGroups(owner_id, int_user_id); }, 333);
-						}
+					//	}
 					}
 					else {
 						alert(r.error.error_msg+ " main()");
@@ -64,7 +64,7 @@
 						wallSearch(owner_id, news_count, int_user_id);
 					}
 						else {
-							alert(r.error.error_msg+ " getGroups() фывфывфыв");
+							alert(r.error.error_msg+ " getGroups()");
 						}
 					});
 			 }
