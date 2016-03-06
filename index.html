@@ -16,7 +16,7 @@
   			apiId: 5322127
 			});
 			
-			var offset = 0;
+			var offset;
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
 			var separator = "<br/>-----------------------<br/>";
@@ -36,6 +36,7 @@
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
             					user_id = r.response[0].id;
             					int_user_id = parseInt(user_id, 10);
+            					offset=0;
             					setTimeout(function() { main(); }, 333);
             				}
             				else {
@@ -63,8 +64,6 @@
 					if(r.response) {
 						news_count = r.response.count;
 						setTimeout(function() { wallSearch(owner_id, news_count); }, 333);
-						alert("конец");
-						offset=0;
 					}
 						else {
 							alert(r.error.error_msg+ " getGroups()");
@@ -73,7 +72,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {	
-				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
+				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	alert(data.response.items[0].from_id);
