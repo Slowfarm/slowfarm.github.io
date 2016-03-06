@@ -44,7 +44,7 @@
 				 VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
 					 	if(r.response) {
 					 		for(var i = 0; i < r.response.count; i++) {
-					 			VK.Api.call('wall.get', {owner_id: r.response.items[i], count: 0, v: '5.37'}, function(r) {
+					 			VK.Api.call('wall.get', {owner_id: "-"+r.response.items[i], count: 0, v: '5.37'}, function(r) {
 					 				if(r.response) {
 					 					news_count = r.response.count;
 					 				}
@@ -62,8 +62,8 @@
 					 	}
 				 });
 			}
-			function wallSearch(user_id, dataCount) {	
-				var code = 'return API.wall.get({owner_id: '+ user_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
+			function wallSearch(group_id, dataCount) {	
+				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	if(dataCount > offset+100) {
