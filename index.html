@@ -22,6 +22,7 @@
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
+			var ownerArray = new Array();
 			
 			function login(){
 				
@@ -37,7 +38,7 @@
             					int_user_id = parseInt(user_id, 10);
             					offset=0;
             					index=0;
-            					setTimeout(function() { main(); }, 5000);
+            					setTimeout(function() { main(); }, 333);
             				}
             				else {
 					 	alert(r.error.error_msg + " login()");
@@ -45,25 +46,27 @@
 				 });
 			}
 			
-			function main() {
+			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
 					if(r.response) {
-						for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[i];
-							setTimeout(function() { getGroups(owner_id); }, 333);
+						data_count = r.response.count;
+						for(i = 0; i < data_count; i++) {
+							ownerArray[i] = "-"+r.response.items[i];
 						}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
 					}
 				});
+				for(var i = 0; i < data_count; i++)
+					getGroups(ownerArray[i]);
 			}
 			
 			function getGroups(owner_id) {
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						setTimeout(function() { wallSearch(owner_id, r.response.count); }, 5000);
+						wallSearch(owner_id, r.response.count);
 					}
 						else {
 							alert(r.error.error_msg + " getGroups()");
