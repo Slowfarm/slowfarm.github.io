@@ -49,7 +49,6 @@
 					if(r.response) {
 						//for(var i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[0];
-							alert(int_user_id);
 							setTimeout(function() { getGroups(owner_id); }, 333);
 					//	}
 					}
@@ -63,8 +62,9 @@
 				VK.Api.call('wall.get', {owner_id: owner_id, count: 0, v: '5.37'}, function(r) {
 					if(r.response) {
 						news_count = r.response.count;
-						alert(int_user_id);
 						setTimeout(function() { wallSearch(owner_id, news_count); }, 333);
+						alert("конец");
+						offset=0;
 					}
 						else {
 							alert(r.error.error_msg+ " getGroups()");
@@ -78,7 +78,7 @@
 					  if (data.response) {
 					  	if(dataCount >= offset+100) {
 					  		for (var i = 0; i < 100; i++)
-					  			if(data.response.items.from_id == int_user_id)
+					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
 							setTimeout(function() { wallSearch(user_id, dataCount, int_user_id); }, 333);
@@ -86,7 +86,7 @@
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 							{
-								alert(dataCount+ "      "+int_user_id);
+								alert(dataCount+ "      "+data.response.items[i].from_id);
 					  			wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							}
 						}
