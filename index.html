@@ -74,22 +74,20 @@
 			 
 			function wallSearch(group_id) {
 				delay(334);
-				var i=0;
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
-						if(r.response.items[i+1].text) {
-							while(r.response.items[i+1].text)
-							{
+						alert(r.response.items[0].length);
+						if(r.response.items[0].length > offset + 100) {
+							for(var i = 0; i < r.response.items[0].length)
 								if(data.response.items[i].from_id == int_user_id);
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-								i++;
-							}
 							offset+=100;
-							wallSearch(group_id, dataCount);
+							wallSearch(group_id);
 						}
 						else {
-							alert("Список готов");
+							for(var i =0; i < r.response.items[0].length - offset; i++)
+								wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 						}
 					}
 					else {
