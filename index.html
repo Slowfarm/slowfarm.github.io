@@ -22,6 +22,7 @@
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
+			var count = 0;
 			
 			function login(){
 				
@@ -82,12 +83,15 @@
 								if(data.response.items[i].from_id == int_user_id);
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
+							count+=100;
 							wallSearch(group_id);
 						}
 						else {
 							for(var i =0; i < data.response.items.length - offset; i++)
 								if(data.response.items[i].from_id == int_user_id);
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+							count+=data.response.items.length;
+							alert(count);
 						}
 					}
 					else {
