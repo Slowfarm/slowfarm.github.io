@@ -48,10 +48,13 @@
 			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
-						if(count<=r.response.count) {
+						if(count<r.response.count) {
 							var owner_id = "-"+r.response.items[count];
 							wallSearch(owner_id);
 							delay(334);
+						}
+						else {
+							alert("Успех");
 						}
 					}
 					else {
