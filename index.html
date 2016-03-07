@@ -48,11 +48,9 @@
 			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
-						for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[i];
+							var owner_id = "-"+r.response.items[count];
 							wallSearch(owner_id);
 							delay(334);
-						}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
@@ -90,6 +88,8 @@
 								if(data.response.items[i].from_id == int_user_id)
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 								}
+								count++;
+							main();
 						}
 					}
 					else {
