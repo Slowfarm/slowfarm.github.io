@@ -48,10 +48,10 @@
 				var code = 'return API.groups.get({user_id: '+ int_user_id +', v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-					//	for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[0];
+						for(i = 0; i < r.response.count; i++) {
+							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
-					//	}
+						}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
@@ -60,10 +60,31 @@
 			}
 			
 			function getGroups(owner_id) {
-				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
-				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
+				var codeGroups = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
+				VK.Api.call('execute', {code: codeGroups, v: '5.37'}, function(r) {
 					if(r.response) {
-						wallSearch(owner_id ,r.response.count);
+							var code = 'return API.wall.get({owner_id: '+ owner_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+							VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
+								  if (data.response) {
+								  	if(r.response.count >= offset+100) {
+								  		for (var i = 0; i < 100; i++)
+								  			if(data.response.items[i].from_id == int_user_id)
+								  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+										offset+=100;
+										//setTimeout( function() {wallSearch(group_id, dataCount);},333);
+									}
+									else {
+										for (var i = 0; i < r.response.count-offset; i++)
+										{
+											if(data.response.items[i].from_id == int_user_id)
+								  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+										}
+									}
+								  }
+								  else {
+								  	alert(data.error.error_msg + " WallSearch()");
+								  }
+							});
 					}
 						else {
 							alert(r.error.error_msg + " getGroups()");
@@ -71,30 +92,6 @@
 					});
 			 }
 			 
-			function wallSearch(group_id, dataCount) {	
-				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
-				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
-					  if (data.response) {
-					  	if(dataCount >= offset+100) {
-					  		for (var i = 0; i < 100; i++)
-					  			if(data.response.items[i].from_id == int_user_id)
-					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-							offset+=100;
-							setTimeout( function() {wallSearch(group_id, dataCount);},333);
-						}
-						else {
-							for (var i = 0; i < dataCount-offset; i++)
-							{
-								if(data.response.items[i].from_id == int_user_id)
-					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-							}
-						}
-					  }
-					  else {
-					  	alert(data.error.error_msg + " WallSearch()");
-					  }
-				});
-			}
 		</script>
 	</body>
 </html>
