@@ -79,7 +79,7 @@
 					if (data.response) {
 						alert(r.response.items[0].length);
 						if(r.response.items[0].length > offset + 100) {
-							for(var i = 0; i < r.response.items[0].length)
+							for(var i = 0; i < r.response.items[0].length; i++)
 								if(data.response.items[i].from_id == int_user_id);
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
