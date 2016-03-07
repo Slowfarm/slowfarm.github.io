@@ -85,8 +85,7 @@
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							}
 							offset+=100;
-							delay(334);
-							wallSearch(group_id);
+							setTimeout(function() {wallSearch(group_id);}, 334);
 						}
 						else {
 							for(var i =0; i < data.response.items.length; i++) {
@@ -95,6 +94,7 @@
 								}
 							wallInfoStream.innerHTML+=group_id+"<br/>";
 							count++;
+							delay(334);
 							main();
 						}
 					}
