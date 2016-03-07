@@ -45,8 +45,8 @@
 			}
 			
 			function main() { // получаем список id сообществ
-			var array = new Array();
-				VK.Api.call('groups.get', {user_id: int_user_id, v: '5.37'}, function(r) {
+				var code = 'return API.groups.get({user_id: '+ int_user_id +', v: 5.37});';
+				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
