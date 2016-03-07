@@ -47,20 +47,11 @@
 			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
-					//	for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[0];
+						for(i = 0; i < r.response.count; i++) {
+							var owner_id = "-"+r.response.items[ш];
 							getGroups(owner_id);
 							delay(333);
-							var owner_id = "-"+r.response.items[1];
-							getGroups(owner_id);
-							delay(333);
-							var owner_id = "-"+r.response.items[2];
-							getGroups(owner_id);
-							delay(333);
-							var owner_id = "-"+r.response.items[3];
-							getGroups(owner_id);
-							delay(333);
-					//	}
+						}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
