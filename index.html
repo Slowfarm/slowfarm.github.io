@@ -88,7 +88,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout( function() {wallSearch(group_id, dataCount);},333);
+							setTimeout( function() {wallSearch(group_id, dataCount);},333*dataCount);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
