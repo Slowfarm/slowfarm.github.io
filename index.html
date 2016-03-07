@@ -50,7 +50,7 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[0];
+							var owner_id = "-"+r.response.items[i];
 							groups_count = r.response.count;
 								delay(350);
 							getGroups(owner_id);
