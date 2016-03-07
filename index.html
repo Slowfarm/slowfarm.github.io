@@ -50,7 +50,7 @@
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
-								delay(334);
+								delay(500);
 							getGroups(owner_id);
 						}
 					}
@@ -85,7 +85,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
-				delay(250);
+				delay(300);
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
