@@ -48,13 +48,17 @@
 				var code = 'return API.groups.get({user_id: '+ int_user_id +', v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
+						var i = 0;
+							(function() {
+							    if (i < r.response.count) {
+							    	var owner_id = "-"+r.response.items[0];
+								getGroups(owner_id);
+							        setTimeout(arguments.callee, 1000);
+							        i++;
+							    })();
 					//	for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[0];
-							getGroups(owner_id);
-							var owner_id = "-"+r.response.items[1];
-							getGroups(owner_id);
-							var owner_id = "-"+r.response.items[2];
-							getGroups(owner_id);
+					//		var owner_id = "-"+r.response.items[0];
+					//		getGroups(owner_id);
 					//	}
 					}
 					else {
