@@ -22,6 +22,7 @@
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
+			var groups_count;
 			
 			function login(){
 				
@@ -36,7 +37,7 @@
             					user_id = r.response[0].id;
             					int_user_id = parseInt(user_id, 10);
             					offset=0;
-            					setTimeout(function() { main() }, 333);
+            					main();
             				}
             				else {
 					 	alert(r.error.error_msg + " login()");
@@ -50,7 +51,8 @@
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[0];
-							delay(1000);
+							groups_count = r.response.count;
+							delay(333);
 							getGroups(owner_id);
 						}
 					}
@@ -93,7 +95,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout( function() {wallSearch(group_id, dataCount);},333);
+							setTimeout( function() {wallSearch(group_id, dataCount);}, groups_count);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
