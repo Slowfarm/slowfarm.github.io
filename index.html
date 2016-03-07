@@ -48,16 +48,10 @@
 				var code = 'return API.groups.get({user_id: '+ int_user_id +', v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-					//	for(i = 0; i < r.response.count; i++) {
+						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[0];
-							getGroups(owner_id);
-							var owner_id = "-"+r.response.items[1];
-							getGroups(owner_id);
-							var owner_id = "-"+r.response.items[2];
-							getGroups(owner_id);
-							var owner_id = "-"+r.response.items[3];
-							getGroups(owner_id);
-					//	}
+							setTimeout(function() {getGroups(owner_id)}, 1000);
+						}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
@@ -86,7 +80,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout( function() {wallSearch(group_id, dataCount);},333*dataCount);
+							setTimeout( function() {wallSearch(group_id, dataCount);},333);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
