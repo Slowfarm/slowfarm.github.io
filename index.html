@@ -78,7 +78,7 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						delay(350);
+						//delay(350);
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
