@@ -88,7 +88,8 @@
 								if(data.response.items[i].from_id == int_user_id)
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 								}
-								count++;
+							wallInfoStream.innerHTML+=group_id+"<br/>";
+							count++;
 							main();
 						}
 					}
