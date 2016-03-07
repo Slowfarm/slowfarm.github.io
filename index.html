@@ -78,8 +78,8 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
 						alert(data.response.items.length);
-						if(data.response.items.length > offset + 100) {
-							for(var i = 0; i < data.response.items.length; i++)
+						if(data.response.items.length == 100) {
+							for(var i = 0; i < 100; i++)
 								if(data.response.items[i].from_id == int_user_id);
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
@@ -87,7 +87,8 @@
 						}
 						else {
 							for(var i =0; i < data.response.items.length - offset; i++)
-								wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+								if(data.response.items[i].from_id == int_user_id);
+									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 						}
 					}
 					else {
