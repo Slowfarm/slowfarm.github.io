@@ -22,7 +22,6 @@
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
-			var groups_count;
 			
 			function login(){
 				
@@ -51,7 +50,6 @@
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
-							groups_count = r.response.count;
 								delay(350);
 							getGroups(owner_id);
 						}
@@ -78,7 +76,7 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						delay(200);
+						//delay(200);
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
@@ -96,7 +94,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							delay(200);
+							//delay(200);
 							wallSearch(group_id, dataCount);
 						}
 						else {
@@ -108,7 +106,7 @@
 						}
 					  }
 					  else {
-					  	alert(data.error.error_msg + " WallSearch()");
+					 // 	alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
