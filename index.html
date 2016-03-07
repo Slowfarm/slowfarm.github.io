@@ -52,7 +52,7 @@
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
 							groups_count = r.response.count;
-								delay(334);
+								delay(350);
 							getGroups(owner_id);
 						}
 					}
@@ -96,7 +96,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							//delay(334);
+							delay(334);
 							wallSearch(group_id, dataCount);
 						}
 						else {
