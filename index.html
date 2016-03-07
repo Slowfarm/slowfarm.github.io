@@ -78,20 +78,19 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
 						if(data.response.items.length == 100) {
-							for(var i = 0; i < 99; i++)
+							for(var i = 0; i < 99; i++) {
 								if(data.response.items[i].from_id == int_user_id);
-								{
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-									count++;
-								}
+								count++;
+							}
 							offset+=100;
 							wallSearch(group_id);
 						}
 						else {
-							for(var i =0; i < data.response.items.length - offset; i++)
-								if(data.response.items[i].from_id == int_user_id) {
+							for(var i =0; i < data.response.items.length - offset; i++) {
+								if(data.response.items[i].from_id == int_user_id)
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-									count++;
+								count++;
 								}
 							alert(count);
 						}
