@@ -86,7 +86,8 @@
 					});
 			 }
 			 
-			function wallSearch(group_id, dataCount) {	
+			function wallSearch(group_id, dataCount) {
+				delay(333);
 				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
@@ -95,7 +96,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout(function() {wallSearch(group_id, dataCount)}, 1000);
+							wallSearch(group_id, dataCount);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
