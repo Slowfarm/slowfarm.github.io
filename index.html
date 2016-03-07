@@ -79,7 +79,6 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						delay(333);
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
@@ -97,7 +96,8 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout(function() {wallSearch(group_id, dataCount)}, 333);
+							delay(333);
+							wallSearch(group_id, dataCount);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
