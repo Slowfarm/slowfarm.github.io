@@ -50,9 +50,7 @@
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
-							getGroups(owner_id);
-							array[i] = "-"+r.response.items[i];
-							alert(array[i]);
+							setInterval(function() { getGroups(owner_id) }, 1000)
 						}
 					}
 					else {
