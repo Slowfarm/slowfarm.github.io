@@ -36,7 +36,7 @@
             					user_id = r.response[0].id;
             					int_user_id = parseInt(user_id, 10);
             					offset=0;
-            					setTimeout(function() { main() }, 333);
+            					setTimeout(function() { main() }, 1000);
             				}
             				else {
 					 	alert(r.error.error_msg + " login()");
@@ -48,10 +48,10 @@
 				var code = 'return API.groups.get({user_id: '+ int_user_id +', v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						for(i = 0; i < r.response.count; i++) {
-							var owner_id = "-"+r.response.items[i];
-							setTimeout(function() { getGroups(owner_id) }, 333)
-						}
+					//	for(i = 0; i < r.response.count; i++) {
+							var owner_id = "-"+r.response.items[0];
+							getGroups(owner_id);
+					//	}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
@@ -63,7 +63,7 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						setTimeout(function() { wallSearch(owner_id ,r.response.count) }, 5000);
+						wallSearch(owner_id ,r.response.count);
 					}
 						else {
 							alert(r.error.error_msg + " getGroups()");
@@ -80,7 +80,7 @@
 					  			if(data.response.items[i].from_id == int_user_id)
 					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							offset+=100;
-							setTimeout(function() { wallSearch(group_id, dataCount); }, 333);
+							wallSearch(group_id, dataCount);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
