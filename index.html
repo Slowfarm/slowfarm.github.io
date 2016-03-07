@@ -86,7 +86,7 @@
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 							}
 							offset+=100;
-							wallSearch(group_id);
+							setTimeout(function() { wallSearch(group_id); },334);
 						}
 						else {
 							for(var i =0; i < data.response.items.length; i++) {
