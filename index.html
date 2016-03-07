@@ -50,7 +50,7 @@
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
-								delay(1000);
+								delay(334);
 							getGroups(owner_id);
 						}
 					}
@@ -76,7 +76,7 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
-						delay(100);
+						delay(333);
 						setTimeout(function() {wallSearch(owner_id ,r.response.count)}, 1000);
 					}
 						else {
