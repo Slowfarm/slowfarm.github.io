@@ -78,8 +78,8 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
 						if(data.response.items.length == 100) {
-							for(var i = 0; i < 99; i++) {
-								if(data.response.items[i].from_id == int_user_id);
+							for(var i = 0; i < 100; i++) {
+								if(data.response.items[i].from_id == int_user_id)
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
 								count++;
 							}
