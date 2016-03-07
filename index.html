@@ -22,7 +22,6 @@
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
-			var count = 0;
 			
 			function login(){
 				
@@ -48,11 +47,11 @@
 			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
-						//for(i = 0; i < r.response.count; i++) {
+						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[0];
 							wallSearch(owner_id);
-							//delay(334);
-					//	}
+							delay(334);
+						}
 					}
 					else {
 						alert(r.error.error_msg + " main()");
@@ -81,7 +80,6 @@
 							for(var i = 0; i < 100; i++) {
 								if(data.response.items[i].from_id == int_user_id)
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-								count++;
 							}
 							offset+=100;
 							wallSearch(group_id);
@@ -90,9 +88,7 @@
 							for(var i =0; i < data.response.items.length; i++) {
 								if(data.response.items[i].from_id == int_user_id)
 									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-								count++;
 								}
-							alert(count);
 						}
 					}
 					else {
