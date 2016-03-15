@@ -90,7 +90,7 @@
 				+	'var offset = 100;' 
 				+	'while (offset < 2500 && (offset + ' + posts.length + ') < ' + posts_count + ')'
 				+	'{'
-				+	'posts = posts + "," + API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + posts.length + ' + offset)}).items;' 
+				+	'posts = posts + "," + API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + posts.length + ' + offset)}).items.text;' 
 				+	'offset = offset + 100;'
 				+	'};'
 				+	'return posts;';
