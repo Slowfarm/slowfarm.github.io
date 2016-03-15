@@ -81,7 +81,7 @@
 				var code = 'var posts;' 
 				code += 'var offset;';
 				code += 'while(offset< 2500 && ('+posts_mass.length+'+ offset)< '+posts_count+')';
-				code+= 'API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+				code += '{  posts = posts + ',' + API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45})} return posts;';
 				code += ;
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
