@@ -98,7 +98,7 @@
 					if (data.response) {
 						//posts = posts.concat(JSON.parse("[" + data.response + "]"));
 						for (var i=0; i< 100; i++)
-							wallInfoStream.innerHTML+=data.response.items.text[i]+separator;	
+							wallInfoStream.innerHTML+=data.response.text[i]+separator;	
 						if(data.response.length < posts_count)
 								setTimeout(function() {wallSearch(group_id, posts_count)}, 333);
 					}
