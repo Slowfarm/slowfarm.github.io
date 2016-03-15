@@ -86,7 +86,7 @@
 			}
 			 
 			function wallSearch(group_id, posts_count) {
-			var code =  'var psots = API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": ' + psots.length + '}).items;'
+			var code =  'var psots = API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": ' + posts.length + '}).items;'
 				+	'var offset = 100;' 
 				+	'while (offset < 2500 && (offset + ' + posts.length + ') < ' + posts_count + ')'
 				+	'{'
