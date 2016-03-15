@@ -97,7 +97,7 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
 						alert("Зашли");
-						posts = posts.concat(JSON.parse("[" + data.response.text + "]"));
+						posts = posts.concat(JSON.parse("[" + data.response + "]"));
 						for (var i=0; i< 100; i++)
 							wallInfoStream.innerHTML+=posts[i]+separator;	
 						if(posts.length < posts_count)
