@@ -76,10 +76,13 @@
 			      } 
 			}
 			 
-			function wallSearch(group_id) {
+			function wallSearch(group_id, posts_count) {
+				var posts_mass;
 				var code = 'var posts;' 
 				code += 'var offset;';
-				code += 'while(offset)API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+				code += 'while(offset< 2500 && ('+posts_mass.length+'+ offset)< '+posts_count+')';
+				code+= 'API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+				code += ;
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
 						if(data.response.items.length == 100) {
