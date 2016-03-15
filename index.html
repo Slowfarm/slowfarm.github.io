@@ -16,13 +16,14 @@
   			apiId: 5322127
 			});
 			
+			var posts = [];
 			var offset;
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
-			var count = 0;
+			var counter = 0;
 			
 			function login(){
 				
@@ -47,8 +48,8 @@
 			function main() { // получаем список id сообществ
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
-						if(count<r.response.count) {
-							var owner_id = "-"+r.response.items[count];
+						if(counter<r.response.count) {
+							var owner_id = "-"+r.response.items[counter];
 							delay(334);
 							offset=0;
 							wallSearch(owner_id);
@@ -64,6 +65,7 @@
 				});
 			}
 			
+			
 			function delay(ms) { // создаем задержку
 			      ms = parseInt(ms); 
 			      if (ms <= 0) return; 
@@ -75,34 +77,28 @@
 			            after = after.getTime(); 
 			      } 
 			}
+			
+			function getWallCount(owner_id) {
+				VK.Api.call('wall.get', {owner_id: owner_id, v: 5.27, count: 1} function(r) {
+					if(r.response)
+						wallSearch(owner_id, r.response.count)
+				});
+			}
 			 
 			function wallSearch(group_id, posts_count) {
-				var posts_mass;
-				var code = 'var posts;' 
-				code += 'var offset;';
-				code += 'while(offset< 2500 && ('+posts_mass.length+'+ offset)< '+posts_count+')';
-				code += '{  posts = posts + ',' + API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45})} return posts;';
-				code += ;
+			var code =  'var posts 
+				+	'var offset = 100;' 
+				+	'while (offset < 2500 && (offset + ' + posts.length + ') < ' + posts_count + ')'
+				+	'{'
+				+	'posts = posts + "," + API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + posts.length + ' + offset)}).items;' 
+				+	'offset = offset + 100;'
+				+	'};'
+				+	'return posts;';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
-						if(data.response.items.length == 100) {
-							for(var i = 0; i < 100; i++) {
-								if(data.response.items[i].from_id == int_user_id)
-									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-							}
-							offset+=100;
-							setTimeout(function() {wallSearch(group_id);}, 334);
-						}
-						else {
-							for(var i =0; i < data.response.items.length; i++) {
-								if(data.response.items[i].from_id == int_user_id)
-									wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-								}
-							wallInfoStream.innerHTML+=group_id+"<br/>";
-							count++;
-							delay(334);
-							main();
-						}
+						posts = posts.concat(JSON.parse("[" + data.response + "]"));
+							if(posts.length < posts_count)
+								setTimeout(function() {wallSearch(group_id, posts_count)}, 333);
 					}
 					else {
 						//alert(data.error.error_msg + " WallSearch()");
