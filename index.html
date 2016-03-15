@@ -77,7 +77,9 @@
 			}
 			 
 			function wallSearch(group_id) {
-				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+				var code = 'var posts;' 
+				code += 'var offset;';
+				code += 'while(offset)API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					if (data.response) {
 						if(data.response.items.length == 100) {
