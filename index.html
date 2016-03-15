@@ -79,7 +79,7 @@
 			}
 			
 			function getWallCount(owner_id) {
-				VK.Api.call('wall.get', {owner_id: owner_id, v: 5.27, count: 1} function(r) {
+				VK.Api.call('wall.get', {owner_id: owner_id, v: 5.27, count: 1}, function(r) {
 					if(r.response)
 						wallSearch(owner_id, r.response.count);
 				});
