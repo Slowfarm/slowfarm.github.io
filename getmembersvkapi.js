@@ -39,7 +39,7 @@ function getMembers20k(group_id, members_count) {
 			if (members_count >  counter) 
 				counter+=2500;
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
-			else // если конец то
+			//else // если конец то
 				//alert('Ура тест закончен! В массиве membersGroups теперь ' + membersGroups.length + ' элементов.');
 		} else {
 			alert(data.error.error_msg); // в случае ошибки выведем её
