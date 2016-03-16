@@ -28,14 +28,18 @@ function getMembers20k(group_id, members_count) {
 				+	'members = members + "," + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
 				+	'offset = offset + 100;' // увеличиваем сдвиг на 1000
 			+	'};'
-			+	'return members;'; // вернуть массив members
+			+	'var i=0;'
+			+	'while(i!=2500) {'
+			+	'return members[i].text;
+			+	'i=i+1;'
+			+	'}'	
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
 			//for(var i=0; i< 100; i++)
 			//	membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]")); // запишем это в массив
 			for (var i=0; i< 250; i++)
-				$('.member_ids').append('Загрузка: ' + data.response[i].text + '/' + members_count);
+				$('.member_ids').append('Загрузка: ' + data.response + '/' + members_count);
 			if (members_count >  counter) 
 				counter+=2500;
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
