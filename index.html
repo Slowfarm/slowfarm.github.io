@@ -49,7 +49,7 @@
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
 						if(counter<r.response.count) {
-							var owner_id = "-"+r.response.items[counter];
+							var owner_id = r.response.items[counter];
 							delay(334);
 							offset=0;
 							getWallCount(owner_id);
