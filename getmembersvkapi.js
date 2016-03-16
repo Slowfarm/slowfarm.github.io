@@ -28,7 +28,6 @@ function getMembers20k(group_id, members_count) {
 				+	'offset = offset + 100;' 
 			+	'};'
 			+	'return members'
-			+	'}'	
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
