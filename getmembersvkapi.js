@@ -21,11 +21,11 @@ function getMembers(group_id) {
 
 // получаем участников группы, members_count - количество участников
 function getMembers20k(group_id, members_count) {
-	var code =  'var members = API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ')}).items;'
+	var code =  'var members;'
 			+	'var offset = 100;'
 			+	'while (offset < 2500 && (offset + ' + counter + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
 			+	'{'
-				+	'members = members + "," + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' 
+				+	'members = members + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' 
 				+	'offset = offset + 100;' 
 			+	'};'
 			+	'var i=0;'
