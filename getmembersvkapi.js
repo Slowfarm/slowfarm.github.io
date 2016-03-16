@@ -33,8 +33,7 @@ function getMembers20k(group_id, members_count) {
 		if (data.response) {
 			for(var i=0; i< 2500; i++)
 				membersGroups = membersGroups + data.response[i].text; // запишем это в массив
-			for (var i=0; i< 2500; i++)
-				$('.member_ids').append('Загрузка: ' + membersGroups[i] + '/' + members_count);
+			$('.member_ids').append('Загрузка: ' + membersGroups + '/' + members_count);
 			if (members_count >  membersGroups.length) 
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
 			//else 
