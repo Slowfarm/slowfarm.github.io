@@ -1,112 +1,12 @@
 <!doctype html>
 <html lang="ru">
 	<head>
-		<title>Посты пользователя vk</title>
-		<script src="//vk.com/js/api/openapi.js?117" type="text/javascript"></script>
+		<script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
-		<input type="button" value="Найти" onclick="login()">
-		<div id="wallInfo"></div>
-		<div id="wall"></div>
-
-		<script type="text/javascript">
-			VK.init({
-  			apiId: 5322127
-			});
-			
-			var posts = [];
-			var offset;
-			var wallInfoStream = document.getElementById('wallInfo');
-			var wallStream = document.getElementById('wall');
-			var separator = "<br/>-----------------------<br/>";
-			var user_id;
-			var int_user_id;
-			var counter = 0;
-			
-			function login(){
-				
-				user_id = document.getElementById('inputUser').value;
-				if (user_id.indexOf("com/") >= 0)
-					user_id = user_id.split('com/')[1];
-				
-				 VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
-            				if(r.response) {
-          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
-            					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
-            					user_id = r.response[0].id;
-            					int_user_id = parseInt(user_id, 10);
-            					main();
-            				}
-            				else {
-					 	alert(r.error.error_msg + " login()");
-					}
-				 });
-			}
-			
-			function main() { // получаем список id сообществ
-				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
-					if(r.response) {
-						if(counter<r.response.count) {
-							var owner_id = "-"+r.response.items[counter];
-							delay(334);
-							offset=0;
-							getWallCount(owner_id);
-						}
-						else {
-							alert("Успех");
-						}
-					}
-					else {
-						//alert(r.error.error_msg + " main()");
-						wallInfoStream.innerHTML += "Нет доступа к списку групп данного пользователя <br/>";
-					}
-				});
-			}
-			
-			
-			function delay(ms) { // создаем задержку
-			      ms = parseInt(ms); 
-			      if (ms <= 0) return; 
-			      var before = after = new Date(); 
-			      before = before.getTime(); 
-			      after = after.getTime(); 
-			      while (after < before + ms) { 
-			            after = new Date(); 
-			            after = after.getTime(); 
-			      } 
-			}
-			
-			function getWallCount(owner_id) {
-				VK.Api.call('wall.get', {owner_id: owner_id, v: 5.27, count: 1}, function(r) {
-					if(r.response)
-						wallSearch(owner_id, r.response.count);
-				});
-			}
-			 
-			function wallSearch(group_id, posts_count) {
-	var code =  'var members = API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "sort": "id_asc", "count": "1000", "offset": ' + posts.length + '}).items;' // делаем первый запрос и создаем массив
-			+	'var offset = 1000;' // это сдвиг по участникам группы
-			+	'while (offset < 25000 && (offset + ' + posts.length + ') < ' + posts_count + ')' // пока не получили 20000 и не прошлись по всем участникам
-			+	'{'
-				+	'members = members + "," + API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "sort": "id_asc", "count": "1000", "offset": (' + posts.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
-				+	'offset = offset + 1000;' // увеличиваем сдвиг на 1000
-			+	'};'
-			+	'return members;'; // вернуть массив members
-	
-	VK.Api.call("execute", {code: code}, function(data) {
-		if (data.response) {
-			posts = posts.concat(JSON.parse("[" + data.response + "]")); // запишем это в массив
-			if (members_count >  membersGroups.length) // если еще не всех участников получили
-				setTimeout(function() { wallSearch(group_id, posts_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
-			else // если конец то
-				alert('Ура тест закончен! В массиве membersGroups теперь ' + membersGroups.length + ' элементов.');
-		} //else {
-		//	alert(data.error.error_msg); // в случае ошибки выведем её
-		//}
-	});
-}
-		</script>
+	<div class="group_info"></div>
+	<div class="member_ids"></div>
+	<script src="/getmembersvkapi.js"></script>
 	</body>
 </html>
