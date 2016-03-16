@@ -30,7 +30,7 @@ function getMembers20k(group_id, members_count) {
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
-			membersGroups = membersGroups.concat(JSON.parse("[" + data.response.items + "]"));
+			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]"));
 			$('.member_ids').html('Загрузка: ' + membersGroups.length + '/' + members_count);
 			if (members_count >  membersGroups.length)
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333);
