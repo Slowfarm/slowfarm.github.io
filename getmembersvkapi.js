@@ -22,12 +22,12 @@ function getMembers(group_id) {
 function getMembers20k(group_id, members_count) {
 	var code =  'var members;'
 			+	'var offset = 100;'
-			+	'while (offset < 2500 && (offset + ' + membersGroups.length + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
+			+	'while (offset < 2500 && (offset + ' + membersGroups.length + ') < ' + members_count + ')'
 			+	'{'
 				+	'members = members + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' 
 				+	'offset = offset + 100;' 
-			+	'};'
-			+	'return members'
+			+	'}'
+			+	'return members;'
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
