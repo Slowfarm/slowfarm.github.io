@@ -20,19 +20,20 @@ function getMembers(group_id) {
 
 // получаем участников группы, members_count - количество участников
 function getMembers20k(group_id, members_count) {
-	var code =  'var members = 1;'
-			+	'var offset = 1000;' // это сдвиг по участникам группы
-			+	'while (offset < 25000 && (offset + ' + membersGroups.length + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
+	var code =  'var members = API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;'
+			+	'var offset = 100;' // это сдвиг по участникам группы
+			+	'while (offset < 2500 && (offset + ' + membersGroups.length + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
 			+	'{'
-				+	'members = members + "," + API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "count": "1000", "offset": (' + membersGroups.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
-				+	'offset = offset + 1000;' // увеличиваем сдвиг на 1000
+				+	'members = members + "," + API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
+				+	'offset = offset + 100;' // увеличиваем сдвиг на 1000
 			+	'};'
 			+	'return members;'; // вернуть массив members
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
-			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]")); // запишем это в массив
-			for (var i=0; i< 25000; i++)
+			for(var i=0; i< 100; i++)
+				membersGroups = membersGroups.concat(JSON.parse("[" + data.response[i] + "]")); // запишем это в массив
+			for (var i=0; i< 2500; i++)
 				$('.member_ids').html('Загрузка: ' + membersGroups.length + '/' + members_count);
 			if (members_count >  membersGroups.length) // если еще не всех участников получили
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
