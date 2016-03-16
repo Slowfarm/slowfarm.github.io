@@ -32,10 +32,12 @@ function getMembers20k(group_id, members_count) {
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
 			for(var i=0; i< 2500; i++)
-				membersGroups = membersGroups + data.response[i].text; 
-			$('.member_ids').html('Загрузка: ' + counter + '/' + members_count);
+			{
+				membersGroups[counter+i] = data.response[i].text; 
+			$('.member_ids').html('Загрузка: ' + data.response[i].text + '/' + members_count);
+			}
 			if (members_count >  counter) 
-				counter+=100;
+				counter+=2500;
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); 
 			else 
 				alert('Ура тест закончен! В массиве membersGroups теперь ' + counter + ' элементов.');
