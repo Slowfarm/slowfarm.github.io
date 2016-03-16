@@ -2,7 +2,8 @@ VK.init({
     apiId: 5322127 
 });
 
-var membersGroups = []; 
+var membersGroups = [];
+var counter =0;
 getMembers(20629724);
 
 
@@ -18,26 +19,26 @@ function getMembers(group_id) {
 	});
 }
 
-// получаем участников группы, members_count - количество участников
 function getMembers20k(group_id, members_count) {
-	var code =  'var members;'
-			+	'var offset = 100;'
-			+	'while (offset < 2500 && (offset + ' + membersGroups.length + ') < ' + members_count + ')'
+	var code =  'var members = API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "1000", "offset": ' + counter + '}).items;' 
+			+	'var offset = 100;' // это сдвиг по участникам группы
+			+	'while (offset < 2500 && (offset + ' + counter + ') < ' + members_count + ')' 
 			+	'{'
-				+	'members = members + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' 
+				+	'members = members + "," + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' 
 				+	'offset = offset + 100;' 
-			+	'}'
-			+	'return members;'
+			+	'};'
+			+	'return members;'; // вернуть массив members
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
 			for(var i=0; i< 2500; i++)
-				membersGroups = membersGroups + data.response[i].text; // запишем это в массив
-			$('.member_ids').append('Загрузка: ' + membersGroups + '/' + members_count);
-			if (members_count >  membersGroups.length) 
-				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
-			//else 
-				//alert('Ура тест закончен! В массиве membersGroups теперь ' + membersGroups.length + ' элементов.');
+				membersGroups = membersGroups + data.response[i].text; 
+			$('.member_ids').html('Загрузка: ' + counter + '/' + members_count);
+			if (members_count >  counter) 
+				counter+=100;
+				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); 
+			else 
+				alert('Ура тест закончен! В массиве membersGroups теперь ' + counter + ' элементов.');
 		} else {
 			alert(data.error.error_msg); 
 		}
