@@ -19,11 +19,11 @@ function getMembers(group_id) {
 }
 
 function getMembers20k(group_id, members_count) {
-	var code =  'var members = API.groups.getMembers({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": ' + membersGroups.length + '}).items;' 
-			+	'var offset = 100;' // это сдвиг по участникам группы
+	var code =  'var members = API.groups.getMembers({"group_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": ' + membersGroups.length + '}).items;' 
+			+	'var offset = 100;'
 			+	'while (offset < 2500 && (offset + ' + membersGroups.length + ') < ' + members_count + ')' 
 			+	'{'
-				+	'members = members + "," + API.groups.getMembers({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
+				+	'members = members + "," + API.groups.getMembers({"group_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + membersGroups.length + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
 				+	'offset = offset + 100;' 
 			+	'};'
 			+	'return members;'; 
