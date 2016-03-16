@@ -14,7 +14,7 @@ function getMembers(group_id) {
 				.html('<img src="' + r.response[0].photo_50 + '"/><br/>' 
 					+ r.response[0].name
 					+ '<br/>Участников: ' + r.response[0].members_count);
-				getMembers20k(group_id, r.response[0].members_count); // получаем участников группы и пишем в массив membersGroups
+				getMembers20k(group_id, r.response[0].members_count); 
 			}
 	});
 }
@@ -22,11 +22,11 @@ function getMembers(group_id) {
 // получаем участников группы, members_count - количество участников
 function getMembers20k(group_id, members_count) {
 	var code =  'var members = API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ')}).items;'
-			+	'var offset = 100;' // это сдвиг по участникам группы
+			+	'var offset = 100;'
 			+	'while (offset < 2500 && (offset + ' + counter + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
 			+	'{'
-				+	'members = members + "," + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' // сдвиг участников на offset + мощность массива
-				+	'offset = offset + 100;' // увеличиваем сдвиг на 1000
+				+	'members = members + "," + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' 
+				+	'offset = offset + 100;' 
 			+	'};'
 			+	'var i=0;'
 			+	'while(i!=2500) {'
@@ -43,10 +43,10 @@ function getMembers20k(group_id, members_count) {
 			if (members_count >  counter) 
 				counter+=2500;
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
-			//else // если конец то
+			//else 
 				//alert('Ура тест закончен! В массиве membersGroups теперь ' + membersGroups.length + ' элементов.');
 		} else {
-			alert(data.error.error_msg); // в случае ошибки выведем её
+			alert(data.error.error_msg); 
 		}
 	});
 }
