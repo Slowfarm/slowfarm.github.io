@@ -86,7 +86,7 @@
 			}
 			 
 			function wallSearch(group_id, posts_count) {
-	var code =  'var members = API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "sort": "id_asc", "count": "1000", "offset": ' + psots.length + '}).items;' // делаем первый запрос и создаем массив
+	var code =  'var members = API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "sort": "id_asc", "count": "1000", "offset": ' + posts.length + '}).items;' // делаем первый запрос и создаем массив
 			+	'var offset = 1000;' // это сдвиг по участникам группы
 			+	'while (offset < 25000 && (offset + ' + posts.length + ') < ' + posts_count + ')' // пока не получили 20000 и не прошлись по всем участникам
 			+	'{'
