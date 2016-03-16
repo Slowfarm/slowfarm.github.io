@@ -32,7 +32,7 @@ function getMembers20k(group_id, members_count) {
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
 			for(var i=0; i< 100; i++)
-				membersGroups = membersGroups.concat(JSON.parse("[" + data.response[i] + "]")); // запишем это в массив
+				membersGroups = membersGroups.concat(JSON.parse("[" + data.response[i].text + "]")); // запишем это в массив
 			for (var i=0; i< 2500; i++)
 				$('.member_ids').html('Загрузка: ' + membersGroups.length + '/' + members_count);
 			if (members_count >  membersGroups.length) // если еще не всех участников получили
