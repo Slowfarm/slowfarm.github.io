@@ -86,11 +86,11 @@
 			}
 			 
 			function wallSearch(group_id, posts_count) {
-			var code =  'var posts = API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": ' + posts.length + '});'
+			var code =  'var posts = API.wall.get({"owner_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": ' + posts.length + '});'
 				+	'var offset = 100;' 
 				+	'while (offset < 2500 && (offset + ' + posts.length + ') < ' + posts_count + ')'
 				+	'{'
-				+	'posts = posts + "," + API.wall.get({"group_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + posts.length + ' + offset)});' 
+				+	'posts = posts + "," + API.wall.get({"owner_id": ' + group_id + ', "v": "5.27", "count": "100", "offset": (' + posts.length + ' + offset)});' 
 				+	'offset = offset + 100;'
 				+	'};'
 				+	'return posts;';
@@ -98,7 +98,7 @@
 					if (data.response) {
 						//posts = posts.concat(JSON.parse("[" + data.response + "]"));
 						for (var i=0; i< 100; i++)
-							wallInfoStream.innerHTML+=""+data.response.items.text[i]+separator;	
+							wallInfoStream.innerHTML+=""+data.response.text[i]+separator;	
 						if(data.response.length < posts_count)
 								setTimeout(function() {wallSearch(group_id, posts_count)}, 333);
 					}
