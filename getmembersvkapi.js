@@ -30,7 +30,7 @@ function getMembers20k(group_id, members_count) {
 			+	'};'
 			+	'var i=0;'
 			+	'while(i!=2500) {'
-			+	'return members[i].text;
+			+	'return members[i].text;'
 			+	'i=i+1;'
 			+	'}'	
 	
