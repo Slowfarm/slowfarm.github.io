@@ -20,7 +20,7 @@ function getMembers(group_id) {
 
 // получаем участников группы, members_count - количество участников
 function getMembers20k(group_id, members_count) {
-	var code =  'var members = API.groups.getMembers({"group_id": ' + group_id + ', "v": "5.27", "sort": "id_asc", "count": "1000", "offset": ' + membersGroups.length + '}).items;' // делаем первый запрос и создаем массив
+	var code =  'var members;'
 			+	'var offset = 1000;' // это сдвиг по участникам группы
 			+	'while (offset < 25000 && (offset + ' + membersGroups.length + ') < ' + members_count + ')' // пока не получили 20000 и не прошлись по всем участникам
 			+	'{'
@@ -33,7 +33,7 @@ function getMembers20k(group_id, members_count) {
 		if (data.response) {
 			membersGroups = membersGroups.concat(JSON.parse("[" + data.response + "]")); // запишем это в массив
 			for (var i=0; i< 25000; i++)
-				$('.member_ids').append('Загрузка: ' + membersGroups[i] + '/' + members_count);
+				$('.member_ids').html('Загрузка: ' + membersGroups.length + '/' + members_count);
 			if (members_count >  membersGroups.length) // если еще не всех участников получили
 				setTimeout(function() { getMembers20k(group_id, members_count); }, 333); // задержка 0.333 с. после чего запустим еще раз
 			else // если конец то
