@@ -84,7 +84,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
-				//delay(334);
+				delay(334);
 				var code ='var posts;'
 					+'var j=0;'
 					+'var i=0;'
@@ -105,12 +105,12 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	if(dataCount >= offset+2500) {
-					  		wallStream.innerHTML += " " + data.response +separator;
+					  		wallStream.innerHTML += " " + data.response+separator;
 							offset+=2500;
-							setTimeout(function(){wallSearch(group_id, dataCount);},333);
+							wallSearch(group_id, dataCount);
 						}
 						else {
-					  			wallStream.innerHTML+=" "+data.responset+separator;
+					  			wallStream.innerHTML+=" "+data.response+separator;
 						}
 					  }
 					  else {
