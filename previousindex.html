@@ -50,7 +50,6 @@
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
-							delay(334);
 							wallInfoStream.innerHTML += " "+i+"<br/>"
 						}
 					}
@@ -85,22 +84,34 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
-				delay(334);
-				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+				var code ='var posts;'
+					+'var j=0;'
+					+'var i=0;'
+					+'var output = null;'
+					+'var separator;'
+					+'while (j!=2500)'
+					+'{'
+					+    'posts = API.wall.get({"owner_id": 'group_id', "v": "5.27", "count": "100", "offset": j}).items;'
+					+    'j = j+100;'
+					+    'while (i!=100)'
+					+    '{'
+					+	 'if(posts[i].from_id == 'int_user_id')'
+					+        	'output = output+posts[i].text;'
+					+        'i=i+1;'
+					+    '}'
+					+'}'
+					+'return output;'; 
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	if(dataCount >= offset+100) {
-					  		for (var i = 0; i < 100; i++)
-					  			if(data.response.items[i].from_id == int_user_id)
-					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
-							offset+=100;
+					  	if(dataCount >= offset+2500) {
+					  		wallStream.innerHTML += " " + data.response +separator;
+							offset+=2500;
 							wallSearch(group_id, dataCount);
 						}
 						else {
 							for (var i = 0; i < dataCount-offset; i++)
 							{
-								if(data.response.items[i].from_id == int_user_id)
-					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+					  			wallStream.innerHTML+=" "+data.responset+separator;
 							}
 						}
 					  }
