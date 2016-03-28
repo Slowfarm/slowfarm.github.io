@@ -3,7 +3,6 @@ VK.init({
 });
 
 var membersGroups = [];
-var counter =0;
 getMembers(20629724);
 
 
@@ -20,14 +19,22 @@ function getMembers(group_id) {
 }
 
 function getMembers20k(group_id, members_count) {
-	var code =  'var members = API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "1000", "offset": ' + counter + '}).items;' 
-			+	'var offset = 100;' // это сдвиг по участникам группы
-			+	'while (offset < 2500 && (offset + ' + counter + ') < ' + members_count + ')' 
-			+	'{'
-				+	'members = members + "," + API.wall.get({"owner_id": -' + group_id + ', "v": "5.27", "count": "100", "offset": (' + counter + ' + offset)}).items;' 
-				+	'offset = offset + 100;' 
-			+	'};'
-			+	'return members;'; // вернуть массив members
+	var code ='var posts;'
+		+'var j=0;'
+		+'var i=0;'
+		+'var output = null;'
+		+'var separator;'
+		+'while (j!=2500)'
+		+'{'
+		+    'posts = API.wall.get({"owner_id": -33509, "v": "5.27", "count": "100", "offset": j}).items;'
+		+    'j = j+100;'
+		+    'while (i!=100)'
+		+    '{'
+		+        'output = output+posts[i].text;'
+		+        'i=i+1;'
+		+    '}'
+		+'}'
+		+'return output;'; // вернуть массив members
 	
 	VK.Api.call("execute", {code: code}, function(data) {
 		if (data.response) {
