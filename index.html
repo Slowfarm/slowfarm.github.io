@@ -49,7 +49,7 @@
 							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
 							delay(334);
-							wallInfoStream.innerHTML += " "+i+"<br/>"
+							wallInfoStream.innerHTML += " "+owner_id+"<br/>"
 						}
 					}
 					else {
@@ -84,7 +84,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
-				delay(334);
+				delay(1000);
 				var code ='var posts;'
 					+'var j='+offset+';'
 					+'var i=0;'
