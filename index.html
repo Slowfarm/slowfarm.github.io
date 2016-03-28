@@ -47,6 +47,7 @@
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
+							delay(334);
 							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
 							wallInfoStream.innerHTML += " "+i+"<br/>"
@@ -83,6 +84,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
+				delay(334);
 				var code ='var posts;'
 					+'var j=0;'
 					+'var i=0;'
@@ -105,7 +107,7 @@
 					  	if(dataCount >= offset+2500) {
 					  		wallStream.innerHTML += " " + data.response +separator;
 							offset+=2500;
-							wallSearch(group_id, dataCount);
+							setTimeout(function(){wallSearch(group_id, dataCount);},333);
 						}
 						else {
 					  			wallStream.innerHTML+=" "+data.responset+separator;
