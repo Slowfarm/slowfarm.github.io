@@ -16,12 +16,12 @@
   			apiId: 5322127
 			});
 			
-			var offset;
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
+			var offset;
 			
 			function login(){
 				user_id = document.getElementById('inputUser').value;
@@ -34,7 +34,6 @@
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
             					user_id = r.response[0].id;
             					int_user_id = parseInt(user_id, 10);
-            					offset=0;
             					main();
             				}
             				else {
@@ -75,6 +74,7 @@
 				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
+						offset = 0;
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
