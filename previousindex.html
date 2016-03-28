@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<title>Посты пользователя vk</title>
+		<script src="//vk.com/js/api/openapi.js?117" type="text/javascript"></script>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	</head>
+	<body>
+		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
+		<input type="button" value="Найти" onclick="login()">
+		<div id="wallInfo"></div>
+		<div id="wall"></div>
+
+		<script type="text/javascript">
+			VK.init({
+  			apiId: 5322127
+			});
+			
+			var offset;
+			var wallInfoStream = document.getElementById('wallInfo');
+			var wallStream = document.getElementById('wall');
+			var separator = "<br/>-----------------------<br/>";
+			var user_id;
+			var int_user_id;
+			
+			function login(){
+				
+				user_id = document.getElementById('inputUser').value;
+				if (user_id.indexOf("com/") >= 0)
+					user_id = user_id.split('com/')[1];
+				
+				 VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_50', v: '5.27'}, function(r) {
+            				if(r.response) {
+          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_50 + '" alt="" class="img-responsive"/></a>';
+            					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
+            					user_id = r.response[0].id;
+            					int_user_id = parseInt(user_id, 10);
+            					offset=0;
+            					main();
+            				}
+            				else {
+					 	alert(r.error.error_msg + " login()");
+					}
+				 });
+			}
+			
+			function main() { // получаем список id сообществ
+				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
+					if(r.response) {
+						for(i = 0; i < r.response.count; i++) {
+							var owner_id = "-"+r.response.items[i];
+							getGroups(owner_id);
+							delay(334);
+							wallInfoStream.innerHTML += " "+i+"<br/>"
+						}
+					}
+					else {
+						alert(r.error.error_msg + " main()");
+					}
+				});
+			}
+			
+			function delay(ms) { // создаем задержку
+			      ms = parseInt(ms); 
+			      if (ms <= 0) return; 
+			      var before = after = new Date(); 
+			      before = before.getTime(); 
+			      after = after.getTime(); 
+			      while (after < before + ms) { 
+			            after = new Date(); 
+			            after = after.getTime(); 
+			      } 
+			}
+			
+			function getGroups(owner_id) { // получаем колличество постов вгруппе
+				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
+				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
+					if(r.response) {
+						wallSearch(owner_id ,r.response.count);
+					}
+						else {
+							alert(r.error.error_msg + " getGroups()");
+						}
+					});
+			 }
+			 
+			function wallSearch(group_id, dataCount) {
+				delay(334);
+				var code = 'return API.wall.get({owner_id: '+ group_id+ ', offset: '+ offset +', count: 100, v: 5.45});';
+				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
+					  if (data.response) {
+					  	if(dataCount >= offset+100) {
+					  		for (var i = 0; i < 100; i++)
+					  			if(data.response.items[i].from_id == int_user_id)
+					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+							offset+=100;
+							wallSearch(group_id, dataCount);
+						}
+						else {
+							for (var i = 0; i < dataCount-offset; i++)
+							{
+								if(data.response.items[i].from_id == int_user_id)
+					  				wallStream.innerHTML+=" "+data.response.items[i].text+separator;
+							}
+						}
+					  }
+					  else {
+					  	alert(data.error.error_msg + " WallSearch()");
+					  }
+				});
+			}
+		</script>
+	</body>
+</html>
