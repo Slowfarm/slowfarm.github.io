@@ -48,7 +48,7 @@
 						for(i = 0; i < r.response.count; i++) {
 							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
-							delay(334);
+							delay(350);
 							wallInfoStream.innerHTML += " "+owner_id+"<br/>"
 						}
 					}
@@ -75,7 +75,6 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
 						offset = 0;
-						delay(334);
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
@@ -110,12 +109,9 @@
 							offset+=2500;
 							wallSearch(group_id, dataCount);
 						}
-						else {
-							alert("Успех");	
-						}
 					  }
 					  else {
-					  	alert(data.error.error_msg + " WallSearch()");
+					  	alert("что то не так с WallSearch()");
 					  }
 				});
 			}
