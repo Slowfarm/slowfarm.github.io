@@ -90,7 +90,7 @@
 					+'var i=0;'
 					+'var output = null;'
 					+'var separator;'
-					+'while (j<'+offset+'+2500)'
+					+'while (j<+2500 && (j+'+offset+'< '+dataCount+'))'
 					+'{'
 					+    'posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": j}).items;'
 					+    'j = j+100;'
@@ -104,17 +104,17 @@
 					+'return output;'; 
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
+					  	wallStream.innerHTML += " " + data.response+separator;
 					  	if(dataCount >= offset+2500) {
-					  		wallStream.innerHTML += " " + data.response+separator;
 							offset+=2500;
 							wallSearch(group_id, dataCount);
 						}
 						else {
-					  			wallStream.innerHTML+=" "+data.response+separator;
+							alert("Успех");	
 						}
 					  }
 					  else {
-					  	alert( " WallSearch()");
+					  	alert(r.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
