@@ -86,11 +86,11 @@
 			function wallSearch(group_id, dataCount) {
 				delay(334);
 				var code ='var posts;'
-					+'var j=0;'
+					+'var j='+offset+';'
 					+'var i=0;'
 					+'var output = null;'
 					+'var separator;'
-					+'while (j!=2500)'
+					+'while (j!=j+2500)'
 					+'{'
 					+    'posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": j}).items;'
 					+    'j = j+100;'
