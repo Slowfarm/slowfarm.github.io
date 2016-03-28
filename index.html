@@ -75,6 +75,7 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
 					if(r.response) {
 						offset = 0;
+						delay(334);
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
@@ -84,7 +85,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
-				delay(1000);
+				delay(334);
 				var code ='var posts;'
 					+'var j='+offset+';'
 					+'var i=0;'
@@ -114,7 +115,7 @@
 						}
 					  }
 					  else {
-					  	alert(r.error.error_msg + " WallSearch()");
+					  	alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
