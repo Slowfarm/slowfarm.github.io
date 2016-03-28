@@ -46,9 +46,9 @@
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
 						for(i = 0; i < r.response.count; i++) {
-							delay(334);
 							var owner_id = "-"+r.response.items[i];
 							getGroups(owner_id);
+							delay(334);
 							wallInfoStream.innerHTML += " "+i+"<br/>"
 						}
 					}
