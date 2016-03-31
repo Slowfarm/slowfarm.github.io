@@ -1,5 +1,26 @@
 <!doctype html>
 <html lang="ru">
+	<style>
+		#myProgress {
+		  position: relative;
+		  width: 100%;
+		  height: 30px;
+		  background-color: #ddd;
+		}
+		
+		#myBar {
+		  position: absolute;
+		  width: 10%;
+		  height: 100%;
+		  background-color: #4CAF50;
+		}
+		
+		#label {
+		  text-align: center;
+		  line-height: 30px;
+		  color: white;
+		}
+	</style>
 	<head>
 		<title>Посты пользователя vk</title>
 		<script src="//vk.com/js/api/openapi.js?117" type="text/javascript"></script>
@@ -10,7 +31,12 @@
 		<input type="button" value="Найти" onclick="login();">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
-
+		<div id="myProgress">
+		<div id="myBar">
+			<div id="label">10%</div>
+			</div>
+		</div>
+		
 		<script type="text/javascript">
 			VK.init({
   			apiId: 5322127
@@ -54,6 +80,7 @@
 							//wallInfoStream.innerHTML += " "+owner_id+"<br/>"
 							index++;
 							offset = 0;
+							move(index/r.response.count*100);
 							getGroups(owner_id);
 						}
 						else {
@@ -77,6 +104,18 @@
 			            after = new Date(); 
 			            after = after.getTime(); 
 			      } 
+			}
+			function move(width) {
+				var elem = document.getElementById("myBar");   
+				var id = setInterval(frame, 0);
+				function frame() {
+					if (width >= 100) {
+						clearInterval(id);
+					} else {
+						elem.style.width = width + '%'; 
+						document.getElementById("label").innerHTML = width * 1  + '%';
+					}
+				}
 			}
 			
 			function getGroups(owner_id) { // получаем колличество постов вгруппе
