@@ -30,12 +30,13 @@
 		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
 		<input type="button" value="Найти" onclick="login();">
 		<div id="wallInfo"></div>
-		<div id="wall"></div>
 		<div id="myProgress">
 		<div id="myBar">
 			<div id="label">10%</div>
 			</div>
 		</div>
+		<div id="wall"></div>
+		<div id="myProgress">
 		
 		<script type="text/javascript">
 			VK.init({
@@ -53,6 +54,7 @@
 			function login(){
 				wallInfoStream.innerHTML = "";
 				wallStream.innerHTML = "";
+				move(0);
 				user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
@@ -107,14 +109,8 @@
 			}
 			function move(width) {
 				var elem = document.getElementById("myBar");   
-				var id = setInterval(frame, 0);
-				function frame() {
-					if (width >= 100) {
-						clearInterval(id);
-					} else {
-						elem.style.width = width + '%'; 
-						document.getElementById("label").innerHTML = width * 1  + '%';
-					}
+				elem.style.width = width + '%'; 
+				document.getElementById("label").innerHTML = width * 1  + '%';
 				}
 			}
 			
