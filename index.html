@@ -25,7 +25,8 @@
 			var offset;
 			
 			function login(){
-				
+				wallInfoStream.innerHTML = "";
+				wallStream.innerHTML = "";
 				user_id = document.getElementById('inputUser').value;
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
