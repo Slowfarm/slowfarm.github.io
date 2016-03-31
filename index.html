@@ -108,11 +108,9 @@
 							offset+=100;
 							wallSearch(group_id, dataCount);
 						}
-						else {
-							main();
-						}
 					  else {
-					  	alert(data.error.error_msg + " WallSearch()");
+					  	main();
+					  	//alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
