@@ -48,7 +48,7 @@
 				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
 					if(r.response) {
 						if(index < r.response.count) {
-							var owner_id = "-"+r.response.items[i];
+							var owner_id = "-"+r.response.items[index];
 							delay(334);
 							wallInfoStream.innerHTML += " "+i+"<br/>"
 							index++;
