@@ -60,7 +60,7 @@
 						}
 					}
 					else {
-						alert(r.error.error_msg + " main()");
+						alert("Доступ к сообществам пользователя "+int_user_id+" ограничен. Error: '"+r.error.error_msg+"'");
 						
 					}
 				});
@@ -85,7 +85,7 @@
 						wallSearch(owner_id ,r.response.count);
 					}
 						else {
-							alert(r.error.error_msg + " getGroups()");
+							alert("Доступ к сообществу "+owner_id+" ограничен. Error: "+r.error.error_msg +"'");
 							main();
 						}
 					});
