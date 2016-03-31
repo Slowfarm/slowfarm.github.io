@@ -99,7 +99,7 @@
 					+'var i=0;'
 					+'var output = null;'
 					+'var separator = "<br/>-----------------------<br/>";'
-					+'while (offset<2500 && (offset+'+offset+'< '+dataCount+'))'
+					+'while (offset<2500)'
 					+'{'
 					+    'posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
 					+    'offset = offset+100;'
