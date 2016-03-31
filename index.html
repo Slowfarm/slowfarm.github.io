@@ -21,6 +21,7 @@
 			var separator = "<br/>-----------------------<br/>";
 			var user_id;
 			var int_user_id;
+			var index = 0;
 			
 			function login(){
 				
@@ -50,6 +51,7 @@
 							var owner_id = "-"+r.response.items[i];
 							delay(334);
 							wallInfoStream.innerHTML += " "+i+"<br/>"
+							i++;
 							getGroups(owner_id);
 						}
 					}
