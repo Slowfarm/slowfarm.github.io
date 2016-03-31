@@ -39,7 +39,7 @@
             					main();
             				}
             				else {
-					 	alert(r.error.error_msg + " login()");
+					 	alert("Неверный идентификатор пользователя. Error: '"+r.error.error_msg+"'");
 					}
 				 });
 			}
@@ -50,7 +50,7 @@
 						if(index < r.response.count) {
 							var owner_id = "-"+r.response.items[index];
 							delay(500);
-							wallInfoStream.innerHTML += " "+owner_id+"<br/>"
+							//wallInfoStream.innerHTML += " "+owner_id+"<br/>"
 							index++;
 							offset = 0;
 							getGroups(owner_id);
