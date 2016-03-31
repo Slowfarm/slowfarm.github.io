@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
-		<input type="button" value="Найти" onclick="login()">
+		<input type="button" value="Найти" onclick="login();">
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
 
@@ -34,7 +34,6 @@
             					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
             					user_id = r.response[0].id;
             					int_user_id = parseInt(user_id, 10);
-            					offset=0;
             					main();
             				}
             				else {
