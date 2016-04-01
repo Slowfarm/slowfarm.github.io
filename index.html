@@ -147,7 +147,7 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  		wallStream.innerHTML+=" "+data.response+separator;
-							offset+=2500;
+							offset+=100;
 							wallSearch(group_id, dataCount);
 						}
 					  else {
