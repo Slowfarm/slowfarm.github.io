@@ -126,7 +126,7 @@
 			 }
 			 
 			function wallSearch(group_id, dataCount) {
-				delay(334);
+			//	delay(334);
 				var code ='var posts;'
 					+'var offset='+offset+';'
 					+'var i=0;'
@@ -148,7 +148,7 @@
 					  if (data.response) {
 					  		wallStream.innerHTML+=" "+data.response+separator;
 							offset+=2500;
-							wallSearch(group_id, dataCount);
+							setTimeout(function() {wallSearch(group_id, dataCount);} ,333);
 						}
 					  else {
 					  	main();
