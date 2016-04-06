@@ -28,6 +28,7 @@
 	</head>
 	<body>
 		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
+		<input type="text" class="form-control" id="inputGroups" placeholder="Введите id сообществ">
 		<input type="button" value="Найти" onclick="login();">
 		<div id="wallInfo"></div>
 		<div id="myProgress">
@@ -55,6 +56,9 @@
 				wallStream.innerHTML = "";
 				move(0);
 				user_id = document.getElementById('inputUser').value;
+				groups = document.getElementById('inputGroups').value;
+				groups_id = groups.split(',');
+				alert(groups_id[0]);
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
 				
