@@ -74,7 +74,7 @@
 					} 
 				}
 				var json;
-				json = jquery.load("https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code="+param["code"]);
+				json = file_get_contents("https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code="+param["code"]);
 				var access_token = json.JSON.parse(json);
 				alert(access_token.access_token[0]);
 				move(0);
@@ -112,23 +112,6 @@
 				else {
 					alert("complete");
 				}
-			}
-			
-			function delay(ms) { // создаем задержку
-			      ms = parseInt(ms); 
-			      if (ms <= 0) return; 
-			      var before = after = new Date(); 
-			      before = before.getTime(); 
-			      after = after.getTime(); 
-			      while (after < before + ms) { 
-			            after = new Date(); 
-			            after = after.getTime(); 
-			      } 
-			}
-			function move(width) { // функция смещения progress bar
-				var elem = document.getElementById("myBar");   
-				elem.style.width = width + '%'; 
-				document.getElementById("label").innerHTML = Math.round(width) * 1  + '%';
 			}
 			
 			function getGroups(owner_id) { // получаем колличество постов вгруппе
@@ -176,6 +159,36 @@
 					  	//alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
+			}
+						function delay(ms) { // создаем задержку
+			      ms = parseInt(ms); 
+			      if (ms <= 0) return; 
+			      var before = after = new Date(); 
+			      before = before.getTime(); 
+			      after = after.getTime(); 
+			      while (after < before + ms) { 
+			            after = new Date(); 
+			            after = after.getTime(); 
+			      } 
+			}
+			function move(width) { // функция смещения progress bar
+				var elem = document.getElementById("myBar");   
+				elem.style.width = width + '%'; 
+				document.getElementById("label").innerHTML = Math.round(width) * 1  + '%';
+			}
+			function file_get_contents( url ) {	// Reads entire file into a string
+				var req = null;
+				try { req = new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) {
+					try { req = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {
+						try { req = new XMLHttpRequest(); } catch(e) {}
+					}
+				}
+				if (req == null) throw new Error('XMLHttpRequest not supported');
+			
+				req.open("GET", url, false);
+				req.send(null);
+			
+				return req.responseText;
 			}
 		</script>
 	</body>
