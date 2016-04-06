@@ -52,48 +52,55 @@
 			var groups;
 			var groups_id;
 			var index = 0;
+			var access = false;
 			var groups_count = 0;
 			var offset;
 			
 			function oAuth(){
 				document.location.href = "https://oauth.vk.com/authorize?client_id=5322127&display=page&redirect_uri=http://slowfarm.github.io&scope=groups&response_type=code&v=5.50";
+				access = true;
 			}
 			
 			function login(){
-				wallInfoStream.innerHTML = "";
-				wallStream.innerHTML = "";
-				var tmp = new Array();      // два вспомагательных
-				var tmp2 = new Array();     // массива
-				var param = new Array();
-				var get = location.search;  // строка GET запроса
-				if(get != '') {
-					tmp = (get.substr(1)).split('&');   // разделяем переменные
-					for(var i=0; i < tmp.length; i++) {
-					tmp2 = tmp[i].split('=');       // массив param будет содержать
-					param[tmp2[0]] = tmp2[1];       // пары ключ(имя переменной)->значение
-					} 
-				}
-				var req="https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code="+param["code"];
-				move(0);
-				user_id = document.getElementById('inputUser').value;// получение id пользователя
-				groups = document.getElementById('inputGroups').value;// получение списка сообществ
-				groups_id = groups.split(',');
-				groups_count = groups_id.length;
-				if (user_id.indexOf("com/") >= 0)
-					user_id = user_id.split('com/')[1];
-				//получение запроса на целочисленный id пользователя, имя и изображение
-				 VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_max', v: '5.27'}, function(r) {
-            				if(r.response) {
-          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_max + '" alt="" class="img-responsive"/></a>';
-            					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
-            					user_id = r.response[0].id;
-            					int_user_id = parseInt(user_id, 10);
-            					main();
-            				}
-            				else {
-					 	alert("Неверный идентификатор пользователя. Error: '"+r.error.error_msg+"'");
+				if(access){
+					wallInfoStream.innerHTML = "";
+					wallStream.innerHTML = "";
+					var tmp = new Array();      // два вспомагательных
+					var tmp2 = new Array();     // массива
+					var param = new Array();
+					var get = location.search;  // строка GET запроса
+					if(get != '') {
+						tmp = (get.substr(1)).split('&');   // разделяем переменные
+						for(var i=0; i < tmp.length; i++) {
+						tmp2 = tmp[i].split('=');       // массив param будет содержать
+						param[tmp2[0]] = tmp2[1];       // пары ключ(имя переменной)->значение
+						} 
 					}
-				 });
+					var req="https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code="+param["code"];
+					move(0);
+					user_id = document.getElementById('inputUser').value;// получение id пользователя
+					groups = document.getElementById('inputGroups').value;// получение списка сообществ
+					groups_id = groups.split(',');
+					groups_count = groups_id.length;
+					if (user_id.indexOf("com/") >= 0)
+						user_id = user_id.split('com/')[1];
+					//получение запроса на целочисленный id пользователя, имя и изображение
+					 VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_max', v: '5.27'}, function(r) {
+	            				if(r.response) {
+	          					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_max + '" alt="" class="img-responsive"/></a>';
+	            					wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
+	            					user_id = r.response[0].id;
+	            					int_user_id = parseInt(user_id, 10);
+	            					main();
+	            				}
+	            				else {
+						 	alert("Неверный идентификатор пользователя. Error: '"+r.error.error_msg+"'");
+						}
+					 });
+				}
+				else {
+					alert("Прежде чем использовать модуль нажмите Войти");
+				}
 			}
 			
 			function main() { // получаем список id сообществ
