@@ -58,13 +58,13 @@
 				wallInfoStream.innerHTML = "";
 				wallStream.innerHTML = "";
 				move(0);
-				user_id = document.getElementById('inputUser').value;
-				groups = document.getElementById('inputGroups').value;
+				user_id = document.getElementById('inputUser').value;// получение id пользователя
+				groups = document.getElementById('inputGroups').value;// получение списка сообществ
 				groups_id = groups.split(',');
 				groups_count = groups_id.length;
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
-				
+				//получение запроса на целочисленный id пользователя, имя и изображение
 				 VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_max', v: '5.27'}, function(r) {
             				if(r.response) {
           					wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_max + '" alt="" class="img-responsive"/></a>';
