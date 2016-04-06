@@ -74,14 +74,6 @@
 					} 
 				}
 				var req="https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code="+param["code"];
-				$.ajax({
-				    url : req,
-				    type : "GET",
-				    dataType : "jsonp",
-				    success : function(msg){
-				    alert(msg.response[0]);
-				    }
-				});
 				move(0);
 				user_id = document.getElementById('inputUser').value;// получение id пользователя
 				groups = document.getElementById('inputGroups').value;// получение списка сообществ
@@ -180,20 +172,6 @@
 				var elem = document.getElementById("myBar");   
 				elem.style.width = width + '%'; 
 				document.getElementById("label").innerHTML = Math.round(width) * 1  + '%';
-			}
-			function file_get_contents( url ) {	// Reads entire file into a string
-				var req = null;
-				try { req = new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) {
-					try { req = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {
-						try { req = new XMLHttpRequest(); } catch(e) {}
-					}
-				}
-				if (req == null) throw new Error('XMLHttpRequest not supported');
-			
-				req.open("GET", url, false);
-				req.send(null);
-			
-				return req.responseText;
 			}
 		</script>
 	</body>
