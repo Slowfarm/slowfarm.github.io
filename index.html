@@ -74,7 +74,7 @@
 					} 
 				}
 				var json;
-				json = file_get_contents("https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code="+param["code"]);
+				json = file_get_contents('https://oauth.vk.com/access_token?client_id=5322127&client_secret=sSPK9jtLQnMayEwNrXIV&redirect_uri=http://slowfarm.github.io&code='+param["code"]);
 				var access_token = json.JSON.parse(json);
 				alert(access_token.access_token[0]);
 				move(0);
