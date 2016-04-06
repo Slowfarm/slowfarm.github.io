@@ -49,6 +49,7 @@
 			var user_id;
 			var int_user_id;
 			var index = 0;
+			var groups_count = 0;
 			var offset;
 			
 			function login(){
@@ -58,7 +59,7 @@
 				user_id = document.getElementById('inputUser').value;
 				groups = document.getElementById('inputGroups').value;
 				groups_id = groups.split(',');
-				alert(groups_id[1]);
+				groups_count = groups_id.length;
 				if (user_id.indexOf("com/") >= 0)
 					user_id = user_id.split('com/')[1];
 				
@@ -77,26 +78,18 @@
 			}
 			
 			function main() { // получаем список id сообществ
-				VK.Api.call('groups.get', {user_id: int_user_id , v: 5.37}, function(r) {
-					if(r.response) {
-						if(index < r.response.count) {
-							var owner_id = "-"+r.response.items[index];
-							delay(500);
-							//wallInfoStream.innerHTML += " "+owner_id+"<br/>"
-							index++;
-							offset = 0;
-							move(index/r.response.count*100);
-							getGroups(owner_id);
-						}
-						else {
-							alert("complete");
-						}
-					}
-					else {
-						alert("Доступ к сообществам пользователя "+int_user_id+" ограничен. Error: '"+r.error.error_msg+"'");
-						
-					}
-				});
+				if(index < groups_count) {
+					var owner_id = "-"+gropus_id[index];
+					delay(500);
+					//wallInfoStream.innerHTML += " "+owner_id+"<br/>"
+					index++;
+					offset = 0;
+					move(index/groups_count*100);
+					getGroups(owner_id);
+				}
+				else {
+					alert("complete");
+				}
 			}
 			
 			function delay(ms) { // создаем задержку
