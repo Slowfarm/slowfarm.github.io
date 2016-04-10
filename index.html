@@ -27,7 +27,6 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
 		<input type="text" class="form-control" id="inputGroups" placeholder="Введите id сообществ">
 		<input type="button" value="Найти" onclick="login();">
 		<input type="button" value="Войти" onclick="oAuth();">
@@ -47,8 +46,6 @@
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
 			var separator = "<br/>-----------------------<br/>";
-			var user_id;
-			var int_user_id;
 			var groups;
 			var groups_id;
 			var index = 0;
@@ -75,25 +72,10 @@
 				wallInfoStream.innerHTML = "";
 				wallStream.innerHTML = "";
 				move(0);
-				user_id = document.getElementById('inputUser').value;// получение id пользователя
 				groups = document.getElementById('inputGroups').value;// получение списка сообществ
 				groups_id = groups.split(',');
 				groups_count = groups_id.length;
-				if (user_id.indexOf("com/") >= 0)
-					user_id = user_id.split('com/')[1];
-				//получение запроса на целочисленный id пользователя, имя и изображение
-				VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_max', v: '5.27'}, function(r) {
-	           			if(r.response) {
-	       				wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_max + '" alt="" class="img-responsive"/></a>';
-	       				wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
-	            			user_id = r.response[0].id;
-	            			int_user_id = parseInt(user_id, 10);
-	            			main();
-	            			}
-	            			else {
-						alert("Неверный идентификатор пользователя. Error: '"+r.error.error_msg+"'");
-					}
-				});
+				main();
 				}
 			else {
 				alert("Прежде чем использовать модуль нажмите Войти");
@@ -127,7 +109,7 @@
 					});
 			 }
 			 
-			function wallSearch(group_id, dataCount) {// записей пользователя по сообществу
+			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
 				var code='var j=0;'
 					+'var i=0;'
@@ -136,23 +118,19 @@
 					+'var result;'
 					+'var separator = "<br/>------------<br/>";'
 					+'while (j<3) {'
-					+'var posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
+					+'var posts = posts + API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
 					+    'j = j+1;'
-					+   'while (i<100) {'
-					+        'if(posts[i].from_id == ' + int_user_id + '|| posts[i].signer_id == ' + int_user_id + ')'
-					+            'output = output+posts[i].text+separator;'
-					+        'i=i+1;'
-					+    '}'
-					+    'i=0;'
 					+    'offset = offset+100;'
 					+'}'
-					+'return output;'
+					+'return posts;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  		wallStream.innerHTML+=" "+data.response+separator;
+					  		var json = JSON.parse(data.resonse);
+					  		for(int i=0; i<300; i++)
+					  			wallStream.innerHTML+=" "+json.text[i]+separator;
 							offset+=300;
-							wallSearch(group_id, dataCount);
+							wallSearch(group_id);
 						}
 					  else {
 					  	move(index/groups_count*100);
