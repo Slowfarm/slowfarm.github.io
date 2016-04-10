@@ -118,17 +118,18 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  		for(var i = 0; i < 100; i++) {
-					  			wallStream.innerHTML+=" "+data.response[i].text+separator;
-					  			if(i==299)
-					  			alert("kek")
+					  			if(data.response[i].text)
+					  				wallStream.innerHTML+=" "+data.response[i].text+separator;
+					  			else {
+					  				move(index/groups_count*100);
+					  				main();	
+					  			}
 					  		}
 							offset+=100;
 							wallSearch(group_id);
 						}
 					  else {
-					  	move(index/groups_count*100);
-					  	main();
-					  	//alert(data.error.error_msg + " WallSearch()");
+					  	alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
