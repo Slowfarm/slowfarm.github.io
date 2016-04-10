@@ -101,11 +101,15 @@
 				delay(334);
 				var code='var offset='+offset+';'
 					+'var posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
+					+'offset = offset+100;'
+					+'posts = posts+","+API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
 					+'return posts;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	var postsCount = data.response.length;
+					  	var json = JSON.parse(data.reponse);
+					  	alert(json[0]);
+					  	/*var postsCount = data.response.length;
 					  	for(var i = 0; i < postsCount; i++) {
 					  		wallStream.innerHTML+=" "+data.response[i].text+separator;	
 							}
@@ -116,7 +120,7 @@
 					  	else {
 							move(index/groups_count*100);
 					  		main();
-					  	}
+					  	}*/
 					  }
 					  else {
 					  	alert(data.error.error_msg + " WallSearch()");
