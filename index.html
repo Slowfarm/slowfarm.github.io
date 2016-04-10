@@ -117,16 +117,15 @@
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  		for(var i = 0; i < data.response.length; i++) {
-					  			wallStream.innerHTML+=" "+data.response[i].text+separator;	
-								}
-					  		}
-					  		if(data.response.length<100)
-					  			move(index/groups_count*100);
-					  			main();
-							offset+=100;
-							wallSearch(group_id);
-						}
+					  	for(var i = 0; i < data.response.length; i++) {
+					  		wallStream.innerHTML+=" "+data.response[i].text+separator;	
+							}
+					  	}
+					  	if(data.response.length<100)
+					  		move(index/groups_count*100);
+					  		main();
+						offset+=100;
+						wallSearch(group_id);
 					  else {
 					  	alert(data.error.error_msg + " WallSearch()");
 					  }
