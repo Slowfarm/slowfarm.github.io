@@ -101,8 +101,8 @@
 				delay(334);
 				var code='var offset='+offset+';'
 					+'var posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
-					+'offset = offset+100;'
-					+'posts = posts+","+API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
+				//	+'offset = offset+100;'
+				//	+'posts = posts+","+API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
 					+'return posts;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
