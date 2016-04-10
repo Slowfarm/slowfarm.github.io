@@ -118,7 +118,7 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  		for(var i = 0; i < 100; i++) {
-					  			if(data.response[i].text)
+					  			if (window.data.response[i].text)
 					  				wallStream.innerHTML+=" "+data.response[i].text+separator;
 					  			else {
 					  				move(index/groups_count*100);
