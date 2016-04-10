@@ -118,12 +118,12 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  		for(var i = 0; i < 100; i++) {
-					  			if (typeof(data.response[i].text) != "undefined")
-					  				wallStream.innerHTML+=" "+data.response[i].text+separator;
-					  			else {
-					  				move(index/groups_count*100);
-					  				main();	
-					  			}
+					  			try {
+					  			wallStream.innerHTML+=" "+data.response[i].text+separator;	
+								} catch (err) {
+								  move(index/groups_count*100);
+					  				main();
+								}
 					  		}
 							offset+=100;
 							wallSearch(group_id);
