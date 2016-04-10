@@ -127,8 +127,9 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  		var json = JSON.parse(data.resonse);
-					  		for(int i=0; i<300; i++)
+					  		for(var i = 0; i < 300; i++) {
 					  			wallStream.innerHTML+=" "+json.text[i]+separator;
+					  		}
 							offset+=300;
 							wallSearch(group_id);
 						}
