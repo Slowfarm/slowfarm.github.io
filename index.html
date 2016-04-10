@@ -108,7 +108,7 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	var json = JSON.parse(data);
-					  	alert(data.response[0].text);
+					  	alert(data.response[text]);
 					  	/*var postsCount = data.response.length;
 					  	for(var i = 0; i < postsCount; i++) {
 					  		wallStream.innerHTML+=" "+data.response[i].text+separator;	
