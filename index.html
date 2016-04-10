@@ -88,7 +88,7 @@
 					delay(500);
 					index++;
 					offset = 0;
-					getGroups(owner_id);
+					wallSearch(owner_id);
 				}
 				else {
 					index=0;
@@ -96,18 +96,6 @@
 				}
 			}
 			
-			function getGroups(owner_id) { // получаем колличество постов вгруппе
-				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
-				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
-					if(r.response) {
-						wallSearch(owner_id ,r.response.count);
-					}
-						else {
-							alert("Доступ к сообществу "+owner_id+" ограничен. Error: "+r.error.error_msg +"'");
-							main();
-						}
-					});
-			 }
 			 
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
