@@ -129,6 +129,8 @@
 					  		var json = JSON.parse(data.resonse);
 					  		for(var i = 0; i < 300; i++) {
 					  			wallStream.innerHTML+=" "+json.text[i]+separator;
+					  			if(i==299)
+					  			alert("kek")
 					  		}
 							offset+=300;
 							wallSearch(group_id);
