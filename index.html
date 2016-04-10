@@ -111,28 +111,19 @@
 			 
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
-				var code='var j=0;'
-					+'var i=0;'
-					+'var offset='+offset+';'
-					+'var posts = null'
-					+'var result;'
-					+'var separator = "<br/>------------<br/>";'
-					+'//while (j<3) {'
-					+'posts = posts + API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
-					+    '//j = j+1;'
-					+    '//offset = offset+100;'
-					+'//}'
+				var code='var offset='+offset+';'
+					+'var posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
 					+'return posts;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  		var json = JSON.parse(data.resonse);
 					  		for(var i = 0; i < 300; i++) {
-					  			wallStream.innerHTML+=" "+json.text[i]+separator;
+					  			wallStream.innerHTML+=" "+json[i].text+separator;
 					  			if(i==299)
 					  			alert("kek")
 					  		}
-							offset+=300;
+							offset+=100;
 							wallSearch(group_id);
 						}
 					  else {
