@@ -106,10 +106,11 @@
 					  if (data.response) {
 					  	var dataCount = data.response.length;
 					  	for (var i=0; i<dataCount; i++) {
+					  		wallStream.innerHTML+="<b>Идентификатор записи: </b>"+data.response[i].id+"<br>";
 					  		if(typeof data.response[i].signer_id !== 'undefined')
-					  			wallStream.innerHTML+="Владелец записи "+data.response[i].signer_id+"<br>";
+					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].signer_id+"<br>";
 					  		else
-					  			wallStream.innerHTML+="Владелец записи "+data.response[i].owner_id+"<br>";
+					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].owner_id+"<br>";
 					  		wallStream.innerHTML+=""+data.response[i].text.substr(0, 50)+"..."+separator;
 					  	}
 					  	if(dataCount==100) {
