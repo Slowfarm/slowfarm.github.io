@@ -92,7 +92,7 @@
 				}
 				else {
 					index=0;
-					alert("complete");
+					//alert("complete");
 				}
 			}
 			
@@ -106,12 +106,11 @@
 					  if (data.response) {
 					  	var dataCount = data.response.length;
 					  	for (var i=0; i<dataCount; i++) {
-					  		document.write(""+data.response[i].text+separator);
 					  		if(typeof data.response[i].signer_id !== 'undefined')
-					  			document.write("Владелец записи "+data.response[i].signer_id+"<br>");
+					  			wallStream.innerHTML+="Владелец записи "+data.response[i].signer_id+"<br>";
 					  		else
-					  			document.write("Владелец записи "+data.response[i].owner_id+"<br>");
-					  		document.write(""+data.response[i].text+separator);
+					  			wallStream.innerHTML+="Владелец записи "+data.response[i].owner_id+"<br>";
+					  		wallStream.innerHTML+=""+data.response[i].text.substr(0, 30)+separator;
 					  	}
 					  	if(dataCount==100) {
 					  		offset+=100;
