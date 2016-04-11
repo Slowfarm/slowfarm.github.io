@@ -107,6 +107,7 @@
 					  	var dataCount = data.response.length;
 					  	for (var i=0; i<dataCount; i++) {
 					  		wallStream.innerHTML+="<b>Идентификатор записи: </b>"+data.response[i].id+"<br>";
+					  		wallStream.innerHTML+="<b>Идентификатор сообщества: </b>"+data.response[i].owner_id+"<br>";
 					  		if(typeof data.response[i].signer_id !== 'undefined')
 					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].signer_id+"<br>";
 					  		else
