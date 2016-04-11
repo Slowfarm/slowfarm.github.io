@@ -45,7 +45,7 @@
 			
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
-			var separator = "<br/>-----------------------<br/>";
+			var separator = "<hr>";
 			var groups;
 			var groups_id;
 			var index = 0;
@@ -105,8 +105,10 @@
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
 					  	var dataCount = data.response.length;
-					  	for (var i=0; i<dataCount; i++)
+					  	for (var i=0; i<dataCount; i++) {
+					  		wallStream.innerHTML+="Владелец записи"+data.response[i].owner_id+"<br>";
 					  		wallStream.innerHTML+=""+data.response[i].text+separator;
+					  	}
 					  	if(dataCount==100) {
 					  		offset+=100;
 							wallSearch(group_id);
