@@ -100,7 +100,7 @@
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
 				var code='var posts = API.wall.get({"owner_id": -57789423, "v": "5.27", "count": "100", "offset": '+offset+'}).items;'
-					+'return output;'
+					+'return posts;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
