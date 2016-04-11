@@ -43,6 +43,28 @@
   			apiId: 5322127
 			});
 			
+			sys = require("sys");
+			test = require("mjsunit");
+			 
+			var mongo = require('../lib/mongodb');
+			 
+			// Хост и порт берутся из переменных окружения
+			var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
+			var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : mongo.Connection.DEFAULT_PORT;
+			 
+			sys.puts("Connecting to " + host + ":" + port);
+			var db = new mongo.Db('node-mongo-examples', new mongo.Server(host, port, {}), {});
+			db.open(function(err, db) {
+			    // Подключились к базе
+			});
+			
+			db.collection('test', function(err, collection) {
+			  // Добавляем три элемента
+			  for(var i = 0; i < 3; i++) {
+			    collection.insert({'a':i});
+			  }
+			});
+			
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
 			var separator = "<hr>";
