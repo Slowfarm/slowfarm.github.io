@@ -108,6 +108,8 @@
 					  	for (var i=0; i<dataCount; i++) {
 					  		if(typeof data.response[i].signer_id !== 'undefined')
 					  			wallStream.innerHTML+="Владелец записи "+data.response[i].signer_id+"<br>";
+					  		else
+					  			wallStream.innerHTML+="Владелец записи "+data.response[i].owner_id+"<br>";
 					  		wallStream.innerHTML+=""+data.response[i].text+separator;
 					  	}
 					  	if(dataCount==100) {
