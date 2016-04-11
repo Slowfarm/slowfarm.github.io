@@ -99,32 +99,33 @@
 			 
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
-				var code='var offset='+offset+';'
-					+'var posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
-					+'offset = offset+100;'
-					+'posts = posts+","+API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
-					+'return posts;'
+				var code='var i=0;'
+					+'var offset='+offset+';'
+					+'var output = null;'
+					+'var separator = "<br/>------------<br/>";'
+					+'while (offset<'+offset+'+400)'
+					+'{'
+					+'var posts = API.wall.get({"owner_id": -57789423, "v": "5.27", "count": "100", "offset": offset}).items;'
+					+    'while (i<100)'
+					+    '{'
+					+        'output = output+posts[i].text+separator;'
+					+        'i=i+1;'
+					+    '}'
+					+    'i=0;'
+					+    'offset = offset+100;'
+					+'}'
+					+'return output;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  	var schedule = data;
-					  	schedule = JSON.stringify(schedule);
-						alert( schedule);
-					  	/*var postsCount = data.response.length;
-					  	for(var i = 0; i < postsCount; i++) {
-					  		wallStream.innerHTML+=" "+data.response[i].text+separator;	
-							}
-					  	if(postsCount==100) {
-					  		offset+=100;
+					  		wallStream.innerHTML+=""+data.response;	
+					  		offset+=400;
 							wallSearch(group_id);
-					  	}
-					  	else {
-							move(index/groups_count*100);
-					  		main();
-					  	}*/
 					  }
 					  else {
-					  	alert(data.error.error_msg + " WallSearch()");
+					  	move(index/groups_count*100);
+					  	main();
+					  	//alert(data.error.error_msg + " WallSearch()");
 					  }
 				});
 			}
