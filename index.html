@@ -106,7 +106,8 @@
 					  if (data.response) {
 					  	var dataCount = data.response.length;
 					  	for (var i=0; i<dataCount; i++) {
-					  		wallStream.innerHTML+="Владелец записи"+data.response[i].owner_id+"<br>";
+					  		if(typeof data.response[i].signer_id !== 'undefined')
+					  			wallStream.innerHTML+="Владелец записи "+data.response[i].signer_id+"<br>";
 					  		wallStream.innerHTML+=""+data.response[i].text+separator;
 					  	}
 					  	if(dataCount==100) {
