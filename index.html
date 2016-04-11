@@ -110,7 +110,7 @@
 					  			wallStream.innerHTML+="Владелец записи "+data.response[i].signer_id+"<br>";
 					  		else
 					  			wallStream.innerHTML+="Владелец записи "+data.response[i].owner_id+"<br>";
-					  		wallStream.innerHTML+=""+data.response[i].text.substr(0, 30)+separator;
+					  		wallStream.innerHTML+=""+data.response[i].text.substr(0, 50)+"..."+separator;
 					  	}
 					  	if(dataCount==100) {
 					  		offset+=100;
