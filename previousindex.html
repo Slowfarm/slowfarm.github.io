@@ -27,8 +27,7 @@
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
-		<input type="text" class="form-control" id="inputUser" placeholder="Введите id пользователя">
-		<input type="text" class="form-control" id="inputGroups" placeholder="Введите id сообществ">
+		<input type="text" class="form-control" id="inputGroups" placeholder="Введите id сообществ" value="74217493,62269959,90145873">
 		<input type="button" value="Найти" onclick="login();">
 		<input type="button" value="Войти" onclick="oAuth();">
 		<div id="wallInfo"></div>
@@ -46,9 +45,7 @@
 			
 			var wallInfoStream = document.getElementById('wallInfo');
 			var wallStream = document.getElementById('wall');
-			var separator = "<br/>-----------------------<br/>";
-			var user_id;
-			var int_user_id;
+			var separator = "<hr>";
 			var groups;
 			var groups_id;
 			var index = 0;
@@ -75,25 +72,10 @@
 				wallInfoStream.innerHTML = "";
 				wallStream.innerHTML = "";
 				move(0);
-				user_id = document.getElementById('inputUser').value;// получение id пользователя
 				groups = document.getElementById('inputGroups').value;// получение списка сообществ
 				groups_id = groups.split(',');
 				groups_count = groups_id.length;
-				if (user_id.indexOf("com/") >= 0)
-					user_id = user_id.split('com/')[1];
-				//получение запроса на целочисленный id пользователя, имя и изображение
-				VK.Api.call('users.get', {user_ids: user_id, fields: 'photo_max', v: '5.27'}, function(r) {
-	           			if(r.response) {
-	       				wallInfoStream.innerHTML += '<a href="#"><img src="' + r.response[0].photo_max + '" alt="" class="img-responsive"/></a>';
-	       				wallInfoStream.innerHTML += "<br/>"+r.response[0].first_name+"<br/>"+r.response[0].last_name+separator;
-	            			user_id = r.response[0].id;
-	            			int_user_id = parseInt(user_id, 10);
-	            			main();
-	            			}
-	            			else {
-						alert("Неверный идентификатор пользователя. Error: '"+r.error.error_msg+"'");
-					}
-				});
+				main();
 				}
 			else {
 				alert("Прежде чем использовать модуль нажмите Войти");
@@ -106,7 +88,7 @@
 					delay(500);
 					index++;
 					offset = 0;
-					getGroups(owner_id);
+					wallSearch(owner_id);
 				}
 				else {
 					index=0;
@@ -114,50 +96,35 @@
 				}
 			}
 			
-			function getGroups(owner_id) { // получаем колличество постов вгруппе
-				var code = 'return API.wall.get({owner_id: '+ owner_id +', count: 1, v: 5.37});';
-				VK.Api.call('execute', {code: code, v: '5.37'}, function(r) {
-					if(r.response) {
-						wallSearch(owner_id ,r.response.count);
-					}
-						else {
-							alert("Доступ к сообществу "+owner_id+" ограничен. Error: "+r.error.error_msg +"'");
-							main();
-						}
-					});
-			 }
 			 
-			function wallSearch(group_id, dataCount) {// записей пользователя по сообществу
+			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
-				var code='var j=0;'
-					+'var i=0;'
-					+'var offset='+offset+';'
-					+'var output = null;'
-					+'var result;'
-					+'var separator = "<br/>------------<br/>";'
-					+'while (j<3) {'
-					+'var posts = API.wall.get({"owner_id": '+ group_id +', "v": "5.27", "count": "100", "offset": offset}).items;'
-					+    'j = j+1;'
-					+   'while (i<100) {'
-					+        'if(posts[i].from_id == ' + int_user_id + '|| posts[i].signer_id == ' + int_user_id + ')'
-					+            'output = output+posts[i].text+separator;'
-					+        'i=i+1;'
-					+    '}'
-					+    'i=0;'
-					+    'offset = offset+100;'
-					+'}'
-					+'return output;'
+				var code='var posts = API.wall.get({"owner_id": '+group_id+', "v": "5.27", "count": "100", "offset": '+offset+'}).items;'
+					+'return posts;'
 					
 				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
 					  if (data.response) {
-					  		wallStream.innerHTML+=" "+data.response+separator;
-							offset+=300;
-							wallSearch(group_id, dataCount);
-						}
-					  else {
-					  	move(index/groups_count*100);
+					  	var dataCount = data.response.length;
+					  	for (var i=0; i<dataCount; i++) {
+					  		wallStream.innerHTML+="<b>Идентификатор записи: </b>"+data.response[i].id+"<br>";
+					  		wallStream.innerHTML+="<b>Идентификатор сообщества: </b>"+data.response[i].owner_id+"<br>";
+					  		if(typeof data.response[i].signer_id !== 'undefined')
+					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].signer_id+"<br>";
+					  		else
+					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].owner_id+"<br>";
+					  		wallStream.innerHTML+=""+data.response[i].text.substr(0, 50)+"..."+separator;
+					  	}
+					  	if(dataCount==100) {
+					  		offset+=100;
+							wallSearch(group_id);
+					  	}
+						else {
+						move(index/groups_count*100);
 					  	main();
-					  	//alert(data.error.error_msg + " WallSearch()");
+						}
+					  }
+					  else {
+					  	alert(data.error.error_msg+ "(Введен неверный идентификатор)");
 					  }
 				});
 			}
