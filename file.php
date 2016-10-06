@@ -2,7 +2,6 @@
 <html>
  <head>
    <title>Пример использования PHP</title>
-  <meta http-equiv="refresh" content="0; url=http://repo.github.io/file.php" />
  </head>
 <body>
 <?php
