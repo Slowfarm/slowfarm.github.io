@@ -1,3 +1,4 @@
+<?php
 $sdd_db_host='178.208.81.185'; // ваш хост
 $sdd_db_name='vova_test'; // ваша бд
 $sdd_db_user='vova_test'; // пользователь бд
@@ -9,3 +10,4 @@ while($row=mysql_fetch_array($result))
 {
 echo '<p>Запись id='.$row['id'].'. Текст: '.$row['text'].'</p>';// выводим данные
 }
+?>
