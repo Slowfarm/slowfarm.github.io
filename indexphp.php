@@ -1,7 +1,7 @@
 
 <html>
  <head>
-   <title>Пример использования PHP</title>
+   <title>PHP</title>
  </head>
 <body>
 <?php
