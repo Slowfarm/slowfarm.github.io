@@ -1,10 +1,15 @@
 <html>
-<head>
-<title>My First PHP Page</title>
-</head>
+ <head>
+   <title>Пример использования PHP</title>
+ </head>
+
 <body>
+
+<!-- вставляем код php -->
 <?php
-echo "Hello World!"
+echo "Привет, мир!";
 ?>
+<!-- вставляем код php -->
+
 </body>
 </html>
