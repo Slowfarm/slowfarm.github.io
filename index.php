@@ -15,7 +15,7 @@
  $result=mysql_query('SELECT * FROM `test_table`'); // запрос на выборку
  while($row=mysql_fetch_array($result))
  { 
- echo '<p>Запись id='.$row['id'].'. Текст: '.$row['text'].'</p>';// выводим данные
+ echo json_encode($row[text]);// выводим данные
  }
  ?>
  </script>
