@@ -36,6 +36,7 @@
  					tmp = tmp[0].split('=');       // массив param будет содержать
  					param[tmp[0]] = tmp[1];       // пары ключ(имя переменной)->значение
  					}
+				alert(param["access_token"]);
  			if(param["access_token"])
  				access=true;
 			if(access){
