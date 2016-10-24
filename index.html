@@ -32,7 +32,7 @@
 			function login(){
  			var get = location.href;
  				if(get != '') {
- 					tmp = (get.substr(0)).split(',');
+ 					tmp = (get.substr(0)).split('#');
 					alert(tmp);// разделяем переменные
  					tmp = tmp[0].split('=');// массив param будет содержать
  					param[tmp[0]] = tmp[1]; // пары ключ(имя переменной)->значение
