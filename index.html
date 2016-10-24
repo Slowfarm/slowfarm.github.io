@@ -55,7 +55,7 @@
 				method = "messages.send";
 				request = "https://api.vk.com/method/"+ method +"?"+ params +"&"+ token;
 				var xhr = new XMLHttpRequest();
-				xhr.open('GET', request, false);
+				xhr.open('POST', request, false);
 				xhr.send();
 			}
 		</script>
