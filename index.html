@@ -51,7 +51,7 @@
 			
 			function main() { // получаем список id сообществ
 				params = "user_id=1827401147&message=notification+text";
-				token = tmp[0];
+				token = "access_token="+tmp[0];
 				method = "messages.send";
 				request = "https://api.vk.com/method/"+ method +"?"+ params +"&"+ token;
 				var xhr = new XMLHttpRequest();
