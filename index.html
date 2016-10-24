@@ -32,8 +32,8 @@
 			function login(){
  			var get = location.href;
  				if(get != '') {
- 					tmp = get.split('=');
-					tmp = tmp.split('&');
+ 					get = get.split('=');
+					tmp = get.split('&');
 					alert(tmp[0]);
  					}
  			if(tmp[0])
