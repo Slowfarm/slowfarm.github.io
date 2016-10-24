@@ -12,11 +12,49 @@
 		<div id="wallInfo"></div>
 		<div id="wall"></div>
 		
-<?
-$client_id = '5322127';
-$scope = 'offline,messages'
-?>
-<a href="https://oauth.vk.com/authorize?client_id=<?=$client_id;?>&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=<?=$scope;?>&response_type=token&v=5.37">Push the button</a>
-	
+		<script type="text/javascript">
+			VK.init({
+  			apiId: 5322127
+			});
+			
+			var wallInfoStream = document.getElementById('wallInfo');
+			var wallStream = document.getElementById('wall');
+			var groups;
+			var access = false;
+			var tmp = new Array();
+ 			var param = new Array();
+			
+			function oAuth(){
+				document.location.href = 
+					"https://oauth.vk.com/authorize?client_id=5322127&display=page&redirect_uri=http://slowfarm.github.io&scope=friends&response_type=token&v=5.59";
+			}
+			
+			function login(){
+ 			var get = location.href;
+ 				if(get != '') {
+ 					get = get.split('=');
+					tmp = get[1].split('&');
+					alert(tmp[0]);
+ 					}
+ 			if(tmp[0])
+ 				access=true;
+			if(access){
+				wallInfoStream.innerHTML = "";
+				wallStream.innerHTML = "";
+				groups = document.getElementById('inputGroups').value;// получение списка сообществ
+				main();
+				}
+			else {
+				alert("Прежде чем использовать модуль нажмите Войти");
+			}
+			}
+			
+			function main() { // получаем список id сообществ
+				request = "https://api.vk.com/method/messages.send?user_id=6269901&message=habrahabr&v=5.37&access_token="+tmp[0];
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', request, true);
+				xhr.send();
+			}
+		</script>
 	</body>
 </html>
