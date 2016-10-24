@@ -76,7 +76,8 @@
 			}
 			
 			function main() { // получаем список id сообществ
-				VK.Api.call('messages.send', {user_id: '182740114', message: groups, v: '5.59'}, function(data){});
+				VK.Api.call('messages.send', {user_id: '182740114', message: groups, v: '5.59'}, function(data){
+				alert(""+data.error);});
 			}
 		</script>
 	</body>
