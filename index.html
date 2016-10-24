@@ -32,7 +32,7 @@
 			function login(){
  			var get = location.search;  // строка GET запроса
  				if(get != '') {
- 					tmp = (get.substr(1)).split('&');   // разделяем переменные
+ 					tmp = (get.substr(1)).split('#');   // разделяем переменные
  					tmp = tmp[0].split('=');       // массив param будет содержать
  					param[tmp[0]] = tmp[1];       // пары ключ(имя переменной)->значение
  					}
