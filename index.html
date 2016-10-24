@@ -55,7 +55,7 @@
 				method = "messages.send";
 				request = "https://api.vkontakte.ru/method/messages.send?user_id=182740114&message='asdsa'&title='asdas'&access_token="+tmp[0];
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', request, async);
+				xhr.open('POST', request, true);
 				xhr.send();
 			}
 		</script>
