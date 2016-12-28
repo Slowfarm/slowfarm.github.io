@@ -1,3 +1,3 @@
 <?php 
-echo "json";
+echo $_GET['code'];
 ?>
