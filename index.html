@@ -99,7 +99,7 @@
 			 
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
-				VK.Api.call('messages.send', {'user_id': group_id, 'message': 'Hello!', v: '5.37'}, function(data){
+				VK.Api.call('messages.send', {'user_id': group_id, 'message': 'Hello!', v: '5.46'}, function(data){
 					  if (data.response) {
 					  	alert(data.response);
 					  	main();
