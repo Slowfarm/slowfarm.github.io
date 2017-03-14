@@ -55,7 +55,7 @@
 			var param = new Array();
 			
 			function oAuth(){
-				document.location.href = "https://oauth.vk.com/authorize?client_id=5322127&display=page&redirect_uri=http://slowfarm.github.io&scope=messages&response_type=token&v=5.50";
+				document.location.href = "https://oauth.vk.com/authorize?client_id=5322127&display=page&redirect_uri=http://slowfarm.github.io&scope=messages&response_type=code&v=5.50";
 			}
 			
 			function login(){
@@ -66,7 +66,7 @@
  					tmp = tmp[0].split('=');       // массив param будет содержать
  					param[tmp[0]] = tmp[1];       // пары ключ(имя переменной)->значение
  					}
- 			if(param["token"])
+ 			if(param["code"])
  				access=true;
 			if(access){
 				wallInfoStream.innerHTML = "";
@@ -99,7 +99,7 @@
 			 
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
-				VK.Api.call('messages.send', {'user_id': group_id,'access_token': param["token"], 'message': 'Hello!', v: '5.46'}, function(data){
+				VK.Api.call('messages.send', {'user_id': group_id,'access_token': param["code"], 'message': 'Hello!', v: '5.46'}, function(data){
 					  if (data.response) {
 					  	alert(data.response);
 					  	main();
