@@ -23,7 +23,7 @@
 	</style>
 	<head>
 		<title>Посты пользователя vk</title>
-		<script src="//vk.com/js/api/openapi.js?117" type="text/javascript"></script>
+		<script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	</head>
 	<body>
@@ -99,27 +99,9 @@
 			 
 			function wallSearch(group_id) {// записей пользователя по сообществу
 				delay(334);
-				var code='var posts = API.wall.get({"owner_id": '+group_id+', "v": "5.27", "count": "100", "offset": '+offset+'}).items;'
-					+'return posts;'
-					
-				VK.Api.call('execute', {code: code, v: '5.37'}, function(data){
+				VK.Api('messages.send', {'user_id': group_id, 'message': 'Hello!', v: '5.37'}, function(data){
 					  if (data.response) {
-					  	var dataCount = data.response.length;
-					  	for (var i=0; i<dataCount; i++) {
-					  		wallStream.innerHTML+="<b>Идентификатор записи: </b>"+data.response[i].id+"<br>";
-					  		wallStream.innerHTML+="<b>Идентификатор сообщества: </b>"+data.response[i].owner_id+"<br>";
-					  		if(typeof data.response[i].signer_id !== 'undefined')
-					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].signer_id+"<br>";
-					  		else
-					  			wallStream.innerHTML+="<b>Владелец записи: </b>"+data.response[i].owner_id+"<br>";
-					  		wallStream.innerHTML+=""+data.response[i].text.substr(0, 50)+"..."+separator;
-					  	}
-					  	if(dataCount==100) {
-					  		offset+=100;
-							wallSearch(group_id);
-					  	}
-						else {
-						move(index/groups_count*100);
+					  	alert(data.response);
 					  	main();
 						}
 					  }
