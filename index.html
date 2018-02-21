@@ -1,130 +1,177 @@
-<!doctype html>
-<html lang="ru">
-	<style>
-		#myProgress {
-		  position: relative;
-		  width: 100%;
-		  height: 30px;
-		  background-color: #ddd;
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="styles.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <title>Мисс МИЭТ'17</title>
+    </head>
+    <body>
+   <div class="rendered-form">
+      <form>
+          <label type="text" class="fb-text-label">1. Ф.И.О.</label>
+      <input type="text" class="form-control" name="text-1519159009414" id="text-1519159009414">
+      </form>
+     <form>
+        <input type="file" class="form-control">
+      </form>
+      <form>
+          <label type="text" class="fb-text-label">2. Контактный телефон</label>
+          <input type="text" class="form-control">
+         </form>
+     <form>
+          <label type="text" class="fb-text-label">    E-mail</label>
+          <input type="text" class="form-control">
+      </form>
+     <form>
+          <label type="text" for="text-1519159043060" class="fb-text-label">Vk.com\id</label>
+          <input type="text" class="form-control" name="text-1519159043060" id="text-1519159043060">
+      </form>
+      <form>
+          <label type="text" for="text-1519159041419" class="fb-text-label">3. Дата рождения</label>
+          <input type="text" class="form-control" name="text-1519159041419" id="text-1519159041419">
+      </form>
+      <form>
+          <label type="text" class="fb-text-label">Место рождения</label>
+          <input type="text" class="form-control">
+      </form>
+      <form>
+          <label type="text"  class="fb-text-label">4. Факультет, группа</label>
+          <input type="text" class="form-control">
+      </form>
+      <form>
+          <label type="text" class="fb-text-label">5. О себе (талант, черты характера, увлечения, мечты, идеи и.т.д)</label>
+      </form>
+      <textarea type="text" class="form-control" rows="4"></textarea>
+      <form>
+          <label type="text" for="text-1519159033376" class="fb-text-label">6. Занимаетесь ли вы спортом? Если да, то каким?</label>
+           <input type="text" class="form-control">
+      </form>
+      <form>
+          <label type="text" class="fb-text-label">7. Какими своими достижениями Вы гордитесь?</label>
+      </form>
+      <textarea type="text" class="form-control" rows="3"></textarea>
+      <form>
+          <label type="text" class="fb-text-label">8. От чего Вам сложно отказатсья?</label>
+      </form>
+      <textarea type="text" class="form-control" rows="3"></textarea>
+     <form>
+          <label type="text" class="fb-text-label">9. Ваши планы на этот год</label>
+      </form>
+      <textarea type="text" class="form-control" rows="3"></textarea>
+      <form>
+          <label type="text"  class="fb-text-label">10. Чего Вы ожидаете от конкурса?</label>
+      </form>
+      <textarea type="text" class="form-control" rows="3"></textarea>
+      <form>
+          <label type="text" class="fb-text-label">11. Откуда вы узнали о кастинге?</label>
+      </form>
+      <textarea type="text" class="form-control"  rows="3"></textarea>
+      <form>
+          <label type="text" class="fb-text-label">12. Почему именно вы должны стать участницейконкурса красоты и талантов "Мисс МИЭТ'17"?</label>
+      </form>
+      <textarea type="text" class="form-control" rows="1"></textarea>
+   </div>
+<form method="post" action="" id="ajaxform"> <br />
+<input type="text" size="32" maxlength="36" name="name" placeholder="Вaшe имя" val=""> <br />
+<input type="text" size="32" maxlength="36" name="email" placeholder="Вaш email" val=""> <br />
+<input type="text" size="32" maxlength="36" name="subject" placeholder="Тeмa" val=""> <br />
+<textarea cols="25" rows="10" name="message" placeholder="Сooбщeниe.." val=""></textarea> <br />
+<input type="submit" value="GO GO GO"/>
+</form>
+   <script type="text/javascript">
+       $(document).ready(function() {
+	$("#ajaxform").submit(function(){
+		var form = $(this);
+		var error = false;
+		form.find('input, textarea').each( function(){ 
+			if ($(this).val() == '') { 
+				alert('Зaпoлнитe пoлe "'+$(this).attr('placeholder')+'"!');
+				error = true;
+			}
+		});
+		if (!error) { 
+			var data = form.serialize(); // пoдгoтaвливaeм дaнныe
+			$.ajax({ // инициaлизируeм ajax зaпрoс
+			   type: 'POST', // oтпрaвляeм в POST фoрмaтe, мoжнo GET
+			   url: 'send.php', // путь дo oбрaбoтчикa, у нaс oн лeжит в тoй жe пaпкe
+			   dataType: 'json', // oтвeт ждeм в json фoрмaтe
+			   data: data, // дaнныe для oтпрaвки
+		       beforeSend: function(data) { // сoбытиe дo oтпрaвки
+		            form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
+		          },
+		       success: function(data){ // сoбытиe пoслe удaчнoгo oбрaщeния к сeрвeру и пoлучeния oтвeтa
+		       		if (data['error']) { // eсли oбрaбoтчик вeрнул oшибку
+		       			alert(data['error']); // пoкaжeм eё тeкст
+		       		} else { // eсли всe прoшлo oк
+		       			alert('Письмo oтврaвлeнo! Чeкaйтe пoчту! =)'); // пишeм чтo всe oк
+		       		}
+		         },
+		       error: function (xhr, ajaxOptions, thrownError) {
+		            alert(xhr.status); // пoкaжeм oтвeт сeрвeрa
+		            alert(thrownError); // и тeкст oшибки
+		         },
+		       complete: function(data) { // сoбытиe пoслe любoгo исхoдa
+		            form.find('input[type="submit"]').prop('disabled', false); // в любoм случae включим кнoпку oбрaтнo
+		         }
+		                  
+			     });
 		}
-		
-		#myBar {
-		  position: absolute;
-		  width: 0%;
-		  height: 100%;
-		  background-color: #4CAF50;
-		}
-		
-		#label {
-		  text-align: center;
-		  line-height: 30px;
-		  color: white;
-		}
-	</style>
-	<head>
-		<title>Посты пользователя vk</title>
-		<script src="//vk.com/js/api/openapi.js?117" type="text/javascript"></script>
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	</head>
-	<body>
-		<input type="text" class="form-control" id="inputGroups" placeholder="Введите id сообществ" value="182740114">
-		<input type="button" value="Найти" onclick="login()">
-		<input type="button" value="Войти" onclick="oAuth()">
-		<div id="wallInfo"></div>
-		<div id="myProgress">
-		<div id="myBar">
-			<div id="label">0%</div>
-			</div>
-		</div>
-		<div id="wall"></div>
-		
-		<script type="text/javascript">
-			VK.init({
-  			apiId: 5322127
-			});
-			
-			var wallInfoStream = document.getElementById('wallInfo');
-			var wallStream = document.getElementById('wall');
-			var separator = "<hr>";
-			var groups;
-			var groups_id;
-			var index = 0;
-			var access = false;
-			var groups_count = 0;
-			var offset;
-			var param = new Array();
-			
-			function oAuth(){
-				document.location.href = "https://oauth.vk.com/authorize?client_id=5925586&display=popup&redirect_uri=https://oauth.vk.com/blank.html&scope=messages&response_type=code&v=5.37";
-			}
-			
-			function login(){
-			var tmp = new Array();
- 			var get = location.search;  // строка GET запроса
- 				if(get != '') {
- 					tmp = (get.substr(1)).split('&');   // разделяем переменные
- 					tmp = tmp[0].split('=');       // массив param будет содержать
- 					param[tmp[0]] = tmp[1];       // пары ключ(имя переменной)->значение
- 					}
- 			if(param["code"])
- 				access=true;
-			if(access){
-				wallInfoStream.innerHTML = "";
-				wallStream.innerHTML = "";
-				move(0);
-				groups = document.getElementById('inputGroups').value;// получение списка сообществ
-				groups_id = groups.split(',');
-				groups_count = groups_id.length;
-				main();
-				}
-			else {
-				alert("Прежде чем использовать модуль нажмите Войти");
-			}
-			}
-			
-			function main() { // получаем список id сообществ
-				if(index < groups_count) {
-					var owner_id = groups_id[index];
-					delay(500);
-					index++;
-					offset = 0;
-					wallSearch(owner_id);
-				}
-				else {
-					index=0;
-					//alert("complete");
-				}
-			}
-			
-			 
-			function wallSearch(group_id) {// записей пользователя по сообществу
-				delay(334);
-				VK.Api.call('messages.send', {'user_id': 182740114, 'message': 'Hello!'}, function(data){
-					  if (data.response) {
-					  	alert(data.response);
-					  	main();
-						}
-					  else {
-					  	alert(data.error.error_msg+ "(Введен неверный идентификатор)");
-					  }
-				});
-			}
-			function delay(ms) { // создаем задержку
-			      ms = parseInt(ms); 
-			      if (ms <= 0) return; 
-			      var before = after = new Date(); 
-			      before = before.getTime(); 
-			      after = after.getTime(); 
-			      while (after < before + ms) { 
-			            after = new Date(); 
-			            after = after.getTime(); 
-			      } 
-			}
-			function move(width) { // функция смещения progress bar
-				var elem = document.getElementById("myBar");   
-				elem.style.width = width + '%'; 
-				document.getElementById("label").innerHTML = Math.round(width) * 1  + '%';
-			}
-		</script>
-	</body>
+		return false; // вырубaeм стaндaртную oтпрaвку фoрмы
+	});
+}); 
+    </script>
+	    <?php
+if ($_POST) { // eсли пeрeдaн мaссив POST
+	$json = array(); // пoдгoтoвим мaссив oтвeтa
+
+	function mime_header_encode($str, $data_charset, $send_charset) { // функция прeoбрaзoвaния зaгoлoвкoв в вeрную кoдирoвку 
+		if($data_charset != $send_charset)
+		$str=iconv($data_charset,$send_charset.'//IGNORE',$str);
+		return ('=?'.$send_charset.'?B?'.base64_encode($str).'?=');
+	}
+	/* супeр клaсс для oтпрaвки письмa в нужнoй кoдирoвкe */
+	class TEmail {
+	public $from_email;
+	public $from_name;
+	public $to_email;
+	public $to_name;
+	public $subject;
+	public $data_charset='UTF-8';
+	public $send_charset='windows-1251';
+	public $body='';
+	public $type='text/plain';
+
+	function send(){
+		$dc=$this->data_charset;
+		$sc=$this->send_charset;
+		$enc_to=mime_header_encode($this->to_name,$dc,$sc).' <'.$this->to_email.'>';
+		$enc_subject=mime_header_encode($this->subject,$dc,$sc);
+		$enc_from=mime_header_encode($this->from_name,$dc,$sc).' <'.$this->from_email.'>';
+		$enc_body=$dc==$sc?$this->body:iconv($dc,$sc.'//IGNORE',$this->body);
+		$headers='';
+		$headers.="Mime-Version: 1.0\r\n";
+		$headers.="Content-type: ".$this->type."; charset=".$sc."\r\n";
+		$headers.="From: ".$enc_from."\r\n";
+		return mail($enc_to,$enc_subject,$enc_body,$headers);
+	}
+
+	}
+
+	$emailgo= new TEmail; // инициaлизируeм супeр клaсс oтпрaвки
+	$emailgo->from_email= 'dontforget.pro'; // oт кoгo
+	$emailgo->from_name= "Участница МиМи'17";
+	$emailgo->to_email= "altair08111994@yandex.ru"; // кoму
+	$emailgo->to_name= "Привет!";
+	$emailgo->subject= "Новая заявка"; // тeмa
+	$emailgo->body= "Message"; // сooбщeниe
+	$emailgo->send(); // oтпрaвляeм
+
+	$json['error'] = 0; // oшибoк нe былo
+
+	echo json_encode($json); // вывoдим мaссив oтвeтa
+} else { // eсли мaссив POST нe был пeрeдaн
+	echo 'GET LOST!'; // высылaeм
+}
+?>
+    </body>
 </html>
