@@ -1,0 +1,74 @@
+ header {
+     display: block;
+     height: 1002px;
+     background: url(images/misskaheader.png) no-repeat center;
+}
+ footer {
+     display: block;
+     height: 151px;
+     background: url(images/misskafootert.png) no-repeat center;
+}
+ .rendered-form {
+     display: block;
+     height: 1649px;
+     background: url(images/whithouttext.png) no-repeat center;
+}
+ .main-container {
+     margin: auto;
+     padding-top: 120px;
+     width: 1400px;
+}
+ form {
+     display: inline-block;
+     width: 100%;
+}
+.form-group {
+    margin: 7px;
+    display: flex;
+}
+ input[type="text"] {
+     background: transparent;
+     position: relative;
+     font-size: 18pt;
+     font-family: "Times New Roman", Times, serif;
+     border: none;
+     color: #ddd7d7;
+     flex: 1;
+     outline: none;
+     border-bottom: 2px solid #ddd7d7;
+     left: 10px;
+}
+ input[type="file"] {
+     position: relative;
+     margin-top: 10px;
+     margin-bottom: 10px;
+     font-size: 18pt;
+     font-family: "Times New Roman", Times, serif;
+     color: #ddd7d7;
+}
+ label[type="text"] {
+     position: relative;
+     color: #ddd7d7;
+     display: inline-block;
+     font-size: 18pt;
+}
+ textarea[type="text"] {
+     background: transparent;
+     position: relative;
+     margin-bottom: 7px;
+     border: none;
+     font-size: 18pt;
+     width: 100%;
+     color: #ddd7d7;
+     font-family: "Times New Roman", Times, serif;
+     outline: none;
+     border-bottom: 2px solid #ddd7d7;
+     resize: none;
+     margin-left: 5px;
+}
+input[type=submit] {
+    padding:5px 15px; 
+    margin: auto;
+    font-size: 18pt;
+    font-family: "Times New Roman", Times, serif;
+}
