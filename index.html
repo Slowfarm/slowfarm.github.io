@@ -1,124 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="styles.css" rel="stylesheet" type="text/css"/>
-        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <title>Мисс МИЭТ'17</title>
-    </head>
-    <body>
-   <div class="rendered-form">
-      <form>
-          <label type="text" class="fb-text-label">1. Ф.И.О.</label>
-      <input type="text" class="form-control" name="text-1519159009414" id="text-1519159009414">
-      </form>
-     <form>
-        <input type="file" class="form-control">
-      </form>
-      <form>
-          <label type="text" class="fb-text-label">2. Контактный телефон</label>
-          <input type="text" class="form-control">
-         </form>
-     <form>
-          <label type="text" class="fb-text-label">    E-mail</label>
-          <input type="text" class="form-control">
-      </form>
-     <form>
-          <label type="text" for="text-1519159043060" class="fb-text-label">Vk.com\id</label>
-          <input type="text" class="form-control" name="text-1519159043060" id="text-1519159043060">
-      </form>
-      <form>
-          <label type="text" for="text-1519159041419" class="fb-text-label">3. Дата рождения</label>
-          <input type="text" class="form-control" name="text-1519159041419" id="text-1519159041419">
-      </form>
-      <form>
-          <label type="text" class="fb-text-label">Место рождения</label>
-          <input type="text" class="form-control">
-      </form>
-      <form>
-          <label type="text"  class="fb-text-label">4. Факультет, группа</label>
-          <input type="text" class="form-control">
-      </form>
-      <form>
-          <label type="text" class="fb-text-label">5. О себе (талант, черты характера, увлечения, мечты, идеи и.т.д)</label>
-      </form>
-      <textarea type="text" class="form-control" rows="4"></textarea>
-      <form>
-          <label type="text" for="text-1519159033376" class="fb-text-label">6. Занимаетесь ли вы спортом? Если да, то каким?</label>
-           <input type="text" class="form-control">
-      </form>
-      <form>
-          <label type="text" class="fb-text-label">7. Какими своими достижениями Вы гордитесь?</label>
-      </form>
-      <textarea type="text" class="form-control" rows="3"></textarea>
-      <form>
-          <label type="text" class="fb-text-label">8. От чего Вам сложно отказатсья?</label>
-      </form>
-      <textarea type="text" class="form-control" rows="3"></textarea>
-     <form>
-          <label type="text" class="fb-text-label">9. Ваши планы на этот год</label>
-      </form>
-      <textarea type="text" class="form-control" rows="3"></textarea>
-      <form>
-          <label type="text"  class="fb-text-label">10. Чего Вы ожидаете от конкурса?</label>
-      </form>
-      <textarea type="text" class="form-control" rows="3"></textarea>
-      <form>
-          <label type="text" class="fb-text-label">11. Откуда вы узнали о кастинге?</label>
-      </form>
-      <textarea type="text" class="form-control"  rows="3"></textarea>
-      <form>
-          <label type="text" class="fb-text-label">12. Почему именно вы должны стать участницейконкурса красоты и талантов "Мисс МИЭТ'17"?</label>
-      </form>
-      <textarea type="text" class="form-control" rows="1"></textarea>
-   </div>
-<form method="post" action="" id="ajaxform"> <br />
-<input type="text" size="32" maxlength="36" name="name" placeholder="Вaшe имя" val=""> <br />
-<input type="text" size="32" maxlength="36" name="email" placeholder="Вaш email" val=""> <br />
-<input type="text" size="32" maxlength="36" name="subject" placeholder="Тeмa" val=""> <br />
-<textarea cols="25" rows="10" name="message" placeholder="Сooбщeниe.." val=""></textarea> <br />
-<input type="submit" value="GO GO GO"/>
-</form>
-   <script type="text/javascript">
-       $(document).ready(function() {
-	$("#ajaxform").submit(function(){
-		var form = $(this);
-		var error = false;
-		form.find('input, textarea').each( function(){ 
-			if ($(this).val() == '') { 
-				alert('Зaпoлнитe пoлe "'+$(this).attr('placeholder')+'"!');
-				error = true;
-			}
-		});
-		if (!error) { 
-			var data = form.serialize(); // пoдгoтaвливaeм дaнныe
-			$.ajax({ // инициaлизируeм ajax зaпрoс
-			   type: 'POST', // oтпрaвляeм в POST фoрмaтe, мoжнo GET
-			   url: 'send.php', // путь дo oбрaбoтчикa, у нaс oн лeжит в тoй жe пaпкe
-			   dataType: 'json', // oтвeт ждeм в json фoрмaтe
-			   data: data, // дaнныe для oтпрaвки
-		       beforeSend: function(data) { // сoбытиe дo oтпрaвки
-		            form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
-		          },
-		       success: function(data){ // сoбытиe пoслe удaчнoгo oбрaщeния к сeрвeру и пoлучeния oтвeтa
-		       		if (data['error']) { // eсли oбрaбoтчик вeрнул oшибку
-		       			alert(data['error']); // пoкaжeм eё тeкст
-		       		} else { // eсли всe прoшлo oк
-		       			alert('Письмo oтврaвлeнo! Чeкaйтe пoчту! =)'); // пишeм чтo всe oк
-		       		}
-		         },
-		       error: function (xhr, ajaxOptions, thrownError) {
-		            alert(xhr.status); // пoкaжeм oтвeт сeрвeрa
-		            alert(thrownError); // и тeкст oшибки
-		         },
-		       complete: function(data) { // сoбытиe пoслe любoгo исхoдa
-		            form.find('input[type="submit"]').prop('disabled', false); // в любoм случae включим кнoпку oбрaтнo
-		         }
-		                  
-			     });
-		}
-		return false; // вырубaeм стaндaртную oтпрaвку фoрмы
-	});
-}); 
-    </script>
-    </body>
+
+<head>
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <title>Мисс МИЭТ'17</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <div class="rendered-form">
+        <div class="main-container">
+            <form method="post" action="" id="ajaxform">
+                <div class="form-group">
+                    <label type="text">1. Ф.И.О.</label>
+                    <input type="text" class="form-control" required name="name">
+                </div>
+                <div class="form-group">
+                    <input type="file" class="form-control" required name="file">
+                </div>
+                <div class="form-group">
+                    <label type="text">2. Контактный телефон</label>
+                    <input type="text" class="form-control" required name="phone">
+                </div>
+                <div class="form-group">
+                    <label type="text">Email</label>
+                    <input type="text" class="form-control" required name="mail">
+                </div>
+                <div class="form-group">
+                    <label type="text">Vk.com\id</label>
+                    <input type="text" class="form-control" required name="vk">
+                </div>
+                <div class="form-group">
+                    <label type="text">3. Дата рождения</label>
+                    <input type="text" class="form-control" required name="birthday">
+                </div>
+                <div class="form-group">
+                    <label type="text">Место рождения</label>
+                    <input type="text" class="form-control" required name="location">
+                </div>
+                <div class="form-group">
+                    <label type="text">4. Факультет, группа</label>
+                    <input type="text" class="form-control" required name="faculty">
+                </div>
+                <div class="form-group">
+                    <label type="text">5. О себе (талант, черты характера, увлечения, мечты, идеи и.т.д)</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="4" name="about"></textarea>
+                <div class="form-group">
+                    <label type="text">6. Занимаетесь ли вы спортом? Если да, то каким?</label>
+                    <input type="text" class="form-control" required name="sport">
+                </div>
+                <div class="form-group">
+                    <label type="text">7. Какими своими достижениями Вы гордитесь?</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="3" name="achivements"></textarea>
+                <div class="form-group">
+                    <label type="text">8. От чего Вам сложно отказатсья?</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="3" name="habbits"></textarea>
+                <div class="form-group">
+                    <label type="text">9. Ваши планы на этот год</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="3" name="plans"></textarea>
+                <div class="form-group">
+                    <label type="text">10. Чего Вы ожидаете от конкурса?</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="3" name="expections"></textarea>
+                <div class="form-group">
+                    <label type="text">11. Откуда вы узнали о кастинге?</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="3" name="know"></textarea>
+                <div class="form-group">
+                    <label type="text">12. Почему именно вы должны стать участницей конкурса красоты и талантов "Мисс МИЭТ'17"?</label>
+                </div>
+                <textarea type="text" class="form-control" required rows="1" name="miss"></textarea>
+                <div class="form-group">
+                    <input type="submit" value="Отправить" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="myapp.js"></script>
+</body>
+
 </html>
